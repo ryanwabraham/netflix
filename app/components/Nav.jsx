@@ -9,7 +9,7 @@ var Nav = React.createClass({
 	render: function() {
 		return (
 			<nav>
-				<img id="logo" src="http://ryanabraham.net/netflix/img/logo.svg" alt="Netflix"/>
+				<div id="logo">Netflix</div>
 				<form onChange={this.handleChange}>
 					<input ref="searchInput" type="search" placeholder="Search Titles, Actors" autofocus></input>
 				</form>

@@ -19991,7 +19991,11 @@
 			return React.createElement(
 				"nav",
 				null,
-				React.createElement("img", { id: "logo", src: "http://ryanabraham.net/netflix/img/logo.svg", alt: "Netflix" }),
+				React.createElement(
+					"div",
+					{ id: "logo" },
+					"Netflix"
+				),
 				React.createElement(
 					"form",
 					{ onChange: this.handleChange },
@@ -20507,7 +20511,7 @@
 	var content = __webpack_require__(166);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(168)(content, {});
+	var update = __webpack_require__(169)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20532,7 +20536,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #292929;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #logo {\n    width: 10%;\n    margin-left: 4%; }\n  nav form {\n    width: 82%;\n    height: 100%; }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    webkit-appearance: none;\n    padding: 10px;\n    border: none;\n    font-size: 16px;\n    background-color: #1d1d1d;\n    color: #eee; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n\naside {\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 82%; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 20%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
+	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #292929;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #logo {\n    width: 18%;\n    text-indent: -9999px;\n    background-repeat: no-repeat;\n    background-size: contain;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(168) + ");\n    text-indent: -9999px; }\n  nav form {\n    width: 82%;\n    height: 100%; }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    webkit-appearance: none;\n    padding: 10px;\n    border: none;\n    font-size: 16px;\n    background-color: #1d1d1d;\n    color: #eee; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n\naside {\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 82%; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 20%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
 
 	// exports
 
@@ -20595,6 +20599,12 @@
 
 /***/ },
 /* 168 */
+/***/ function(module, exports) {
+
+	module.exports = "/img/logo.svg";
+
+/***/ },
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
