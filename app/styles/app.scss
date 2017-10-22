@@ -3,6 +3,7 @@ $gray-dark: #292929;
 $text: #eee;
 $text-gray: #9a9a9a;
 $font-stack: 'Helvetica Neu', Helvetica, sans-serif;
+$font-size-l: 32px;
 $font-size: 16px;
 $font-size-s: 12px;
 $nav-height: 75px;
@@ -105,6 +106,27 @@ aside {
 section#results {
 	margin-top: $nav-height;
 	width: 82%;
+
+	#hero {
+	    height: 25%;
+	}
+
+	.hero__info {
+		width: 33.3%;
+		height: 100%;
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		background: -webkit-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+	    background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+	}
+
+	h1 {
+		font-size: $font-size-l;
+		color: $text;
+	}
 
 	ul {
 		display: flex;

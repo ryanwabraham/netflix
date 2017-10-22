@@ -51,7 +51,7 @@
 	var Main = __webpack_require__(159);
 
 	// App css
-	__webpack_require__(165);
+	__webpack_require__(166);
 
 	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 
@@ -19768,8 +19768,9 @@
 
 	var React = __webpack_require__(1);
 	var Nav = __webpack_require__(160);
-	var Results = __webpack_require__(161);
-	var Filters = __webpack_require__(164);
+	var Hero = __webpack_require__(161);
+	var Results = __webpack_require__(163);
+	var Filters = __webpack_require__(165);
 
 	var Main = React.createClass({
 		displayName: 'Main',
@@ -19963,6 +19964,7 @@
 				React.createElement(
 					'section',
 					{ id: 'results' },
+					React.createElement(Hero, { resultData: data }),
 					displayResults()
 				)
 			);
@@ -20014,7 +20016,94 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var ResultItem = __webpack_require__(162);
+	var GenreData = __webpack_require__(162);
+
+	var Hero = React.createClass({
+		displayName: 'Hero',
+
+		render: function render() {
+			if (this.props.resultData) {
+				var topResult = this.props.resultData[0];
+
+				if (topResult.media_type != 'person') {
+					var key = topResult.id;
+					var title = topResult.title;
+					var overview = topResult.overview;
+					var genres = topResult.genre_ids;
+					var rating = topResult.vote_average;
+					var background = 'http://image.tmdb.org/t/p/original' + topResult.backdrop_path;
+
+					var genreList = '';
+					genres.forEach(function (genre, genreCount) {
+						GenreData.genres.forEach(function (item, index) {
+							if (genreCount < 3 && item.id === genre) {
+								genreList += item.name + ', ';
+							}
+						});
+					});
+					//remove the last comma
+					genreList = genreList.replace(/,\s*$/, "");
+				}
+
+				var backgroundStyle = {
+					backgroundImage: 'url(' + background + ')',
+					backgroundSize: '100% auto',
+					backgroundPosition: 'right center'
+				};
+			}
+
+			return React.createElement(
+				'section',
+				{ id: 'hero', style: backgroundStyle },
+				React.createElement(
+					'div',
+					{ className: 'hero__info' },
+					React.createElement(
+						'div',
+						{ className: 'hero__info__wrapper' },
+						React.createElement(
+							'h1',
+							{ className: 'animated quick fadeInUp' },
+							title
+						),
+						React.createElement(
+							'p',
+							{ className: 'animated quick fadeInUp' },
+							overview
+						),
+						React.createElement(
+							'p',
+							{ className: 'genres animated quick fadeInUp' },
+							genreList
+						),
+						React.createElement(
+							'p',
+							{ className: 'rating animated quick fadeInUp' },
+							rating,
+							' / 10'
+						)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Hero;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports) {
+
+	module.exports = {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ResultItem = __webpack_require__(164);
 
 	var Results = React.createClass({
 		displayName: 'Results',
@@ -20055,13 +20144,13 @@
 	module.exports = Results;
 
 /***/ },
-/* 162 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var GenreData = __webpack_require__(163);
+	var GenreData = __webpack_require__(162);
 
 	var ResultItem = function ResultItem(_ref) {
 		var title = _ref.title,
@@ -20110,13 +20199,7 @@
 	module.exports = ResultItem;
 
 /***/ },
-/* 163 */
-/***/ function(module, exports) {
-
-	module.exports = {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
-
-/***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20502,16 +20585,16 @@
 	module.exports = Filters;
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(166);
+	var content = __webpack_require__(167);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(169)(content, {});
+	var update = __webpack_require__(170)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20528,21 +20611,21 @@
 	}
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(167)();
+	exports = module.exports = __webpack_require__(168)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #292929;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #logo {\n    width: 18%;\n    text-indent: -9999px;\n    background-repeat: no-repeat;\n    background-size: contain;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(168) + ");\n    text-indent: -9999px; }\n  nav form {\n    width: 82%;\n    height: 100%; }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    webkit-appearance: none;\n    padding: 10px;\n    border: none;\n    font-size: 16px;\n    background-color: #1d1d1d;\n    color: #eee; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n\naside {\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 82%; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 20%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
+	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #292929;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #logo {\n    width: 18%;\n    height: 100%;\n    text-indent: -9999px;\n    background-repeat: no-repeat;\n    background-size: 50% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(169) + ");\n    text-indent: -9999px; }\n  nav form {\n    width: 82%;\n    height: 100%; }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    webkit-appearance: none;\n    padding: 10px;\n    border: none;\n    font-size: 16px;\n    background-color: #1d1d1d;\n    color: #eee; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n\naside {\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 82%; }\n  section#results #hero {\n    height: 30%; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 20px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results h1 {\n    font-size: 32px;\n    color: #eee; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 20%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports) {
 
 	/*
@@ -20598,13 +20681,13 @@
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports) {
 
 	module.exports = "/img/logo.svg";
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

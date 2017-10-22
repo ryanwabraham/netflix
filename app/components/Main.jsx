@@ -7,6 +7,7 @@ var initialRequest = false;
 
 var React = require('react');
 var Nav = require('Nav');
+var Hero = require('Hero');
 var Results = require('Results');
 var Filters = require('Filters');
 
@@ -179,6 +180,7 @@ var Main = React.createClass({
 				<Nav onSearch={this.handleSearch}/>
 				<Filters onFilter={this.handleFilter}/>
 				<section id="results">
+					<Hero resultData={data}/>
 					{displayResults()}
 				</section>
 			</main>

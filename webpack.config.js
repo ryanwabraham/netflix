@@ -13,6 +13,7 @@ module.exports = {
       Filters: 'app/components/Filters.jsx',
       Main: 'app/components/Main.jsx',
       Nav: 'app/components/Nav.jsx',
+      Hero: 'app/components/Hero.jsx',
       Results: 'app/components/Results.jsx',
       ResultItem: 'app/components/ResultItem.jsx'
     },
