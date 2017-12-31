@@ -52,6 +52,15 @@ nav {
 	#filter-trigger {
 		padding-left: 20px;
 		color: $text-gray;
+		cursor: pointer;
+
+		&:before {
+			background-image: url('../img/filter.svg');
+		}
+
+		span {
+			padding-left: 40px;
+		}
 	}
 
 	#logo {
@@ -66,21 +75,37 @@ nav {
 	}
 
 	#filter-trigger, form {
+		position: relative;
 	    width: 15%;
 	    height: 100%;
+	}
+
+	form:before {
+		margin-top: 3px;
+		background-image: url('../img/search.svg');
 	}
 
 	input[type="search"] {
 		width: 100%;
 		height: 100%;
 		background-color: $black;
-		webkit-appearance: none;
-		padding: 10px 20px;
+		-webkit-appearance: none;
+	    padding: 10px 0px 10px 55px;
 		border: none;
 
 		&:focus {
 			outline-color: $text;
 		}
+	}
+
+	#filter-trigger:before, form:before {
+		position: absolute;
+	    left: 20px;
+	    top: 20px;
+	    width: 30px;
+	    height: 30px;
+	    background-size: 30px 30px;
+		content: '';
 	}
 }
 

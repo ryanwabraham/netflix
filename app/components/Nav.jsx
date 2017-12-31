@@ -9,7 +9,7 @@ var Nav = React.createClass({
 	render: function() {
 		return (
 			<nav>
-				<div id="filter-trigger">Filter</div>
+				<div id="filter-trigger"><span>Filter Titles</span></div>
 				<div id="logo">Netflix</div>
 				<form onChange={this.handleChange}>
 					<input ref="searchInput" type="search" placeholder="Search Titles, Actors" autofocus></input>
