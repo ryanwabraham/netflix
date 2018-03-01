@@ -19794,10 +19794,15 @@
 					isLoading: true,
 					searchTerm: searchTerm
 				});
+				initialRequest = false;
 				var request = encodeURIComponent(searchTerm);
 				var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
 				this.getResults(requestUrl);
 			} else {
+				this.setState({
+					isLoading: true,
+					searchTerm: searchTerm
+				});
 				this.getResults(DEFAULT_REQUEST);
 			}
 		},
@@ -19810,6 +19815,7 @@
 			    certification = _state.certification,
 			    releaseDate = _state.releaseDate;
 
+			initialRequest = false;
 
 			if (filter === 'type') {
 				var type = e.target.value;
@@ -19820,7 +19826,6 @@
 			}
 
 			if (filter === 'genre') {
-				console.log(genres);
 				if (e.target.checked) {
 					genres.push(e.target.value);
 				} else {
@@ -19879,7 +19884,6 @@
 
 			if (filter === 'releaseDate') {
 				var releaseDate = e.target.value;
-				console.log(releaseDate);
 
 				if (type == 'movie') {
 					var gte = '&primary_release_date.gte=';
@@ -19933,6 +19937,7 @@
 			var _state2 = this.state,
 			    isLoading = _state2.isLoading,
 			    searchTerm = _state2.searchTerm,
+			    filterState = _state2.filterState,
 			    genres = _state2.genres,
 			    data = _state2.data;
 
@@ -19940,6 +19945,15 @@
 			if (initialRequest == false && genres.length === 0 && searchTerm.length === 0) {
 				this.getResults(DEFAULT_REQUEST);
 				initialRequest = true;
+			}
+
+			function displayHero() {
+				console.log(initialRequest);
+				if (initialRequest) {
+					return React.createElement(Hero, null);
+				} else {
+					return null;
+				}
 			}
 
 			function displayResults() {
@@ -19964,7 +19978,7 @@
 				React.createElement(
 					'section',
 					{ id: 'results' },
-					React.createElement(Hero, { resultData: data }),
+					displayHero(),
 					displayResults()
 				)
 			);
@@ -19995,7 +20009,7 @@
 				null,
 				React.createElement(
 					"div",
-					{ id: "filter-trigger" },
+					{ id: "filter-trigger", className: this.props.filterState },
 					React.createElement(
 						"span",
 						null,
@@ -20031,40 +20045,9 @@
 		displayName: 'Hero',
 
 		render: function render() {
-			if (this.props.resultData) {
-				var topResult = this.props.resultData[0];
-
-				if (topResult.media_type != 'person') {
-					var key = topResult.id;
-					var title = topResult.title;
-					var overview = topResult.overview;
-					var genres = topResult.genre_ids;
-					var rating = topResult.vote_average;
-					var background = 'http://image.tmdb.org/t/p/original' + topResult.backdrop_path;
-
-					var genreList = '';
-					genres.forEach(function (genre, genreCount) {
-						GenreData.genres.forEach(function (item, index) {
-							if (genreCount < 3 && item.id === genre) {
-								genreList += item.name + ', ';
-							}
-						});
-					});
-					//remove the last comma
-					genreList = genreList.replace(/,\s*$/, "");
-				}
-
-				var backgroundStyle = {
-					backgroundImage: 'url(' + background + ')',
-					backgroundSize: 'cover',
-					backgroundRepeat: 'no-repeat',
-					backgroundPosition: 'right center'
-				};
-			}
-
 			return React.createElement(
 				'section',
-				{ id: 'hero', style: backgroundStyle },
+				{ id: 'hero' },
 				React.createElement(
 					'div',
 					{ className: 'hero__info' },
@@ -20074,23 +20057,12 @@
 						React.createElement(
 							'h1',
 							{ className: 'animated quick fadeInUp' },
-							title
+							'The X Files'
 						),
 						React.createElement(
-							'p',
-							{ className: 'animated quick fadeInUp' },
-							overview
-						),
-						React.createElement(
-							'p',
-							{ className: 'genres animated quick fadeInUp' },
-							genreList
-						),
-						React.createElement(
-							'p',
-							{ className: 'rating animated quick fadeInUp' },
-							rating,
-							' / 10'
+							'a',
+							{ href: '#', className: 'button' },
+							'Play'
 						)
 					)
 				)
@@ -20629,7 +20601,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #1d1d1d;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #filter-trigger, nav input[type=\"search\"] {\n    font-size: 16px;\n    color: #eee;\n    font-weight: 400;\n    line-height: 75px; }\n  nav #filter-trigger {\n    padding-left: 20px;\n    color: #9a9a9a;\n    cursor: pointer; }\n    nav #filter-trigger:before {\n      background-image: url(" + __webpack_require__(169) + "); }\n    nav #filter-trigger span {\n      padding-left: 40px; }\n  nav #logo {\n    width: 20%;\n    height: 100%;\n    text-indent: -9999px;\n    background-repeat: no-repeat;\n    background-size: 50% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(170) + ");\n    text-indent: -9999px; }\n  nav #filter-trigger, nav form {\n    position: relative;\n    width: 15%;\n    height: 100%; }\n  nav form:before {\n    top: 23px;\n    background-image: url(" + __webpack_require__(171) + "); }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n  nav #filter-trigger:before, nav form:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: ''; }\n\naside {\n  display: none;\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside.active {\n    display: block; }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 100%; }\n  section#results #hero {\n    height: 50vh; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 20px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results h1 {\n    font-size: 32px;\n    color: #eee; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
+	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #1d1d1d;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #filter-trigger, nav input[type=\"search\"] {\n    font-size: 16px;\n    color: #eee;\n    font-weight: 400;\n    line-height: 75px; }\n  nav #filter-trigger {\n    padding-left: 20px;\n    color: #9a9a9a;\n    cursor: pointer; }\n    nav #filter-trigger:before {\n      background-image: url(" + __webpack_require__(169) + "); }\n    nav #filter-trigger span {\n      padding-left: 40px; }\n  nav #logo {\n    width: 20%;\n    height: 100%;\n    text-indent: -9999px;\n    background-repeat: no-repeat;\n    background-size: 50% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(170) + ");\n    text-indent: -9999px; }\n  nav #filter-trigger, nav form {\n    position: relative;\n    width: 15%;\n    min-width: 230px;\n    height: 100%; }\n  nav form:before {\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(171) + "); }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n  nav #filter-trigger:before, nav form:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: ''; }\n\naside {\n  display: none;\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside.active {\n    display: block; }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 100%; }\n  section#results #hero {\n    height: 50vh; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 20px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results h1 {\n    font-size: 32px;\n    color: #eee; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
 
 	// exports
 

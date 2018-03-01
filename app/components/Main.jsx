@@ -31,15 +31,21 @@ var Main = React.createClass({
 				isLoading: true,
 				searchTerm: searchTerm
 			});
+			initialRequest = false;
 			var request = encodeURIComponent(searchTerm);
 			var requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
 			this.getResults(requestUrl);
 		} else {
+			this.setState({
+				isLoading: true,
+				searchTerm: searchTerm
+			});
 			this.getResults(DEFAULT_REQUEST);
 		}
 	},
 	handleFilter: function(e, filter) {
 		var {type, genres, duration, rating, certification, releaseDate} = this.state;
+		initialRequest = false;
 
 		if (filter === 'type') {
 			var type = e.target.value;
@@ -50,7 +56,6 @@ var Main = React.createClass({
 		}
 
 		if (filter === 'genre') {
-			console.log(genres);
 			if (e.target.checked) {
 				genres.push(e.target.value);
 			} else {
@@ -109,7 +114,6 @@ var Main = React.createClass({
 
 		if (filter === 'releaseDate') {
 			var releaseDate = e.target.value;
-			console.log(releaseDate);
 
 			if (type == 'movie') {
 				var gte = '&primary_release_date.gte=';
@@ -158,11 +162,20 @@ var Main = React.createClass({
 	    });
 	},
 	render: function() {
-		var {isLoading, searchTerm, genres, data} = this.state;
+		var {isLoading, searchTerm, filterState, genres, data} = this.state;
 
 		if (initialRequest == false && genres.length === 0 && searchTerm.length === 0) {
 			this.getResults(DEFAULT_REQUEST);
 			initialRequest = true;
+		}
+
+		function displayHero() {
+			console.log(initialRequest);
+			if (initialRequest) {
+				return <Hero/>;
+			} else {
+				return null;
+			}
 		}
 
 		function displayResults() {
@@ -180,7 +193,7 @@ var Main = React.createClass({
 				<Nav onSearch={this.handleSearch}/>
 				<Filters onFilter={this.handleFilter}/>
 				<section id="results">
-					<Hero resultData={data}/>
+					{displayHero()}
 					{displayResults()}
 				</section>
 			</main>
