@@ -162,9 +162,9 @@ var Main = React.createClass({
 	    });
 	},
 	render: function() {
-		var {isLoading, searchTerm, filterState, genres, data} = this.state;
+		var {isLoading, searchTerm, data} = this.state;
 
-		if (initialRequest == false && genres.length === 0 && searchTerm.length === 0) {
+		if (initialRequest == false && searchTerm.length === 0) {
 			this.getResults(DEFAULT_REQUEST);
 			initialRequest = true;
 		}
@@ -191,9 +191,9 @@ var Main = React.createClass({
 		return (
 			<main>
 				<Nav onSearch={this.handleSearch}/>
-				<Filters onFilter={this.handleFilter}/>
 				<section id="results">
 					{displayHero()}
+					<Filters onFilter={this.handleFilter}/>
 					{displayResults()}
 				</section>
 			</main>
