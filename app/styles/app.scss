@@ -10,206 +10,212 @@ $nav-height: 75px;
 $aside-width: 18%;
 
 * {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: $gray-dark;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	font-family: $font-stack;
-	font-size: $font-size;
-	font-weight: 800;
-	color: $text-gray;
-	line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    font-family: $font-stack;
+    font-size: $font-size;
+    font-weight: 800;
+    color: $text-gray;
+    line-height: 1.2;
 }
 
 main {
-	display: flex;
-	background-color: $gray-dark;
-	width: 100%;
-	height: 100%;
+    display: flex;
+    background-color: $gray-dark;
+    width: 100%;
+    height: 100%;
 }
 
 nav {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background-color: $black;
-	width: 100%;
-	height: $nav-height;
-	z-index: 1;
-	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $black;
+    width: 100%;
+    height: $nav-height;
+    z-index: 1;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 
-	#filter-trigger, input[type="search"] {
-		font-size: $font-size;
-		color: $text;
-		font-weight: 400;
-		line-height: $nav-height;
-	}
+    #filter-trigger, input[type="search"] {
+        font-size: $font-size;
+        color: $text;
+        font-weight: 400;
+        line-height: $nav-height;
+    }
 
-	#filter-trigger {
-		padding-left: 20px;
-		color: $text-gray;
-		cursor: pointer;
+    #filter-trigger {
+        padding-left: 20px;
+        color: $text-gray;
+        cursor: pointer;
 
-		&:before {
-			background-image: url('../img/filter.svg');
-		}
+        &:before {
+            background-image: url('../img/filter.svg');
+        }
 
-		span {
-			padding-left: 40px;
-		}
-	}
+        span {
+            padding-left: 40px;
+        }
+    }
 
-	#logo {
-		width: 20%;
-	    height: 100%;
-		text-indent: -9999px;
-		background-repeat: no-repeat;
-		background-size: 50% auto;
-		background-position: center center;
-	    background-image: url('../img/logo.svg');
-	    text-indent: -9999px;
-	}
+    #logo {
+        width: 20%;
+        height: 100%;
+        text-indent: -9999px;
+        background-repeat: no-repeat;
+        background-size: 50% auto;
+        background-position: center center;
+        background-image: url('../img/logo.svg');
+        text-indent: -9999px;
+    }
 
-	#filter-trigger, form {
-		position: relative;
-	    width: 15%;
-	    height: 100%;
-	}
+    #filter-trigger, form {
+        position: relative;
+        width: 15%;
+        height: 100%;
+    }
 
-	form:before {
-		margin-top: 3px;
-		background-image: url('../img/search.svg');
-	}
+    form:before {
+        margin-top: 3px;
+        background-image: url('../img/search.svg');
+    }
 
-	input[type="search"] {
-		width: 100%;
-		height: 100%;
-		background-color: $black;
-		-webkit-appearance: none;
-	    padding: 10px 0px 10px 55px;
-		border: none;
+    input[type="search"] {
+        width: 100%;
+        height: 100%;
+        background-color: $black;
+        -webkit-appearance: none;
+        padding: 10px 0px 10px 55px;
+        border: none;
 
-		&:focus {
-			outline-color: $text;
-		}
-	}
+        &:focus {
+            outline-color: $text;
+        }
+    }
 
-	#filter-trigger:before, form:before {
-		position: absolute;
-	    left: 20px;
-	    top: 20px;
-	    width: 30px;
-	    height: 30px;
-	    background-size: 30px 30px;
-		content: '';
-	}
+    #filter-trigger:before, form:before {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background-size: 30px 30px;
+        content: '';
+    }
 }
 
 aside {
-	display: none;
-	position: sticky;
-	top: $nav-height;
-	width: $aside-width;
-	height: 100vh;
-	margin-top: $nav-height;
-	padding: 20px;
-	background-color: $black;
-	overflow-y: scroll;
+    display: none;
+    position: sticky;
+    top: $nav-height;
+    width: $aside-width;
+    height: 100vh;
+    margin-top: $nav-height;
+    padding: 20px;
+    background-color: $black;
+    overflow-y: scroll;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
 
     &.active {
-    	display: block;
+        display: block;
     }
 
-	h2, h3 {
-		color: $text;
-	}
+    h2, h3 {
+        color: $text;
+    }
 
-	section {
-		margin: 20px 0px;
-	}
+    section {
+        margin: 20px 0px;
+    }
 
-	label {
-	    display: block;
-	    margin: 10px 0px;
-	}
+    label {
+        display: block;
+        margin: 10px 0px;
+    }
 
-	input[type="radio"], input[type="checkbox"] {
-		margin-right: 10px;
-	}
+    input[type="radio"], input[type="checkbox"] {
+        margin-right: 10px;
+    }
 }
 
 section#results {
-	margin-top: $nav-height;
-	width: 100%;
+    margin-top: $nav-height;
+    width: 100%;
 
-	#hero {
-	    height: 50vh;
-	}
+    #hero {
+        height: 50vh;
+    }
 
-	.hero__info {
-		width: 33.3%;
-		height: 100%;
-		padding: 20px;
-		display: flex;
-		align-items: center;
-		background: -webkit-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
-	    background: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
-	    background: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
-	    background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
-	}
+    .hero__info {
+        width: 33.3%;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        background: -webkit-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+    }
 
-	h1 {
-		font-size: $font-size-l;
-		color: $text;
-	}
+    h1 {
+        font-size: $font-size-l;
+        color: $text;
+    }
 
-	ul {
-		display: flex;
-		flex-wrap: wrap;
-		margin: 0px;
-		padding: 10px;
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0px;
+        padding: 10px;
 
-		li {
-			position: relative;
-			display: inline-block;
-			width: 16.65%;
-			list-style-type: none;
-			padding: 10px;
-			font-size: $font-size-s;
+        li {
+            position: relative;
+            display: inline-block;
+            width: 16.65%;
+            list-style-type: none;
+            padding: 10px;
+            font-size: $font-size-s;
 
-			img {
-				width: 100%;
-			}
+            img {
+                width: 100%;
+            }
 
-			img:hover + .info {
-				display: block; //display info when hovering over poster
-			}
+            img:hover + .info {
+                display: block; //display info when hovering over poster
+            }
 
-			.info {
-				display: none;
-				position: absolute;
-			    bottom: 10px;
-			    left: 10px;
-			    right: 10px;
-				padding: 60px 10px 10px 10px;
-				line-height: 1.4;
-				background: -webkit-linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
-			    background: -o-linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
-			    background: -moz-linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
-			    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+            .info {
+                display: none;
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 60px 10px 10px 10px;
+                line-height: 1.4;
+                background: -webkit-linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+                background: -o-linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+                background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
 
-			    .title {
-					color: $text;
-					font-size: $font-size;
-				}
-			}
-		}
-	}
+                .title {
+                    color: $text;
+                    font-size: $font-size;
+                }
+            }
+        }
+    }
 }
 
 //animations
