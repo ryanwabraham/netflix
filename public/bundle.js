@@ -19971,12 +19971,12 @@
 			return React.createElement(
 				'main',
 				null,
-				React.createElement(Nav, { onSearch: this.handleSearch }),
+				React.createElement(Nav, null),
 				React.createElement(
 					'section',
 					{ id: 'results' },
 					displayHero(),
-					React.createElement(Filters, { onFilter: this.handleFilter }),
+					React.createElement(Filters, { onFilter: this.handleFilter, onSearch: this.handleSearch }),
 					displayResults()
 				)
 			);
@@ -19996,33 +19996,14 @@
 	var Nav = React.createClass({
 		displayName: "Nav",
 
-		handleChange: function handleChange(e) {
-			e.preventDefault();
-			var searchTerm = this.refs.searchInput.value;
-			this.props.onSearch(searchTerm);
-		},
 		render: function render() {
 			return React.createElement(
 				"nav",
 				null,
 				React.createElement(
 					"div",
-					{ id: "filter-trigger", className: this.props.filterState },
-					React.createElement(
-						"span",
-						null,
-						"Filter Titles"
-					)
-				),
-				React.createElement(
-					"div",
 					{ id: "logo" },
 					"Netflix"
-				),
-				React.createElement(
-					"form",
-					{ onChange: this.handleChange },
-					React.createElement("input", { ref: "searchInput", type: "search", placeholder: "Search Titles, Actors", autofocus: true })
 				)
 			);
 		}
@@ -20207,356 +20188,365 @@
 			handleReleaseDate: function handleReleaseDate(e) {
 					this.props.onFilter(e, 'releaseDate');
 			},
+			handleSearch: function handleSearch(e) {
+					e.preventDefault();
+					var searchTerm = this.refs.searchInput.value;
+					this.props.onSearch(searchTerm);
+			},
 			render: function render() {
 					return React.createElement(
 							'aside',
 							null,
 							React.createElement(
-									'h2',
-									null,
-									'Filters'
-							),
-							React.createElement(
-									'section',
-									null,
+									'div',
+									{ id: 'filters' },
 									React.createElement(
-											'form',
-											{ onChange: this.handleType },
-											React.createElement(
-													'h3',
-													null,
-													'Type'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'type--any' },
-													React.createElement('input', { type: 'radio', id: 'type--any', name: 'type', value: '' }),
-													'Any'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'type--movie' },
-													React.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
-													'Movie'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'type--tv' },
-													React.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
-													'TV'
-											)
-									)
-							),
-							React.createElement(
-									'section',
-									null,
-									React.createElement(
-											'form',
+											'section',
 											null,
 											React.createElement(
-													'h3',
+													'form',
+													{ onChange: this.handleType },
+													React.createElement(
+															'h3',
+															null,
+															'Type'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'type--any' },
+															React.createElement('input', { type: 'radio', id: 'type--any', name: 'type', value: '' }),
+															'Any'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'type--movie' },
+															React.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
+															'Movie'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'type--tv' },
+															React.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
+															'TV'
+													)
+											)
+									),
+									React.createElement(
+											'section',
+											null,
+											React.createElement(
+													'form',
 													null,
-													'Genre'
-											),
+													React.createElement(
+															'h3',
+															null,
+															'Genre'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--action' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
+															'Action'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--adventure' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
+															'Adventure'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--animation' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
+															'Animation'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--comedy' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
+															'Comedy'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--crime' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
+															'Crime'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--documentary' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
+															'Documentary'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--drama' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
+															'Drama'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--family' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
+															'Family'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--fantasy' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
+															'Fantasy'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--history' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
+															'History'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--horror' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
+															'Horror'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--musical' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
+															'Musical'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--mystery' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
+															'Mystery'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--romance' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
+															'Romance'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--sci-fi' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
+															'Science Fiction'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--thriller' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
+															'Thriller'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--war' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
+															'War'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'genre--western' },
+															React.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
+															'Western'
+													)
+											)
+									),
+									React.createElement(
+											'section',
+											null,
 											React.createElement(
-													'label',
-													{ htmlFor: 'genre--action' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
-													'Action'
-											),
+													'form',
+													{ onChange: this.handleDuration },
+													React.createElement(
+															'h3',
+															null,
+															'Duration'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'duration--any' },
+															React.createElement('input', { type: 'radio', id: 'duration--any', name: 'duration', value: '' }),
+															'Any Duration'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'duration--half-hour' },
+															React.createElement('input', { type: 'radio', id: 'duration--half-hour', name: 'duration', value: '30' }),
+															'Half-Hour or Less'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'duration--one-hour' },
+															React.createElement('input', { type: 'radio', id: 'duration--one-hour', name: 'duration', value: '60' }),
+															'One Hour or Less'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'duration--two-hours' },
+															React.createElement('input', { type: 'radio', id: 'duration--two-hours', name: 'duration', value: '120' }),
+															'Two Hours or Less'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'duration--two-plus-hours' },
+															React.createElement('input', { type: 'radio', id: 'duration--two-plus-hours', name: 'duration', value: '121' }),
+															'2+ Hours'
+													)
+											)
+									),
+									React.createElement(
+											'section',
+											null,
 											React.createElement(
-													'label',
-													{ htmlFor: 'genre--adventure' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
-													'Adventure'
-											),
+													'form',
+													{ onChange: this.handleRating },
+													React.createElement(
+															'h3',
+															null,
+															'User Rating'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'rating--any' },
+															React.createElement('input', { type: 'radio', id: 'duration--any', name: 'rating', value: '' }),
+															'Any Rating'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'rating--two-stars' },
+															React.createElement('input', { type: 'radio', id: 'rating--two-stars', name: 'rating', value: '2' }),
+															'2/10 +'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'rating--four-stars' },
+															React.createElement('input', { type: 'radio', id: 'rating--four-stars', name: 'rating', value: '4' }),
+															'4/10 +'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'rating--six-stars' },
+															React.createElement('input', { type: 'radio', id: 'rating--six-stars', name: 'rating', value: '6' }),
+															'6/10 +'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'rating--eight-stars' },
+															React.createElement('input', { type: 'radio', id: 'rating--eight-stars', name: 'rating', value: '8' }),
+															'8/10 +'
+													)
+											)
+									),
+									React.createElement(
+											'section',
+											null,
 											React.createElement(
-													'label',
-													{ htmlFor: 'genre--animation' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
-													'Animation'
-											),
+													'form',
+													{ onChange: this.handleCertification },
+													React.createElement(
+															'h3',
+															null,
+															'Official Rating'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'certification--any' },
+															React.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
+															'Any'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'certification--g' },
+															React.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
+															'G'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'certification--pg' },
+															React.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
+															'PG'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'certification--pg-13' },
+															React.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
+															'PG-13'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'certification--r' },
+															React.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
+															'R'
+													)
+											)
+									),
+									React.createElement(
+											'section',
+											null,
 											React.createElement(
-													'label',
-													{ htmlFor: 'genre--comedy' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
-													'Comedy'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--crime' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
-													'Crime'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--documentary' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
-													'Documentary'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--drama' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
-													'Drama'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--family' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
-													'Family'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--fantasy' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
-													'Fantasy'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--history' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
-													'History'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--horror' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
-													'Horror'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--musical' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
-													'Musical'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--mystery' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
-													'Mystery'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--romance' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
-													'Romance'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--sci-fi' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
-													'Science Fiction'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--thriller' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
-													'Thriller'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--war' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
-													'War'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'genre--western' },
-													React.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
-													'Western'
+													'form',
+													{ onChange: this.handleReleaseDate },
+													React.createElement(
+															'h3',
+															null,
+															'Release Date'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--any' },
+															React.createElement('input', { type: 'radio', id: 'release-date--any', name: 'release-date', value: '' }),
+															'Any'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--1950' },
+															React.createElement('input', { type: 'radio', id: 'release-date--1950', name: 'release-date', value: '1950' }),
+															'Before 1950'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--1960' },
+															React.createElement('input', { type: 'radio', id: 'release-date--1960', name: 'release-date', value: '1960,1970' }),
+															'1960s'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--1970' },
+															React.createElement('input', { type: 'radio', id: 'release-date--1970', name: 'release-date', value: '1970,1980' }),
+															'1970s'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--1980' },
+															React.createElement('input', { type: 'radio', id: 'release-date--1980', name: 'release-date', value: '1980,1990' }),
+															'1980s'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--1990' },
+															React.createElement('input', { type: 'radio', id: 'release-date--1990', name: 'release-date', value: '1990,2000' }),
+															'1990s'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--2000' },
+															React.createElement('input', { type: 'radio', id: 'release-date--2000', name: 'release-date', value: '2000,2010' }),
+															'2000s'
+													),
+													React.createElement(
+															'label',
+															{ htmlFor: 'release-date--2010' },
+															React.createElement('input', { type: 'radio', id: 'release-date--2010', name: 'release-date', value: '2010,2020' }),
+															'2010 - Present'
+													)
 											)
 									)
 							),
 							React.createElement(
-									'section',
-									null,
-									React.createElement(
-											'form',
-											{ onChange: this.handleDuration },
-											React.createElement(
-													'h3',
-													null,
-													'Duration'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'duration--any' },
-													React.createElement('input', { type: 'radio', id: 'duration--any', name: 'duration', value: '' }),
-													'Any Duration'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'duration--half-hour' },
-													React.createElement('input', { type: 'radio', id: 'duration--half-hour', name: 'duration', value: '30' }),
-													'Half-Hour or Less'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'duration--one-hour' },
-													React.createElement('input', { type: 'radio', id: 'duration--one-hour', name: 'duration', value: '60' }),
-													'One Hour or Less'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'duration--two-hours' },
-													React.createElement('input', { type: 'radio', id: 'duration--two-hours', name: 'duration', value: '120' }),
-													'Two Hours or Less'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'duration--two-plus-hours' },
-													React.createElement('input', { type: 'radio', id: 'duration--two-plus-hours', name: 'duration', value: '121' }),
-													'2+ Hours'
-											)
-									)
-							),
-							React.createElement(
-									'section',
-									null,
-									React.createElement(
-											'form',
-											{ onChange: this.handleRating },
-											React.createElement(
-													'h3',
-													null,
-													'User Rating'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'rating--any' },
-													React.createElement('input', { type: 'radio', id: 'duration--any', name: 'rating', value: '' }),
-													'Any Rating'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'rating--two-stars' },
-													React.createElement('input', { type: 'radio', id: 'rating--two-stars', name: 'rating', value: '2' }),
-													'2/10 +'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'rating--four-stars' },
-													React.createElement('input', { type: 'radio', id: 'rating--four-stars', name: 'rating', value: '4' }),
-													'4/10 +'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'rating--six-stars' },
-													React.createElement('input', { type: 'radio', id: 'rating--six-stars', name: 'rating', value: '6' }),
-													'6/10 +'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'rating--eight-stars' },
-													React.createElement('input', { type: 'radio', id: 'rating--eight-stars', name: 'rating', value: '8' }),
-													'8/10 +'
-											)
-									)
-							),
-							React.createElement(
-									'section',
-									null,
-									React.createElement(
-											'form',
-											{ onChange: this.handleCertification },
-											React.createElement(
-													'h3',
-													null,
-													'Official Rating'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'certification--any' },
-													React.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
-													'Any'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'certification--g' },
-													React.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
-													'G'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'certification--pg' },
-													React.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
-													'PG'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'certification--pg-13' },
-													React.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
-													'PG-13'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'certification--r' },
-													React.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
-													'R'
-											)
-									)
-							),
-							React.createElement(
-									'section',
-									null,
-									React.createElement(
-											'form',
-											{ onChange: this.handleReleaseDate },
-											React.createElement(
-													'h3',
-													null,
-													'Release Date'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--any' },
-													React.createElement('input', { type: 'radio', id: 'release-date--any', name: 'release-date', value: '' }),
-													'Any'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--1950' },
-													React.createElement('input', { type: 'radio', id: 'release-date--1950', name: 'release-date', value: '1950' }),
-													'Before 1950'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--1960' },
-													React.createElement('input', { type: 'radio', id: 'release-date--1960', name: 'release-date', value: '1960,1970' }),
-													'1960s'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--1970' },
-													React.createElement('input', { type: 'radio', id: 'release-date--1970', name: 'release-date', value: '1970,1980' }),
-													'1970s'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--1980' },
-													React.createElement('input', { type: 'radio', id: 'release-date--1980', name: 'release-date', value: '1980,1990' }),
-													'1980s'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--1990' },
-													React.createElement('input', { type: 'radio', id: 'release-date--1990', name: 'release-date', value: '1990,2000' }),
-													'1990s'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--2000' },
-													React.createElement('input', { type: 'radio', id: 'release-date--2000', name: 'release-date', value: '2000,2010' }),
-													'2000s'
-											),
-											React.createElement(
-													'label',
-													{ htmlFor: 'release-date--2010' },
-													React.createElement('input', { type: 'radio', id: 'release-date--2010', name: 'release-date', value: '2010,2020' }),
-													'2010 - Present'
-											)
-									)
+									'form',
+									{ id: 'search', onChange: this.handleSearch },
+									React.createElement('input', { ref: 'searchInput', type: 'search', placeholder: 'Search Titles, Actors', autofocus: true })
 							)
 					);
 			}
@@ -20574,7 +20564,7 @@
 	var content = __webpack_require__(167);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(172)(content, {});
+	var update = __webpack_require__(171)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20599,7 +20589,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background-color: #292929; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: fixed;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #1d1d1d;\n  width: 100%;\n  height: 75px;\n  z-index: 1;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); }\n  nav #filter-trigger, nav input[type=\"search\"] {\n    font-size: 16px;\n    color: #eee;\n    font-weight: 400;\n    line-height: 75px; }\n  nav #filter-trigger {\n    padding-left: 20px;\n    color: #9a9a9a;\n    cursor: pointer; }\n    nav #filter-trigger:before {\n      background-image: url(" + __webpack_require__(169) + "); }\n    nav #filter-trigger span {\n      padding-left: 40px; }\n  nav #logo {\n    width: 20%;\n    height: 100%;\n    text-indent: -9999px;\n    background-repeat: no-repeat;\n    background-size: 50% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(170) + ");\n    text-indent: -9999px; }\n  nav #filter-trigger, nav form {\n    position: relative;\n    width: 15%;\n    height: 100%; }\n  nav form:before {\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(171) + "); }\n  nav input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    nav input[type=\"search\"]:focus {\n      outline-color: #eee; }\n  nav #filter-trigger:before, nav form:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: ''; }\n\naside {\n  position: sticky;\n  top: 75px;\n  width: 18%;\n  height: 100vh;\n  margin-top: 75px;\n  padding: 20px;\n  background-color: #1d1d1d;\n  overflow-y: scroll;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); }\n  aside.active {\n    display: block; }\n  aside h2, aside h3 {\n    color: #eee; }\n  aside section {\n    margin: 20px 0px; }\n  aside label {\n    display: block;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n\nsection#results {\n  margin-top: 75px;\n  width: 100%; }\n  section#results #hero {\n    height: 50vh; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 20px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results h1 {\n    font-size: 32px;\n    color: #eee; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
+	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background-color: #292929; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px; }\n  nav input[type=\"search\"] {\n    font-size: 16px;\n    color: #eee;\n    font-weight: 400;\n    line-height: 75px; }\n  nav #logo {\n    width: 120px;\n    height: 100%;\n    background-repeat: no-repeat;\n    background-size: 100% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(169) + ");\n    text-indent: -9999px; }\n\naside {\n  position: sticky;\n  top: -1px;\n  display: flex;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  background-color: #1d1d1d;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);\n  z-index: 2; }\n  aside h3 {\n    color: #9a9a9a; }\n  aside #filters {\n    display: flex;\n    flex: 1;\n    align-items: center; }\n  aside section {\n    margin: 0px 20px; }\n    aside section:first-of-type {\n      margin-left: 0px; }\n  aside label {\n    display: none;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n  aside #search {\n    position: relative;\n    height: 100%; }\n  aside #search:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: '';\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(170) + "); }\n  aside input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    font-size: 18px;\n    color: #eee;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    aside input[type=\"search\"]:focus {\n      outline: none; }\n\nsection#results {\n  width: 100%; }\n  section#results #hero {\n    height: 50vh; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 20px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results h1 {\n    font-size: 32px;\n    color: #eee; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
 
 	// exports
 
@@ -20664,22 +20654,16 @@
 /* 169 */
 /***/ function(module, exports) {
 
-	module.exports = "/img/filter.svg";
+	module.exports = "/img/logo.svg";
 
 /***/ },
 /* 170 */
 /***/ function(module, exports) {
 
-	module.exports = "/img/logo.svg";
-
-/***/ },
-/* 171 */
-/***/ function(module, exports) {
-
 	module.exports = "/img/search.svg";
 
 /***/ },
-/* 172 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

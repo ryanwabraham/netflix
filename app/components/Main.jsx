@@ -190,10 +190,10 @@ var Main = React.createClass({
 
 		return (
 			<main>
-				<Nav onSearch={this.handleSearch}/>
+				<Nav/>
 				<section id="results">
 					{displayHero()}
-					<Filters onFilter={this.handleFilter}/>
+					<Filters onFilter={this.handleFilter} onSearch={this.handleSearch}/>
 					{displayResults()}
 				</section>
 			</main>

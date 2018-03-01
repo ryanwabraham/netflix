@@ -4,10 +4,10 @@ $text: #eee;
 $text-gray: #9a9a9a;
 $font-stack: 'Helvetica Neu', Helvetica, sans-serif;
 $font-size-l: 32px;
+$font-size-m: 18px;
 $font-size: 16px;
 $font-size-s: 12px;
 $nav-height: 75px;
-$aside-width: 18%;
 
 * {
     -webkit-box-sizing: border-box;
@@ -38,55 +38,83 @@ main {
 }
 
 nav {
-    position: fixed;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: $black;
     width: 100%;
     height: $nav-height;
-    z-index: 1;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 0px 30px;
 
-    #filter-trigger, input[type="search"] {
+    input[type="search"] {
         font-size: $font-size;
         color: $text;
         font-weight: 400;
         line-height: $nav-height;
     }
 
-    #filter-trigger {
-        padding-left: 20px;
-        color: $text-gray;
-        cursor: pointer;
-
-        &:before {
-            background-image: url('../img/filter.svg');
-        }
-
-        span {
-            padding-left: 40px;
-        }
-    }
-
     #logo {
-        width: 20%;
+        width: 120px;
         height: 100%;
-        text-indent: -9999px;
         background-repeat: no-repeat;
-        background-size: 50% auto;
+        background-size: 100% auto;
         background-position: center center;
-        background-image: url('../img/logo.svg');
+        background-image: url(../img/logo.svg);
         text-indent: -9999px;
     }
+}
 
-    #filter-trigger, form {
+aside {
+    position: sticky;
+    top: -1px;
+    display: flex;
+    width: 100%;
+    height: $nav-height;
+    padding: 0px 30px;
+    background-color: $black;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+
+    h3 {
+        color: $text-gray;
+    }
+
+    #filters {
+        display: flex;
+        flex: 1;
+        align-items: center;
+    }
+
+    section {
+        margin: 0px 20px;
+
+        &:first-of-type {
+            margin-left: 0px;
+        }
+    }
+
+    label {
+        display: none;
+        margin: 10px 0px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    #search {
         position: relative;
-        width: 15%;
         height: 100%;
     }
 
-    form:before {
+    #search:before {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background-size: 30px 30px;
+        content: '';
         margin-top: 3px;
         background-image: url('../img/search.svg');
     }
@@ -95,62 +123,19 @@ nav {
         width: 100%;
         height: 100%;
         background-color: $black;
+        font-size: $font-size-m;
+        color: $text;
         -webkit-appearance: none;
         padding: 10px 0px 10px 55px;
         border: none;
 
         &:focus {
-            outline-color: $text;
+            outline: none;
         }
-    }
-
-    #filter-trigger:before, form:before {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        width: 30px;
-        height: 30px;
-        background-size: 30px 30px;
-        content: '';
-    }
-}
-
-aside {
-    //display: none;
-    position: sticky;
-    top: $nav-height;
-    width: $aside-width;
-    height: 100vh;
-    margin-top: $nav-height;
-    padding: 20px;
-    background-color: $black;
-    overflow-y: scroll;
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
-
-    &.active {
-        display: block;
-    }
-
-    h2, h3 {
-        color: $text;
-    }
-
-    section {
-        margin: 20px 0px;
-    }
-
-    label {
-        display: block;
-        margin: 10px 0px;
-    }
-
-    input[type="radio"], input[type="checkbox"] {
-        margin-right: 10px;
     }
 }
 
 section#results {
-    margin-top: $nav-height;
     width: 100%;
 
     #hero {
