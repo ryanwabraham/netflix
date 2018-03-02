@@ -175,7 +175,7 @@ var Filters = React.createClass({
 
 					<section>
 						<form onChange={this.handleRating}>
-							<h3>User Rating</h3>
+							<h3>Rating</h3>
 							<label htmlFor="rating--any">
 								<input type="radio" id="duration--any" name="rating" value=""></input>
 								Any Rating
@@ -205,7 +205,7 @@ var Filters = React.createClass({
 
 					<section>
 						<form onChange={this.handleCertification}>
-							<h3>Official Rating</h3>
+							<h3>Maturity Rating</h3>
 							<label htmlFor="certification--any">
 								<input type="radio" id="certification--any" name="certification" value=""></input>
 								Any

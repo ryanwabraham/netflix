@@ -92,7 +92,32 @@ aside {
     z-index: 2;
 
     h3 {
+        position: relative;
         color: $text-gray;
+        cursor: pointer;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: -17px;
+            width: 10px;
+            height: 9px;
+            background-image: url(/img/dropdown.png);
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            transform: rotate(0deg);
+            transition-duration: .5s;
+        }
+
+        &.active {
+            color: $text;
+
+            &:after {
+                transform: rotate(180deg);
+                transition-duration: .5s;
+            }
+        }
     }
 
     #filters {
@@ -102,7 +127,7 @@ aside {
     }
 
     section {
-        margin: 0px 20px;
+        margin: 0px 25px;
 
         &:first-of-type {
             margin-left: 0px;
