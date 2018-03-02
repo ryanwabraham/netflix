@@ -2,6 +2,7 @@ $black: #1d1d1d;
 $gray-dark: #292929;
 $text: #eee;
 $text-gray: #9a9a9a;
+$red: #d32f27;
 $font-stack: 'Helvetica Neu', Helvetica, sans-serif;
 $font-size-l: 32px;
 $font-size-m: 18px;
@@ -45,13 +46,7 @@ nav {
     width: 100%;
     height: $nav-height;
     padding: 0px 30px;
-
-    input[type="search"] {
-        font-size: $font-size;
-        color: $text;
-        font-weight: 400;
-        line-height: $nav-height;
-    }
+    z-index: 1;
 
     #logo {
         width: 120px;
@@ -61,6 +56,27 @@ nav {
         background-position: center center;
         background-image: url(../img/logo.svg);
         text-indent: -9999px;
+    }
+
+    #account {
+        display: flex;
+        align-items: center;
+
+        .notifications {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+            background-image: url('../img/notifications.svg');
+            background-size: 30px 30px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            background-image: url(../img/audrey-horne.png);
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+        }
     }
 }
 
@@ -124,6 +140,7 @@ aside {
         height: 100%;
         background-color: $black;
         font-size: $font-size-m;
+        font-weight: bold;
         color: $text;
         -webkit-appearance: none;
         padding: 10px 0px 10px 55px;
@@ -139,13 +156,18 @@ section#results {
     width: 100%;
 
     #hero {
-        height: 50vh;
+        height: 350px;
+        background: #000;
+    }
+
+    .hero__info__wrapper {
+        z-index: 2;
     }
 
     .hero__info {
         width: 33.3%;
         height: 100%;
-        padding: 20px;
+        padding: 54px 0px 0px 30px;
         display: flex;
         align-items: center;
         background: -webkit-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
@@ -154,9 +176,28 @@ section#results {
         background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
     }
 
-    h1 {
-        font-size: $font-size-l;
+    .hero__img {
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    .hero__logo {
+        width: 200px;
+    }
+
+    .button {
+        display: block;
+        width: 180px;
+        margin: 20px 0px;
+        padding: 10px;
+        text-align: center;
+        background: $red;
         color: $text;
+        text-decoration: none;
+        font-size: $font-size-m;
+        border-radius: 5px;
     }
 
     ul {

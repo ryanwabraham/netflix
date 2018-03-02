@@ -5,9 +5,10 @@ var Hero = React.createClass({
 	render: function() {
 		return (
 			<section id="hero">
+				<img className="hero__img" srcSet="img/x-files-hero.jpg 1x, img/x-files-hero@2x.jpg 2x"/>
 				<div className="hero__info">
 					<div className="hero__info__wrapper">
-						<h1 className="animated quick fadeInUp">The X Files</h1>
+						<img className="hero__logo" src="img/x-files-logo.png" alt="The X Files"/>
 						<a href="#" className="button">Play</a>
 					</div>
 				</div>
