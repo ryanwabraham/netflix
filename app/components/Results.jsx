@@ -1,9 +1,8 @@
-var React = require('react');
-var ResultItem = require('ResultItem');
+import React from 'react';
+import ResultItem from 'ResultItem';
 
-var Results = React.createClass({
-
-	render: function() {
+class Results extends React.Component {
+	render() {
 		var results = '';
 
 		if (this.props.resultData) {
@@ -35,6 +34,6 @@ var Results = React.createClass({
 			</ul>
 		);
 	}
-});
+};
 
 module.exports = Results;

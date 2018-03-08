@@ -1,17 +1,15 @@
-var React = require('react');
+import React from 'react';
 
-var Nav = React.createClass({
-	render: function() {
-		return (
-			<nav>
-				<div id="logo">Netflix</div>
-				<div id="account">
-					<span className="notifications"></span>
-					<span className="avatar"></span>
-				</div>
-			</nav>
-		);
-	}
-});
+function Nav() {
+	return (
+		<nav>
+			<div id="logo">Netflix</div>
+			<div id="account">
+				<span className="notifications"></span>
+				<span className="avatar"></span>
+			</div>
+		</nav>
+	);
+};
 
 module.exports = Nav;

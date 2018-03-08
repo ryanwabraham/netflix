@@ -1,30 +1,30 @@
-var React = require('react');
+import React from 'react';
 
-var Filters = React.createClass({
-	handleType: function(e) {
+class Filters extends React.Component {
+	handleType = (e) => {
 		this.props.onFilter(e, 'type');
-	},
-	handleGenre: function(e) {
+	}
+	handleGenre = (e) => {
 		this.props.onFilter(e, 'genre');
-	},
-	handleDuration: function(e) {
+	}
+	handleDuration = (e) => {
 		this.props.onFilter(e, 'duration');
-	},
-	handleRating: function(e) {
+	}
+	handleRating = (e) => {
 		this.props.onFilter(e, 'rating');
-	},
-	handleCertification: function(e) {
+	}
+	handleCertification = (e) => {
 		this.props.onFilter(e, 'certification');
-	},
-	handleReleaseDate: function(e) {
+	}
+	handleReleaseDate = (e) => {
 		this.props.onFilter(e, 'releaseDate');
-	},
-	handleSearch: function(e) {
+	}
+	handleSearch = (e) => {
 		e.preventDefault();
 		var searchTerm = this.refs.searchInput.value;
 		this.props.onSearch(searchTerm);
-	},
-	render: function() {
+	}
+	render() {
 		return (
 			<aside>
 				<div id="filters">
@@ -275,11 +275,11 @@ var Filters = React.createClass({
 				</div>
 
 				<form id="search" onChange={this.handleSearch}>
-					<input ref="searchInput" type="search" placeholder="Search Titles, Actors" autofocus></input>
+					<input ref="searchInput" type="search" placeholder="Search Titles, Actors" autoFocus></input>
 				</form>
 			</aside>
 		)
 	}
-});
+};
 
 module.exports = Filters;

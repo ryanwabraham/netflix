@@ -5,15 +5,16 @@ const DEFAULT_REQUEST = `${MOVIE_DB_URL}discover/movie?${ADDITIONAL_CONFIG}&api_
 const BASE_FILTER_REQUEST = `${MOVIE_DB_URL}discover/`;
 var initialRequest = false;
 
-var React = require('react');
-var Nav = require('Nav');
-var Hero = require('Hero');
-var Results = require('Results');
-var Filters = require('Filters');
+import React from 'react';
+import Nav from 'Nav';
+import Hero from 'Hero';
+import Results from 'Results';
+import Filters from 'Filters';
 
-var Main = React.createClass({
-	getInitialState: function() {
-		return {
+class Main extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
 			isLoading: false,
 			searchTerm: '',
 			type: 'movie',
@@ -23,9 +24,9 @@ var Main = React.createClass({
 			certification: '',
 			releaseDate: '',
 			data: ''
-		}
-	},
-	handleSearch: function(searchTerm) {
+		};
+	}
+	handleSearch = (searchTerm) => {
 		if (searchTerm.length > 0) {
 			this.setState({
 				isLoading: true,
@@ -42,8 +43,8 @@ var Main = React.createClass({
 			});
 			this.getResults(DEFAULT_REQUEST);
 		}
-	},
-	handleFilter: function(e, filter) {
+	}
+	handleFilter = (e, filter) => {
 		var {type, genres, duration, rating, certification, releaseDate} = this.state;
 		initialRequest = false;
 
@@ -146,8 +147,8 @@ var Main = React.createClass({
 
 		var requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
 		this.getResults(requestUrl);
-	},
-	getResults: function(requestUrl) {
+	}
+	getResults = (requestUrl) => {
 		console.log('requestUrl: ' + requestUrl);
 
 		fetch(requestUrl).then((response)=>{
@@ -160,8 +161,8 @@ var Main = React.createClass({
 	    }).catch((err)=>{
 	        console.log("There has been an error:" + err);
 	    });
-	},
-	render: function() {
+	}
+	render() {
 		var {isLoading, searchTerm, data} = this.state;
 
 		if (initialRequest == false && searchTerm.length === 0) {
@@ -169,7 +170,7 @@ var Main = React.createClass({
 			initialRequest = true;
 		}
 
-		function displayHero() {
+		var displayHero = () => {
 			console.log(initialRequest);
 			if (initialRequest) {
 				return <Hero/>;
@@ -178,7 +179,7 @@ var Main = React.createClass({
 			}
 		}
 
-		function displayResults() {
+		var displayResults = () => {
 			if (!isLoading) {
 				if (data.length > 0) {
 					return <Results resultData={data}/>;
@@ -199,6 +200,6 @@ var Main = React.createClass({
 			</main>
 		);
 	}
-});
+};
 
 module.exports = Main;

@@ -1,5 +1,5 @@
-var React = require('react');
-var GenreData = require('genreData');
+import React from 'react';
+import GenreData from 'genreData';
 
 var ResultItem = ({title, genres, rating, poster}) => {
 	var genreList = '';
