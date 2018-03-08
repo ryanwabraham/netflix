@@ -6,6 +6,6 @@ import Main from 'Main';
 require('style!css!sass!appStyles');
 
 ReactDOM.render(
-	<Main/>,
-	document.getElementById('app')
+    <Main/>,
+    document.getElementById('app')
 );
