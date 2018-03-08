@@ -19,11 +19,12 @@ class Results extends React.Component {
                     var key = result.id;
                     var genres = result.genre_ids;
                     var rating = result.vote_average;
-                    var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
-
-                    return (
-                        <ResultItem key={key} title={title} genres={genres} rating={rating} poster={poster} />
-                    );
+                    if (result.poster_path !== null) {
+                        var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
+                        return (
+                            <ResultItem key={key} title={title} genres={genres} rating={rating} poster={poster} />
+                        );
+                    }
                 }
             });
         }
