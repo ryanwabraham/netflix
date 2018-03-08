@@ -26,6 +26,7 @@ class Main extends React.Component {
 			data: ''
 		};
 	}
+
 	handleSearch = (searchTerm) => {
 		if (searchTerm.length > 0) {
 			this.setState({
@@ -44,99 +45,103 @@ class Main extends React.Component {
 			this.getResults(DEFAULT_REQUEST);
 		}
 	}
+
 	handleFilter = (e, filter) => {
 		var {type, genres, duration, rating, certification, releaseDate} = this.state;
 		initialRequest = false;
 
-		if (filter === 'type') {
-			var type = e.target.value;
-			this.setState({
-				isLoading: true,
-				type: type
-			});
-		}
-
-		if (filter === 'genre') {
-			if (e.target.checked) {
-				genres.push(e.target.value);
-			} else {
-				var index = genres.indexOf(e.target.value);
-				genres.splice(index, 1);
+		switch(filter) {
+			case 'type': {
+				var type = e.target.value;
+				this.setState({
+					isLoading: true,
+					type: type
+				});
+				break;
 			}
-
-			this.setState({
-				isLoading: true,
-				genres: genres
-			});
-		}
-
-		if (filter === 'duration') {
-			var duration = e.target.value;
-
-			if (duration != '') {
-				if (duration >= 121) {
-					var duration = '&with_runtime.gte=' + duration;
+			case 'genre': {
+				if (e.target.checked) {
+					genres.push(e.target.value);
 				} else {
-					var duration = '&with_runtime.lte=' + duration;
+					var index = genres.indexOf(e.target.value);
+					genres.splice(index, 1);
 				}
+
+				this.setState({
+					isLoading: true,
+					genres: genres
+				});
+				break;
 			}
+			case 'duration': {
+				var duration = e.target.value;
 
-			this.setState({
-				isLoading: true,
-				duration: duration
-			});
-		}
+				if (duration != '') {
+					if (duration >= 121) {
+						var duration = '&with_runtime.gte=' + duration;
+					} else {
+						var duration = '&with_runtime.lte=' + duration;
+					}
+				}
 
-		if (filter === 'rating') {
-			var rating = e.target.value;
-
-			if (rating != '') {
-				var rating = '&vote_average.gte=' + rating;
+				this.setState({
+					isLoading: true,
+					duration: duration
+				});
+				break;
 			}
+			case 'rating': {
+				var rating = e.target.value;
 
-			this.setState({
-				isLoading: true,
-				rating: rating
-			});
-		}
+				if (rating != '') {
+					var rating = '&vote_average.gte=' + rating;
+				}
 
-		if (filter === 'certification') {
-			var certification = e.target.value;
-
-			if (certification != '') {
-				var certification = '&certification_country=US&certification=' + certification;
+				this.setState({
+					isLoading: true,
+					rating: rating
+				});
+				break;
 			}
+			case 'certification': {
+				var certification = e.target.value;
 
-			this.setState({
-				isLoading: true,
-				certification: certification
-			});
-		}
+				if (certification != '') {
+					var certification = '&certification_country=US&certification=' + certification;
+				}
 
-		if (filter === 'releaseDate') {
-			var releaseDate = e.target.value;
-
-			if (type == 'movie') {
-				var gte = '&primary_release_date.gte=';
-				var lte = '&primary_release_date.lte=';
-			} else {
-				var gte = '&first_air_date.gte=';
-				var lte = '&first_air_date.lte=';
+				this.setState({
+					isLoading: true,
+					certification: certification
+				});
+				break;
 			}
+			case 'releaseDate': {
+				var releaseDate = e.target.value;
 
-			if (releaseDate != '') {
-				if (releaseDate === '1950') {
-					releaseDate = lte + parseInt(releaseDate);
+				if (type == 'movie') {
+					var gte = '&primary_release_date.gte=';
+					var lte = '&primary_release_date.lte=';
 				} else {
-					releaseDate = e.target.value.split(',');
-					releaseDate = gte + parseInt(releaseDate[0]) + lte + parseInt(releaseDate[1]);
+					var gte = '&first_air_date.gte=';
+					var lte = '&first_air_date.lte=';
 				}
-			}
 
-			this.setState({
-				isLoading: true,
-				releaseDate: releaseDate
-			});
+				if (releaseDate != '') {
+					if (releaseDate === '1950') {
+						releaseDate = lte + parseInt(releaseDate);
+					} else {
+						releaseDate = e.target.value.split(',');
+						releaseDate = gte + parseInt(releaseDate[0]) + lte + parseInt(releaseDate[1]);
+					}
+				}
+
+				this.setState({
+					isLoading: true,
+					releaseDate: releaseDate
+				});
+				break;
+			}
 		}
 
 		if (genres.length > 0) {
@@ -148,6 +153,7 @@ class Main extends React.Component {
 		var requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
 		this.getResults(requestUrl);
 	}
+
 	getResults = (requestUrl) => {
 		console.log('requestUrl: ' + requestUrl);
 
@@ -162,6 +168,7 @@ class Main extends React.Component {
 	        console.log("There has been an error:" + err);
 	    });
 	}
+
 	render() {
 		var {isLoading, searchTerm, data} = this.state;
 

@@ -18299,95 +18299,104 @@
 
 				initialRequest = false;
 
-				if (filter === 'type') {
-					var type = e.target.value;
-					_this.setState({
-						isLoading: true,
-						type: type
-					});
-				}
-
-				if (filter === 'genre') {
-					if (e.target.checked) {
-						genres.push(e.target.value);
-					} else {
-						var index = genres.indexOf(e.target.value);
-						genres.splice(index, 1);
-					}
-
-					_this.setState({
-						isLoading: true,
-						genres: genres
-					});
-				}
-
-				if (filter === 'duration') {
-					var duration = e.target.value;
-
-					if (duration != '') {
-						if (duration >= 121) {
-							var duration = '&with_runtime.gte=' + duration;
-						} else {
-							var duration = '&with_runtime.lte=' + duration;
+				switch (filter) {
+					case 'type':
+						{
+							var type = e.target.value;
+							_this.setState({
+								isLoading: true,
+								type: type
+							});
+							break;
 						}
-					}
+					case 'genre':
+						{
+							if (e.target.checked) {
+								genres.push(e.target.value);
+							} else {
+								var index = genres.indexOf(e.target.value);
+								genres.splice(index, 1);
+							}
 
-					_this.setState({
-						isLoading: true,
-						duration: duration
-					});
-				}
-
-				if (filter === 'rating') {
-					var rating = e.target.value;
-
-					if (rating != '') {
-						var rating = '&vote_average.gte=' + rating;
-					}
-
-					_this.setState({
-						isLoading: true,
-						rating: rating
-					});
-				}
-
-				if (filter === 'certification') {
-					var certification = e.target.value;
-
-					if (certification != '') {
-						var certification = '&certification_country=US&certification=' + certification;
-					}
-
-					_this.setState({
-						isLoading: true,
-						certification: certification
-					});
-				}
-
-				if (filter === 'releaseDate') {
-					var releaseDate = e.target.value;
-
-					if (type == 'movie') {
-						var gte = '&primary_release_date.gte=';
-						var lte = '&primary_release_date.lte=';
-					} else {
-						var gte = '&first_air_date.gte=';
-						var lte = '&first_air_date.lte=';
-					}
-
-					if (releaseDate != '') {
-						if (releaseDate === '1950') {
-							releaseDate = lte + parseInt(releaseDate);
-						} else {
-							releaseDate = e.target.value.split(',');
-							releaseDate = gte + parseInt(releaseDate[0]) + lte + parseInt(releaseDate[1]);
+							_this.setState({
+								isLoading: true,
+								genres: genres
+							});
+							break;
 						}
-					}
+					case 'duration':
+						{
+							var duration = e.target.value;
 
-					_this.setState({
-						isLoading: true,
-						releaseDate: releaseDate
-					});
+							if (duration != '') {
+								if (duration >= 121) {
+									var duration = '&with_runtime.gte=' + duration;
+								} else {
+									var duration = '&with_runtime.lte=' + duration;
+								}
+							}
+
+							_this.setState({
+								isLoading: true,
+								duration: duration
+							});
+							break;
+						}
+					case 'rating':
+						{
+							var rating = e.target.value;
+
+							if (rating != '') {
+								var rating = '&vote_average.gte=' + rating;
+							}
+
+							_this.setState({
+								isLoading: true,
+								rating: rating
+							});
+							break;
+						}
+					case 'certification':
+						{
+							var certification = e.target.value;
+
+							if (certification != '') {
+								var certification = '&certification_country=US&certification=' + certification;
+							}
+
+							_this.setState({
+								isLoading: true,
+								certification: certification
+							});
+							break;
+						}
+					case 'releaseDate':
+						{
+							var releaseDate = e.target.value;
+
+							if (type == 'movie') {
+								var gte = '&primary_release_date.gte=';
+								var lte = '&primary_release_date.lte=';
+							} else {
+								var gte = '&first_air_date.gte=';
+								var lte = '&first_air_date.lte=';
+							}
+
+							if (releaseDate != '') {
+								if (releaseDate === '1950') {
+									releaseDate = lte + parseInt(releaseDate);
+								} else {
+									releaseDate = e.target.value.split(',');
+									releaseDate = gte + parseInt(releaseDate[0]) + lte + parseInt(releaseDate[1]);
+								}
+							}
+
+							_this.setState({
+								isLoading: true,
+								releaseDate: releaseDate
+							});
+							break;
+						}
 				}
 
 				if (genres.length > 0) {
