@@ -1,4 +1,5 @@
 import React from 'react';
+import {DebounceInput} from 'react-debounce-input';
 
 class Filters extends React.Component {
     handleType = (e) => {
@@ -20,8 +21,8 @@ class Filters extends React.Component {
         this.props.onFilter(e, 'releaseDate');
     }
     handleSearch = (e) => {
-        e.preventDefault();
-        var searchTerm = this.refs.searchInput.value;
+        var searchTerm = e.target.value;
+        console.log(searchTerm);
         this.props.onSearch(searchTerm);
     }
     render() {
@@ -274,8 +275,15 @@ class Filters extends React.Component {
                     </section>
                 </div>
 
-                <form id="search" onChange={this.handleSearch}>
-                    <input ref="searchInput" type="search" placeholder="Search Titles, Actors" autoFocus></input>
+                <form id="search">
+                    <DebounceInput
+                        ref="searchInput"
+                        type="search" placeholder="Search Titles, Actors"
+                        autoFocus
+                        minLength={2}
+                        debounceTimeout={300}
+                        onChange={this.handleSearch}
+                        />
                 </form>
             </aside>
         )
