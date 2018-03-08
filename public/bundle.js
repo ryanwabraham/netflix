@@ -18259,238 +18259,230 @@
 	var ADDITIONAL_CONFIG = '&sort_by=popularity.desc&language=en-US&original_language=en';
 	var DEFAULT_REQUEST = MOVIE_DB_URL + 'discover/movie?' + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
 	var BASE_FILTER_REQUEST = MOVIE_DB_URL + 'discover/';
-	var initialRequest = false;
+	var initialRequest = true;
 
 	var Main = function (_React$Component) {
-		_inherits(Main, _React$Component);
+	    _inherits(Main, _React$Component);
 
-		function Main(props) {
-			_classCallCheck(this, Main);
+	    function Main(props) {
+	        _classCallCheck(this, Main);
 
-			var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-			_this.handleSearch = function (searchTerm) {
-				if (searchTerm.length > 0) {
-					_this.setState({
-						isLoading: true,
-						searchTerm: searchTerm
-					});
-					initialRequest = false;
-					var request = encodeURIComponent(searchTerm);
-					var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
-					_this.getResults(requestUrl);
-				} else {
-					_this.setState({
-						isLoading: true,
-						searchTerm: searchTerm
-					});
-					_this.getResults(DEFAULT_REQUEST);
-				}
-			};
+	        _this.handleSearch = function (searchTerm) {
+	            if (searchTerm.length > 0) {
+	                _this.setState({
+	                    searchTerm: searchTerm
+	                });
+	                var request = encodeURIComponent(searchTerm);
+	                var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
+	                _this.getResults(requestUrl);
+	            } else {
+	                _this.setState({
+	                    searchTerm: searchTerm
+	                });
+	                _this.getResults(DEFAULT_REQUEST);
+	            }
+	        };
 
-			_this.handleFilter = function (e, filter) {
-				var _this$state = _this.state,
-				    type = _this$state.type,
-				    genres = _this$state.genres,
-				    duration = _this$state.duration,
-				    rating = _this$state.rating,
-				    certification = _this$state.certification,
-				    releaseDate = _this$state.releaseDate;
-
-				initialRequest = false;
-
-				switch (filter) {
-					case 'type':
-						{
-							var _type = e.target.value;
-							_this.setState({
-								isLoading: true,
-								type: _type
-							});
-							break;
-						}
-					case 'genre':
-						{
-							if (e.target.checked) {
-								genres.push(e.target.value);
-							} else {
-								var index = genres.indexOf(e.target.value);
-								genres.splice(index, 1);
-							}
-
-							_this.setState({
-								isLoading: true,
-								genres: genres
-							});
-							break;
-						}
-					case 'duration':
-						{
-							var _duration = e.target.value;
-
-							if (_duration != '') {
-								if (_duration >= 121) {
-									var _duration2 = '&with_runtime.gte=' + _duration2;
-								} else {
-									var _duration3 = '&with_runtime.lte=' + _duration3;
-								}
-							}
-
-							_this.setState({
-								isLoading: true,
-								duration: _duration
-							});
-							break;
-						}
-					case 'rating':
-						{
-							var _rating = e.target.value;
-
-							if (_rating != '') {
-								var _rating2 = '&vote_average.gte=' + _rating2;
-							}
-
-							_this.setState({
-								isLoading: true,
-								rating: _rating
-							});
-							break;
-						}
-					case 'certification':
-						{
-							var _certification = e.target.value;
-
-							if (_certification != '') {
-								var _certification2 = '&certification_country=US&certification=' + _certification2;
-							}
-
-							_this.setState({
-								isLoading: true,
-								certification: _certification
-							});
-							break;
-						}
-					case 'releaseDate':
-						{
-							var _releaseDate = e.target.value;
-
-							if (type == 'movie') {
-								var _gte = '&primary_release_date.gte=';
-								var _lte = '&primary_release_date.lte=';
-							} else {
-								var _gte2 = '&first_air_date.gte=';
-								var _lte2 = '&first_air_date.lte=';
-							}
-
-							if (_releaseDate != '') {
-								if (_releaseDate === '1950') {
-									_releaseDate = lte + parseInt(_releaseDate);
-								} else {
-									_releaseDate = e.target.value.split(',');
-									_releaseDate = gte + parseInt(_releaseDate[0]) + lte + parseInt(_releaseDate[1]);
-								}
-							}
-
-							_this.setState({
-								isLoading: true,
-								releaseDate: _releaseDate
-							});
-							break;
-						}
-				}
-
-				if (genres.length > 0) {
-					genres = '&with_genres=' + genres.join(',');
-				} else {
-					var _genres = '';
-				}
-
-				var requestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
-				_this.getResults(requestUrl);
-			};
-
-			_this.getResults = function (requestUrl) {
-				console.log('requestUrl: ' + requestUrl);
-
-				fetch(requestUrl).then(function (response) {
-					return response.json();
-				}).then(function (data) {
-					_this.setState({
-						data: data.results,
-						isLoading: false
-					});
-				}).catch(function (err) {
-					console.log("There has been an error:" + err);
-				});
-			};
-
-			_this.state = {
-				isLoading: false,
-				searchTerm: '',
-				type: 'movie',
-				genres: [],
-				duration: '',
-				rating: '',
-				certification: '',
-				releaseDate: '',
-				data: ''
-			};
-			return _this;
-		}
-
-		_createClass(Main, [{
-			key: 'render',
-			value: function render() {
-				var _state = this.state,
-				    isLoading = _state.isLoading,
-				    searchTerm = _state.searchTerm,
-				    data = _state.data;
+	        _this.handleFilter = function (e, filter) {
+	            var _this$state = _this.state,
+	                type = _this$state.type,
+	                genres = _this$state.genres,
+	                duration = _this$state.duration,
+	                rating = _this$state.rating,
+	                certification = _this$state.certification,
+	                releaseDate = _this$state.releaseDate;
 
 
-				if (initialRequest == false && searchTerm.length === 0) {
-					this.getResults(DEFAULT_REQUEST);
-					initialRequest = true;
-				}
+	            switch (filter) {
+	                case 'type':
+	                    {
+	                        var _type = e.target.value;
+	                        _this.setState({
+	                            type: _type
+	                        });
+	                        break;
+	                    }
+	                case 'genre':
+	                    {
+	                        if (e.target.checked) {
+	                            genres.push(e.target.value);
+	                        } else {
+	                            var index = genres.indexOf(e.target.value);
+	                            genres.splice(index, 1);
+	                        }
 
-				var displayHero = function displayHero() {
-					console.log(initialRequest);
-					if (initialRequest) {
-						return _react2.default.createElement(_Hero2.default, null);
-					} else {
-						return null;
-					}
-				};
+	                        _this.setState({
+	                            genres: genres
+	                        });
+	                        break;
+	                    }
+	                case 'duration':
+	                    {
+	                        var _duration = e.target.value;
 
-				var displayResults = function displayResults() {
-					if (!isLoading) {
-						if (data.length > 0) {
-							return _react2.default.createElement(_Results2.default, { resultData: data });
-						} else {
-							return _react2.default.createElement(
-								'h3',
-								null,
-								'No Results Found.'
-							);
-						}
-					}
-				};
+	                        if (_duration != '') {
+	                            if (_duration >= 121) {
+	                                _duration = '&with_runtime.gte=' + _duration;
+	                            } else {
+	                                _duration = '&with_runtime.lte=' + _duration;
+	                            }
+	                        }
 
-				return _react2.default.createElement(
-					'main',
-					null,
-					_react2.default.createElement(_Nav2.default, null),
-					_react2.default.createElement(
-						'section',
-						{ id: 'results' },
-						displayHero(),
-						_react2.default.createElement(_Filters2.default, { onFilter: this.handleFilter, onSearch: this.handleSearch }),
-						displayResults()
-					)
-				);
-			}
-		}]);
+	                        _this.setState({
+	                            duration: _duration
+	                        });
+	                        break;
+	                    }
+	                case 'rating':
+	                    {
+	                        var _rating = e.target.value;
 
-		return Main;
+	                        if (_rating != '') {
+	                            _rating = '&vote_average.gte=' + _rating;
+	                        }
+
+	                        _this.setState({
+	                            rating: _rating
+	                        });
+	                        break;
+	                    }
+	                case 'certification':
+	                    {
+	                        var _certification = e.target.value;
+
+	                        if (_certification != '') {
+	                            _certification = '&certification_country=US&certification=' + _certification;
+	                        }
+
+	                        _this.setState({
+	                            certification: _certification
+	                        });
+	                        break;
+	                    }
+	                case 'releaseDate':
+	                    {
+	                        var _releaseDate = e.target.value;
+
+	                        if (type == 'movie') {
+	                            var gte = '&primary_release_date.gte=';
+	                            var lte = '&primary_release_date.lte=';
+	                        } else {
+	                            var gte = '&first_air_date.gte=';
+	                            var lte = '&first_air_date.lte=';
+	                        }
+
+	                        if (_releaseDate != '') {
+	                            if (_releaseDate === '1950') {
+	                                _releaseDate = lte + parseInt(_releaseDate);
+	                            } else {
+	                                _releaseDate = e.target.value.split(',');
+	                                _releaseDate = gte + parseInt(_releaseDate[0]) + lte + parseInt(_releaseDate[1]);
+	                            }
+	                        }
+
+	                        _this.setState({
+	                            releaseDate: _releaseDate
+	                        });
+	                        break;
+	                    }
+	            }
+
+	            if (genres.length > 0) {
+	                genres = '&with_genres=' + genres.join(',');
+	            } else {
+	                genres = '';
+	            }
+
+	            if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
+	                _this.setState({
+	                    filters: true
+	                });
+	            } else {
+	                _this.setState({
+	                    filters: false
+	                });
+	            }
+
+	            var requestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
+	            _this.setState({
+	                requestUrl: requestUrl
+	            });
+	            _this.getResults(requestUrl);
+	        };
+
+	        _this.getResults = function (requestUrl) {
+	            console.log('requestUrl: ' + requestUrl);
+
+	            fetch(requestUrl).then(function (response) {
+	                return response.json();
+	            }).then(function (data) {
+	                _this.setState({
+	                    data: data.results
+	                });
+	            }).catch(function (err) {
+	                console.log("There has been an error:" + err);
+	            });
+	        };
+
+	        _this.state = {
+	            searchTerm: '',
+	            filters: false,
+	            type: 'movie',
+	            genres: [],
+	            duration: '',
+	            rating: '',
+	            certification: '',
+	            releaseDate: '',
+	            requestUrl: DEFAULT_REQUEST,
+	            data: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Main, [{
+	        key: 'render',
+	        value: function render() {
+	            var _state = this.state,
+	                searchTerm = _state.searchTerm,
+	                filters = _state.filters,
+	                data = _state.data;
+
+
+	            if (initialRequest == true && !filters && searchTerm.length === 0) {
+	                this.getResults(DEFAULT_REQUEST);
+	                initialRequest = false;
+	            }
+
+	            var displayResults = function displayResults() {
+	                if (data.length > 0) {
+	                    return _react2.default.createElement(_Results2.default, { resultData: data });
+	                } else {
+	                    return _react2.default.createElement(
+	                        'h3',
+	                        null,
+	                        'No Results Found.'
+	                    );
+	                }
+	            };
+
+	            return _react2.default.createElement(
+	                'main',
+	                null,
+	                _react2.default.createElement(_Nav2.default, null),
+	                _react2.default.createElement(
+	                    'section',
+	                    { id: 'results' },
+	                    _react2.default.createElement(_Hero2.default, null),
+	                    _react2.default.createElement(_Filters2.default, { onFilter: this.handleFilter, onSearch: this.handleSearch }),
+	                    displayResults()
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Main;
 	}(_react2.default.Component);
 
 	;
@@ -18510,21 +18502,21 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function Nav() {
-		return _react2.default.createElement(
-			"nav",
-			null,
-			_react2.default.createElement(
-				"div",
-				{ id: "logo" },
-				"Netflix"
-			),
-			_react2.default.createElement(
-				"div",
-				{ id: "account" },
-				_react2.default.createElement("span", { className: "notifications" }),
-				_react2.default.createElement("span", { className: "avatar" })
-			)
-		);
+	    return _react2.default.createElement(
+	        "nav",
+	        null,
+	        _react2.default.createElement(
+	            "div",
+	            { id: "logo" },
+	            "Netflix"
+	        ),
+	        _react2.default.createElement(
+	            "div",
+	            { id: "account" },
+	            _react2.default.createElement("span", { className: "notifications" }),
+	            _react2.default.createElement("span", { className: "avatar" })
+	        )
+	    );
 	};
 
 	module.exports = Nav;
@@ -18542,25 +18534,25 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function Hero() {
-		return _react2.default.createElement(
-			"section",
-			{ id: "hero" },
-			_react2.default.createElement("img", { className: "hero__img", srcSet: "img/x-files-hero.jpg 1x, img/x-files-hero@2x.jpg 2x" }),
-			_react2.default.createElement(
-				"div",
-				{ className: "hero__info" },
-				_react2.default.createElement(
-					"div",
-					{ className: "hero__info__wrapper" },
-					_react2.default.createElement("img", { className: "hero__logo", src: "img/x-files-logo.png", alt: "The X Files" }),
-					_react2.default.createElement(
-						"a",
-						{ href: "#", className: "button" },
-						"Play"
-					)
-				)
-			)
-		);
+	    return _react2.default.createElement(
+	        "section",
+	        { id: "hero" },
+	        _react2.default.createElement("img", { className: "hero__img", srcSet: "img/x-files-hero.jpg 1x, img/x-files-hero@2x.jpg 2x" }),
+	        _react2.default.createElement(
+	            "div",
+	            { className: "hero__info" },
+	            _react2.default.createElement(
+	                "div",
+	                { className: "hero__info__wrapper" },
+	                _react2.default.createElement("img", { className: "hero__logo", src: "img/x-files-logo.png", alt: "The X Files" }),
+	                _react2.default.createElement(
+	                    "a",
+	                    { href: "#", className: "button" },
+	                    "Play"
+	                )
+	            )
+	        )
+	    );
 	};
 
 	module.exports = Hero;
@@ -18590,49 +18582,49 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Results = function (_React$Component) {
-		_inherits(Results, _React$Component);
+	    _inherits(Results, _React$Component);
 
-		function Results() {
-			_classCallCheck(this, Results);
+	    function Results() {
+	        _classCallCheck(this, Results);
 
-			return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
-		}
+	        return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
+	    }
 
-		_createClass(Results, [{
-			key: 'render',
-			value: function render() {
-				var results = '';
+	    _createClass(Results, [{
+	        key: 'render',
+	        value: function render() {
+	            var results = '';
 
-				if (this.props.resultData) {
-					results = this.props.resultData.map(function (result) {
-						if (result.media_type == 'person') {
-							console.log('this is a person');
-						} else {
-							if (!result.name) {
-								var title = result.original_title;
-							} else {
-								var title = result.name;
-							}
+	            if (this.props.resultData) {
+	                results = this.props.resultData.map(function (result) {
+	                    if (result.media_type == 'person') {
+	                        console.log('this is a person');
+	                    } else {
+	                        if (!result.name) {
+	                            var title = result.original_title;
+	                        } else {
+	                            var title = result.name;
+	                        }
 
-							var key = result.id;
-							var genres = result.genre_ids;
-							var rating = result.vote_average;
-							var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
+	                        var key = result.id;
+	                        var genres = result.genre_ids;
+	                        var rating = result.vote_average;
+	                        var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
 
-							return _react2.default.createElement(_ResultItem2.default, { key: key, title: title, genres: genres, rating: rating, poster: poster });
-						}
-					});
-				}
+	                        return _react2.default.createElement(_ResultItem2.default, { key: key, title: title, genres: genres, rating: rating, poster: poster });
+	                    }
+	                });
+	            }
 
-				return _react2.default.createElement(
-					'ul',
-					null,
-					results
-				);
-			}
-		}]);
+	            return _react2.default.createElement(
+	                'ul',
+	                null,
+	                results
+	            );
+	        }
+	    }]);
 
-		return Results;
+	    return Results;
 	}(_react2.default.Component);
 
 	;
@@ -18656,47 +18648,47 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var ResultItem = function ResultItem(_ref) {
-		var title = _ref.title,
-		    genres = _ref.genres,
-		    rating = _ref.rating,
-		    poster = _ref.poster;
+	    var title = _ref.title,
+	        genres = _ref.genres,
+	        rating = _ref.rating,
+	        poster = _ref.poster;
 
-		var genreList = '';
-		genres.forEach(function (genre, genreCount) {
-			_genreData2.default.genres.forEach(function (item, index) {
-				if (genreCount < 3 && item.id === genre) {
-					genreList += item.name + ', ';
-				}
-			});
-		});
-		//remove the last comma
-		genreList = genreList.replace(/,\s*$/, "");
+	    var genreList = '';
+	    genres.forEach(function (genre, genreCount) {
+	        _genreData2.default.genres.forEach(function (item, index) {
+	            if (genreCount < 3 && item.id === genre) {
+	                genreList += item.name + ', ';
+	            }
+	        });
+	    });
+	    //remove the last comma
+	    genreList = genreList.replace(/,\s*$/, "");
 
-		return _react2.default.createElement(
-			'li',
-			{ className: 'item animated zoomIn' },
-			_react2.default.createElement('img', { src: poster }),
-			_react2.default.createElement(
-				'div',
-				{ className: 'info' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'title animated quick fadeInUp' },
-					title
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'genres animated quick fadeInUp' },
-					genreList
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'rating animated quick fadeInUp' },
-					rating,
-					' / 10'
-				)
-			)
-		);
+	    return _react2.default.createElement(
+	        'li',
+	        { className: 'item animated zoomIn' },
+	        _react2.default.createElement('img', { src: poster }),
+	        _react2.default.createElement(
+	            'div',
+	            { className: 'info' },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'title animated quick fadeInUp' },
+	                title
+	            ),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'genres animated quick fadeInUp' },
+	                genreList
+	            ),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'rating animated quick fadeInUp' },
+	                rating,
+	                ' / 10'
+	            )
+	        )
+	    );
 	};
 
 	module.exports = ResultItem;
@@ -18728,400 +18720,400 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Filters = function (_React$Component) {
-			_inherits(Filters, _React$Component);
+	    _inherits(Filters, _React$Component);
 
-			function Filters() {
-					var _ref;
+	    function Filters() {
+	        var _ref;
 
-					var _temp, _this, _ret;
+	        var _temp, _this, _ret;
 
-					_classCallCheck(this, Filters);
+	        _classCallCheck(this, Filters);
 
-					for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-							args[_key] = arguments[_key];
-					}
+	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	            args[_key] = arguments[_key];
+	        }
 
-					return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleType = function (e) {
-							_this.props.onFilter(e, 'type');
-					}, _this.handleGenre = function (e) {
-							_this.props.onFilter(e, 'genre');
-					}, _this.handleDuration = function (e) {
-							_this.props.onFilter(e, 'duration');
-					}, _this.handleRating = function (e) {
-							_this.props.onFilter(e, 'rating');
-					}, _this.handleCertification = function (e) {
-							_this.props.onFilter(e, 'certification');
-					}, _this.handleReleaseDate = function (e) {
-							_this.props.onFilter(e, 'releaseDate');
-					}, _this.handleSearch = function (e) {
-							e.preventDefault();
-							var searchTerm = _this.refs.searchInput.value;
-							_this.props.onSearch(searchTerm);
-					}, _temp), _possibleConstructorReturn(_this, _ret);
-			}
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleType = function (e) {
+	            _this.props.onFilter(e, 'type');
+	        }, _this.handleGenre = function (e) {
+	            _this.props.onFilter(e, 'genre');
+	        }, _this.handleDuration = function (e) {
+	            _this.props.onFilter(e, 'duration');
+	        }, _this.handleRating = function (e) {
+	            _this.props.onFilter(e, 'rating');
+	        }, _this.handleCertification = function (e) {
+	            _this.props.onFilter(e, 'certification');
+	        }, _this.handleReleaseDate = function (e) {
+	            _this.props.onFilter(e, 'releaseDate');
+	        }, _this.handleSearch = function (e) {
+	            e.preventDefault();
+	            var searchTerm = _this.refs.searchInput.value;
+	            _this.props.onSearch(searchTerm);
+	        }, _temp), _possibleConstructorReturn(_this, _ret);
+	    }
 
-			_createClass(Filters, [{
-					key: 'render',
-					value: function render() {
-							return _react2.default.createElement(
-									'aside',
-									null,
-									_react2.default.createElement(
-											'div',
-											{ id: 'filters' },
-											_react2.default.createElement(
-													'section',
-													null,
-													_react2.default.createElement(
-															'form',
-															{ onChange: this.handleType },
-															_react2.default.createElement(
-																	'h3',
-																	null,
-																	'Type'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'type--any' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'type--any', name: 'type', value: '' }),
-																	'Any'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'type--movie' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
-																	'Movie'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'type--tv' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
-																	'TV'
-															)
-													)
-											),
-											_react2.default.createElement(
-													'section',
-													null,
-													_react2.default.createElement(
-															'form',
-															null,
-															_react2.default.createElement(
-																	'h3',
-																	null,
-																	'Genre'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--action' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
-																	'Action'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--adventure' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
-																	'Adventure'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--animation' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
-																	'Animation'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--comedy' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
-																	'Comedy'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--crime' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
-																	'Crime'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--documentary' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
-																	'Documentary'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--drama' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
-																	'Drama'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--family' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
-																	'Family'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--fantasy' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
-																	'Fantasy'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--history' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
-																	'History'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--horror' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
-																	'Horror'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--musical' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
-																	'Musical'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--mystery' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
-																	'Mystery'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--romance' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
-																	'Romance'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--sci-fi' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
-																	'Science Fiction'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--thriller' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
-																	'Thriller'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--war' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
-																	'War'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'genre--western' },
-																	_react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
-																	'Western'
-															)
-													)
-											),
-											_react2.default.createElement(
-													'section',
-													null,
-													_react2.default.createElement(
-															'form',
-															{ onChange: this.handleDuration },
-															_react2.default.createElement(
-																	'h3',
-																	null,
-																	'Duration'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'duration--any' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'duration', value: '' }),
-																	'Any Duration'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'duration--half-hour' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'duration--half-hour', name: 'duration', value: '30' }),
-																	'Half-Hour or Less'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'duration--one-hour' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'duration--one-hour', name: 'duration', value: '60' }),
-																	'One Hour or Less'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'duration--two-hours' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'duration--two-hours', name: 'duration', value: '120' }),
-																	'Two Hours or Less'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'duration--two-plus-hours' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'duration--two-plus-hours', name: 'duration', value: '121' }),
-																	'2+ Hours'
-															)
-													)
-											),
-											_react2.default.createElement(
-													'section',
-													null,
-													_react2.default.createElement(
-															'form',
-															{ onChange: this.handleRating },
-															_react2.default.createElement(
-																	'h3',
-																	null,
-																	'Rating'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'rating--any' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'rating', value: '' }),
-																	'Any Rating'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'rating--two-stars' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'rating--two-stars', name: 'rating', value: '2' }),
-																	'2/10 +'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'rating--four-stars' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'rating--four-stars', name: 'rating', value: '4' }),
-																	'4/10 +'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'rating--six-stars' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'rating--six-stars', name: 'rating', value: '6' }),
-																	'6/10 +'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'rating--eight-stars' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'rating--eight-stars', name: 'rating', value: '8' }),
-																	'8/10 +'
-															)
-													)
-											),
-											_react2.default.createElement(
-													'section',
-													null,
-													_react2.default.createElement(
-															'form',
-															{ onChange: this.handleCertification },
-															_react2.default.createElement(
-																	'h3',
-																	null,
-																	'Maturity Rating'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'certification--any' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
-																	'Any'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'certification--g' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
-																	'G'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'certification--pg' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
-																	'PG'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'certification--pg-13' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
-																	'PG-13'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'certification--r' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
-																	'R'
-															)
-													)
-											),
-											_react2.default.createElement(
-													'section',
-													null,
-													_react2.default.createElement(
-															'form',
-															{ onChange: this.handleReleaseDate },
-															_react2.default.createElement(
-																	'h3',
-																	null,
-																	'Release Date'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--any' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--any', name: 'release-date', value: '' }),
-																	'Any'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--1950' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--1950', name: 'release-date', value: '1950' }),
-																	'Before 1950'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--1960' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--1960', name: 'release-date', value: '1960,1970' }),
-																	'1960s'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--1970' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--1970', name: 'release-date', value: '1970,1980' }),
-																	'1970s'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--1980' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--1980', name: 'release-date', value: '1980,1990' }),
-																	'1980s'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--1990' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--1990', name: 'release-date', value: '1990,2000' }),
-																	'1990s'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--2000' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--2000', name: 'release-date', value: '2000,2010' }),
-																	'2000s'
-															),
-															_react2.default.createElement(
-																	'label',
-																	{ htmlFor: 'release-date--2010' },
-																	_react2.default.createElement('input', { type: 'radio', id: 'release-date--2010', name: 'release-date', value: '2010,2020' }),
-																	'2010 - Present'
-															)
-													)
-											)
-									),
-									_react2.default.createElement(
-											'form',
-											{ id: 'search', onChange: this.handleSearch },
-											_react2.default.createElement('input', { ref: 'searchInput', type: 'search', placeholder: 'Search Titles, Actors', autoFocus: true })
-									)
-							);
-					}
-			}]);
+	    _createClass(Filters, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'aside',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'filters' },
+	                    _react2.default.createElement(
+	                        'section',
+	                        null,
+	                        _react2.default.createElement(
+	                            'form',
+	                            { onChange: this.handleType },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Type'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'type--any' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'type--any', name: 'type', value: '' }),
+	                                'Any'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'type--movie' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
+	                                'Movie'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'type--tv' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
+	                                'TV'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'section',
+	                        null,
+	                        _react2.default.createElement(
+	                            'form',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Genre'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--action' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
+	                                'Action'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--adventure' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
+	                                'Adventure'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--animation' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
+	                                'Animation'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--comedy' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
+	                                'Comedy'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--crime' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
+	                                'Crime'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--documentary' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
+	                                'Documentary'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--drama' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
+	                                'Drama'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--family' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
+	                                'Family'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--fantasy' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
+	                                'Fantasy'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--history' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
+	                                'History'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--horror' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
+	                                'Horror'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--musical' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
+	                                'Musical'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--mystery' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
+	                                'Mystery'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--romance' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
+	                                'Romance'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--sci-fi' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
+	                                'Science Fiction'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--thriller' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
+	                                'Thriller'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--war' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
+	                                'War'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'genre--western' },
+	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
+	                                'Western'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'section',
+	                        null,
+	                        _react2.default.createElement(
+	                            'form',
+	                            { onChange: this.handleDuration },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Duration'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'duration--any' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'duration', value: '' }),
+	                                'Any Duration'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'duration--half-hour' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--half-hour', name: 'duration', value: '30' }),
+	                                'Half-Hour or Less'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'duration--one-hour' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--one-hour', name: 'duration', value: '60' }),
+	                                'One Hour or Less'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'duration--two-hours' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--two-hours', name: 'duration', value: '120' }),
+	                                'Two Hours or Less'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'duration--two-plus-hours' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--two-plus-hours', name: 'duration', value: '121' }),
+	                                '2+ Hours'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'section',
+	                        null,
+	                        _react2.default.createElement(
+	                            'form',
+	                            { onChange: this.handleRating },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Rating'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'rating--any' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'rating', value: '' }),
+	                                'Any Rating'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'rating--two-stars' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--two-stars', name: 'rating', value: '2' }),
+	                                '2/10 +'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'rating--four-stars' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--four-stars', name: 'rating', value: '4' }),
+	                                '4/10 +'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'rating--six-stars' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--six-stars', name: 'rating', value: '6' }),
+	                                '6/10 +'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'rating--eight-stars' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--eight-stars', name: 'rating', value: '8' }),
+	                                '8/10 +'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'section',
+	                        null,
+	                        _react2.default.createElement(
+	                            'form',
+	                            { onChange: this.handleCertification },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Maturity Rating'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'certification--any' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
+	                                'Any'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'certification--g' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
+	                                'G'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'certification--pg' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
+	                                'PG'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'certification--pg-13' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
+	                                'PG-13'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'certification--r' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
+	                                'R'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'section',
+	                        null,
+	                        _react2.default.createElement(
+	                            'form',
+	                            { onChange: this.handleReleaseDate },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Release Date'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--any' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--any', name: 'release-date', value: '' }),
+	                                'Any'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--1950' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1950', name: 'release-date', value: '1950' }),
+	                                'Before 1950'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--1960' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1960', name: 'release-date', value: '1960,1970' }),
+	                                '1960s'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--1970' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1970', name: 'release-date', value: '1970,1980' }),
+	                                '1970s'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--1980' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1980', name: 'release-date', value: '1980,1990' }),
+	                                '1980s'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--1990' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1990', name: 'release-date', value: '1990,2000' }),
+	                                '1990s'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--2000' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--2000', name: 'release-date', value: '2000,2010' }),
+	                                '2000s'
+	                            ),
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'release-date--2010' },
+	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--2010', name: 'release-date', value: '2010,2020' }),
+	                                '2010 - Present'
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'form',
+	                    { id: 'search', onChange: this.handleSearch },
+	                    _react2.default.createElement('input', { ref: 'searchInput', type: 'search', placeholder: 'Search Titles, Actors', autoFocus: true })
+	                )
+	            );
+	        }
+	    }]);
 
-			return Filters;
+	    return Filters;
 	}(_react2.default.Component);
 
 	;

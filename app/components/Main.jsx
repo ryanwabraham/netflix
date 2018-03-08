@@ -3,7 +3,7 @@ const API_KEY = '87dfa1c669eea853da609d4968d294be'; //borrowing this for now
 const ADDITIONAL_CONFIG = '&sort_by=popularity.desc&language=en-US&original_language=en';
 const DEFAULT_REQUEST = `${MOVIE_DB_URL}discover/movie?${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
 const BASE_FILTER_REQUEST = `${MOVIE_DB_URL}discover/`;
-var initialRequest = false;
+var initialRequest = true;
 
 import React from 'react';
 import Nav from 'Nav';
@@ -15,14 +15,15 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: false,
             searchTerm: '',
+            filters: false,
             type: 'movie',
             genres: [],
             duration: '',
             rating: '',
             certification: '',
             releaseDate: '',
+            requestUrl: DEFAULT_REQUEST,
             data: ''
         };
     }
@@ -30,16 +31,13 @@ class Main extends React.Component {
     handleSearch = (searchTerm) => {
         if (searchTerm.length > 0) {
             this.setState({
-                isLoading: true,
                 searchTerm: searchTerm
             });
-            initialRequest = false;
             let request = encodeURIComponent(searchTerm);
-            let requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
+            var requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
             this.getResults(requestUrl);
         } else {
             this.setState({
-                isLoading: true,
                 searchTerm: searchTerm
             });
             this.getResults(DEFAULT_REQUEST);
@@ -47,14 +45,12 @@ class Main extends React.Component {
     }
 
     handleFilter = (e, filter) => {
-        let {type, genres, duration, rating, certification, releaseDate} = this.state;
-        initialRequest = false;
+        var {type, genres, duration, rating, certification, releaseDate} = this.state;
 
         switch(filter) {
             case 'type': {
                 let type = e.target.value;
                 this.setState({
-                    isLoading: true,
                     type: type
                 });
                 break;
@@ -68,7 +64,6 @@ class Main extends React.Component {
                 }
 
                 this.setState({
-                    isLoading: true,
                     genres: genres
                 });
                 break;
@@ -78,14 +73,13 @@ class Main extends React.Component {
 
                 if (duration != '') {
                     if (duration >= 121) {
-                        let duration = '&with_runtime.gte=' + duration;
+                        duration = '&with_runtime.gte=' + duration;
                     } else {
-                        let duration = '&with_runtime.lte=' + duration;
+                        duration = '&with_runtime.lte=' + duration;
                     }
                 }
 
                 this.setState({
-                    isLoading: true,
                     duration: duration
                 });
                 break;
@@ -94,11 +88,10 @@ class Main extends React.Component {
                 let rating = e.target.value;
 
                 if (rating != '') {
-                    let rating = '&vote_average.gte=' + rating;
+                    rating = '&vote_average.gte=' + rating;
                 }
 
                 this.setState({
-                    isLoading: true,
                     rating: rating
                 });
                 break;
@@ -107,11 +100,10 @@ class Main extends React.Component {
                 let certification = e.target.value;
 
                 if (certification != '') {
-                    let certification = '&certification_country=US&certification=' + certification;
+                    certification = '&certification_country=US&certification=' + certification;
                 }
 
                 this.setState({
-                    isLoading: true,
                     certification: certification
                 });
                 break;
@@ -120,11 +112,11 @@ class Main extends React.Component {
                 let releaseDate = e.target.value;
 
                 if (type == 'movie') {
-                    let gte = '&primary_release_date.gte=';
-                    let lte = '&primary_release_date.lte=';
+                    var gte = '&primary_release_date.gte=';
+                    var lte = '&primary_release_date.lte=';
                 } else {
-                    let gte = '&first_air_date.gte=';
-                    let lte = '&first_air_date.lte=';
+                    var gte = '&first_air_date.gte=';
+                    var lte = '&first_air_date.lte=';
                 }
 
                 if (releaseDate != '') {
@@ -137,7 +129,6 @@ class Main extends React.Component {
                 }
 
                 this.setState({
-                    isLoading: true,
                     releaseDate: releaseDate
                 });
                 break;
@@ -147,10 +138,23 @@ class Main extends React.Component {
         if (genres.length > 0) {
             genres = '&with_genres=' + genres.join(',');
         } else {
-            let genres = '';
+            genres = '';
         }
 
-        let requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
+        if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
+            this.setState({
+                filters: true
+            });
+        } else {
+            this.setState({
+                filters: false
+            });
+        }
+
+        var requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
+        this.setState({
+            requestUrl: requestUrl
+        });
         this.getResults(requestUrl);
     }
 
@@ -161,8 +165,7 @@ class Main extends React.Component {
             return response.json();
         }).then((data)=>{
             this.setState({
-                data: data.results,
-                isLoading: false
+                data: data.results
             });
         }).catch((err)=>{
             console.log("There has been an error:" + err);
@@ -170,29 +173,18 @@ class Main extends React.Component {
     }
 
     render() {
-        let {isLoading, searchTerm, data} = this.state;
+        let {searchTerm, filters, data} = this.state;
 
-        if (initialRequest == false && searchTerm.length === 0) {
+        if (initialRequest == true && !filters && searchTerm.length === 0) {
             this.getResults(DEFAULT_REQUEST);
-            initialRequest = true;
-        }
-
-        let displayHero = () => {
-            console.log(initialRequest);
-            if (initialRequest) {
-                return <Hero/>;
-            } else {
-                return null;
-            }
+            initialRequest = false;
         }
 
         let displayResults = () => {
-            if (!isLoading) {
-                if (data.length > 0) {
-                    return <Results resultData={data}/>;
-                } else {
-                    return <h3>No Results Found.</h3>;
-                }
+            if (data.length > 0) {
+                return <Results resultData={data}/>;
+            } else {
+                return <h3>No Results Found.</h3>;
             }
         }
 
@@ -200,7 +192,7 @@ class Main extends React.Component {
             <main>
                 <Nav/>
                 <section id="results">
-                    {displayHero()}
+                    <Hero/>
                     <Filters onFilter={this.handleFilter} onSearch={this.handleSearch}/>
                     {displayResults()}
                 </section>
