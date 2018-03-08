@@ -18302,10 +18302,10 @@
 				switch (filter) {
 					case 'type':
 						{
-							var type = e.target.value;
+							var _type = e.target.value;
 							_this.setState({
 								isLoading: true,
-								type: type
+								type: _type
 							});
 							break;
 						}
@@ -18326,74 +18326,74 @@
 						}
 					case 'duration':
 						{
-							var duration = e.target.value;
+							var _duration = e.target.value;
 
-							if (duration != '') {
-								if (duration >= 121) {
-									var duration = '&with_runtime.gte=' + duration;
+							if (_duration != '') {
+								if (_duration >= 121) {
+									var _duration2 = '&with_runtime.gte=' + _duration2;
 								} else {
-									var duration = '&with_runtime.lte=' + duration;
+									var _duration3 = '&with_runtime.lte=' + _duration3;
 								}
 							}
 
 							_this.setState({
 								isLoading: true,
-								duration: duration
+								duration: _duration
 							});
 							break;
 						}
 					case 'rating':
 						{
-							var rating = e.target.value;
+							var _rating = e.target.value;
 
-							if (rating != '') {
-								var rating = '&vote_average.gte=' + rating;
+							if (_rating != '') {
+								var _rating2 = '&vote_average.gte=' + _rating2;
 							}
 
 							_this.setState({
 								isLoading: true,
-								rating: rating
+								rating: _rating
 							});
 							break;
 						}
 					case 'certification':
 						{
-							var certification = e.target.value;
+							var _certification = e.target.value;
 
-							if (certification != '') {
-								var certification = '&certification_country=US&certification=' + certification;
+							if (_certification != '') {
+								var _certification2 = '&certification_country=US&certification=' + _certification2;
 							}
 
 							_this.setState({
 								isLoading: true,
-								certification: certification
+								certification: _certification
 							});
 							break;
 						}
 					case 'releaseDate':
 						{
-							var releaseDate = e.target.value;
+							var _releaseDate = e.target.value;
 
 							if (type == 'movie') {
-								var gte = '&primary_release_date.gte=';
-								var lte = '&primary_release_date.lte=';
+								var _gte = '&primary_release_date.gte=';
+								var _lte = '&primary_release_date.lte=';
 							} else {
-								var gte = '&first_air_date.gte=';
-								var lte = '&first_air_date.lte=';
+								var _gte2 = '&first_air_date.gte=';
+								var _lte2 = '&first_air_date.lte=';
 							}
 
-							if (releaseDate != '') {
-								if (releaseDate === '1950') {
-									releaseDate = lte + parseInt(releaseDate);
+							if (_releaseDate != '') {
+								if (_releaseDate === '1950') {
+									_releaseDate = lte + parseInt(_releaseDate);
 								} else {
-									releaseDate = e.target.value.split(',');
-									releaseDate = gte + parseInt(releaseDate[0]) + lte + parseInt(releaseDate[1]);
+									_releaseDate = e.target.value.split(',');
+									_releaseDate = gte + parseInt(_releaseDate[0]) + lte + parseInt(_releaseDate[1]);
 								}
 							}
 
 							_this.setState({
 								isLoading: true,
-								releaseDate: releaseDate
+								releaseDate: _releaseDate
 							});
 							break;
 						}
@@ -18402,7 +18402,7 @@
 				if (genres.length > 0) {
 					genres = '&with_genres=' + genres.join(',');
 				} else {
-					var genres = '';
+					var _genres = '';
 				}
 
 				var requestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;

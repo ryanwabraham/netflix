@@ -34,8 +34,8 @@ class Main extends React.Component {
 				searchTerm: searchTerm
 			});
 			initialRequest = false;
-			var request = encodeURIComponent(searchTerm);
-			var requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
+			let request = encodeURIComponent(searchTerm);
+			let requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
 			this.getResults(requestUrl);
 		} else {
 			this.setState({
@@ -47,12 +47,12 @@ class Main extends React.Component {
 	}
 
 	handleFilter = (e, filter) => {
-		var {type, genres, duration, rating, certification, releaseDate} = this.state;
+		let {type, genres, duration, rating, certification, releaseDate} = this.state;
 		initialRequest = false;
 
 		switch(filter) {
 			case 'type': {
-				var type = e.target.value;
+				let type = e.target.value;
 				this.setState({
 					isLoading: true,
 					type: type
@@ -63,7 +63,7 @@ class Main extends React.Component {
 				if (e.target.checked) {
 					genres.push(e.target.value);
 				} else {
-					var index = genres.indexOf(e.target.value);
+					let index = genres.indexOf(e.target.value);
 					genres.splice(index, 1);
 				}
 
@@ -74,13 +74,13 @@ class Main extends React.Component {
 				break;
 			}
 			case 'duration': {
-				var duration = e.target.value;
+				let duration = e.target.value;
 
 				if (duration != '') {
 					if (duration >= 121) {
-						var duration = '&with_runtime.gte=' + duration;
+						let duration = '&with_runtime.gte=' + duration;
 					} else {
-						var duration = '&with_runtime.lte=' + duration;
+						let duration = '&with_runtime.lte=' + duration;
 					}
 				}
 
@@ -91,10 +91,10 @@ class Main extends React.Component {
 				break;
 			}
 			case 'rating': {
-				var rating = e.target.value;
+				let rating = e.target.value;
 
 				if (rating != '') {
-					var rating = '&vote_average.gte=' + rating;
+					let rating = '&vote_average.gte=' + rating;
 				}
 
 				this.setState({
@@ -104,10 +104,10 @@ class Main extends React.Component {
 				break;
 			}
 			case 'certification': {
-				var certification = e.target.value;
+				let certification = e.target.value;
 
 				if (certification != '') {
-					var certification = '&certification_country=US&certification=' + certification;
+					let certification = '&certification_country=US&certification=' + certification;
 				}
 
 				this.setState({
@@ -117,14 +117,14 @@ class Main extends React.Component {
 				break;
 			}
 			case 'releaseDate': {
-				var releaseDate = e.target.value;
+				let releaseDate = e.target.value;
 
 				if (type == 'movie') {
-					var gte = '&primary_release_date.gte=';
-					var lte = '&primary_release_date.lte=';
+					let gte = '&primary_release_date.gte=';
+					let lte = '&primary_release_date.lte=';
 				} else {
-					var gte = '&first_air_date.gte=';
-					var lte = '&first_air_date.lte=';
+					let gte = '&first_air_date.gte=';
+					let lte = '&first_air_date.lte=';
 				}
 
 				if (releaseDate != '') {
@@ -147,10 +147,10 @@ class Main extends React.Component {
 		if (genres.length > 0) {
 			genres = '&with_genres=' + genres.join(',');
 		} else {
-			var genres = '';
+			let genres = '';
 		}
 
-		var requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
+		let requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
 		this.getResults(requestUrl);
 	}
 
@@ -170,14 +170,14 @@ class Main extends React.Component {
 	}
 
 	render() {
-		var {isLoading, searchTerm, data} = this.state;
+		let {isLoading, searchTerm, data} = this.state;
 
 		if (initialRequest == false && searchTerm.length === 0) {
 			this.getResults(DEFAULT_REQUEST);
 			initialRequest = true;
 		}
 
-		var displayHero = () => {
+		let displayHero = () => {
 			console.log(initialRequest);
 			if (initialRequest) {
 				return <Hero/>;
@@ -186,7 +186,7 @@ class Main extends React.Component {
 			}
 		}
 
-		var displayResults = () => {
+		let displayResults = () => {
 			if (!isLoading) {
 				if (data.length > 0) {
 					return <Results resultData={data}/>;
