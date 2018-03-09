@@ -32,11 +32,6 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={this.handleType}>
                             <h3>Type</h3>
-                            <label htmlFor="type--any">
-                                <input type="radio" id="type--any" name="type" value=""></input>
-                                Any
-                            </label>
-
                             <label htmlFor="type--movie">
                                 <input type="radio" id="type--movie" name="type" value="movie"></input>
                                 Movie

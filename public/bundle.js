@@ -18806,12 +18806,6 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'type--any' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'type--any', name: 'type', value: '' }),
-	                                'Any'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
 	                                { htmlFor: 'type--movie' },
 	                                _react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
 	                                'Movie'
