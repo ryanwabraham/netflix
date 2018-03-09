@@ -30,28 +30,32 @@ class Main extends React.Component {
 
     handleSearch = (searchTerm) => {
         if (searchTerm.length > 0) {
-            this.setState({
-                searchTerm: searchTerm
-            });
             let request = encodeURIComponent(searchTerm);
             var requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
-            this.getResults(requestUrl);
+            this.setState({
+                searchTerm: searchTerm,
+                requestUrl: requestUrl
+            }, () => {
+                this.getResults(requestUrl);
+            });
         } else {
             this.setState({
                 searchTerm: searchTerm
+            }, () => {
+                this.buildRequest();
             });
-            this.getResults(DEFAULT_REQUEST);
         }
     }
 
     handleFilter = (e, filter) => {
         var {type, genres, duration, rating, certification, releaseDate} = this.state;
-
         switch(filter) {
             case 'type': {
                 let type = e.target.value;
                 this.setState({
                     type: type
+                }, () => {
+                    this.buildRequest();
                 });
                 break;
             }
@@ -65,6 +69,8 @@ class Main extends React.Component {
 
                 this.setState({
                     genres: genres
+                }, () => {
+                    this.buildRequest();
                 });
                 break;
             }
@@ -81,6 +87,8 @@ class Main extends React.Component {
 
                 this.setState({
                     duration: duration
+                }, () => {
+                    this.buildRequest();
                 });
                 break;
             }
@@ -93,6 +101,8 @@ class Main extends React.Component {
 
                 this.setState({
                     rating: rating
+                }, () => {
+                    this.buildRequest();
                 });
                 break;
             }
@@ -105,6 +115,8 @@ class Main extends React.Component {
 
                 this.setState({
                     certification: certification
+                }, () => {
+                    this.buildRequest();
                 });
                 break;
             }
@@ -130,15 +142,11 @@ class Main extends React.Component {
 
                 this.setState({
                     releaseDate: releaseDate
+                }, () => {
+                    this.buildRequest();
                 });
                 break;
             }
-        }
-
-        if (genres.length > 0) {
-            genres = '&with_genres=' + genres.join(',');
-        } else {
-            genres = '';
         }
 
         if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
@@ -150,12 +158,24 @@ class Main extends React.Component {
                 filters: false
             });
         }
+    }
 
-        var requestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
+    buildRequest = () => {
+        var {type, genres, duration, rating, certification, releaseDate, requestUrl} = this.state;
+
+        if (genres.length > 0) {
+            genres = '&with_genres=' + genres.join(',');
+        } else {
+            genres = '';
+        }
+
+        var newRequestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
+
         this.setState({
-            requestUrl: requestUrl
+            requestUrl: newRequestUrl
+        }, () => {
+            this.getResults(newRequestUrl);
         });
-        this.getResults(requestUrl);
     }
 
     getResults = (requestUrl) => {
@@ -173,7 +193,7 @@ class Main extends React.Component {
     }
 
     render() {
-        let {searchTerm, filters, data} = this.state;
+        let {searchTerm, filters, requestUrl, data} = this.state;
 
         if (initialRequest == true && !filters && searchTerm.length === 0) {
             this.getResults(DEFAULT_REQUEST);

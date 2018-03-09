@@ -18271,17 +18271,20 @@
 
 	        _this.handleSearch = function (searchTerm) {
 	            if (searchTerm.length > 0) {
-	                _this.setState({
-	                    searchTerm: searchTerm
-	                });
 	                var request = encodeURIComponent(searchTerm);
 	                var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
-	                _this.getResults(requestUrl);
+	                _this.setState({
+	                    searchTerm: searchTerm,
+	                    requestUrl: requestUrl
+	                }, function () {
+	                    _this.getResults(requestUrl);
+	                });
 	            } else {
 	                _this.setState({
 	                    searchTerm: searchTerm
+	                }, function () {
+	                    _this.buildRequest();
 	                });
-	                _this.getResults(DEFAULT_REQUEST);
 	            }
 	        };
 
@@ -18294,13 +18297,14 @@
 	                certification = _this$state.certification,
 	                releaseDate = _this$state.releaseDate;
 
-
 	            switch (filter) {
 	                case 'type':
 	                    {
 	                        var _type = e.target.value;
 	                        _this.setState({
 	                            type: _type
+	                        }, function () {
+	                            _this.buildRequest();
 	                        });
 	                        break;
 	                    }
@@ -18315,6 +18319,8 @@
 
 	                        _this.setState({
 	                            genres: genres
+	                        }, function () {
+	                            _this.buildRequest();
 	                        });
 	                        break;
 	                    }
@@ -18332,6 +18338,8 @@
 
 	                        _this.setState({
 	                            duration: _duration
+	                        }, function () {
+	                            _this.buildRequest();
 	                        });
 	                        break;
 	                    }
@@ -18345,6 +18353,8 @@
 
 	                        _this.setState({
 	                            rating: _rating
+	                        }, function () {
+	                            _this.buildRequest();
 	                        });
 	                        break;
 	                    }
@@ -18358,6 +18368,8 @@
 
 	                        _this.setState({
 	                            certification: _certification
+	                        }, function () {
+	                            _this.buildRequest();
 	                        });
 	                        break;
 	                    }
@@ -18384,15 +18396,11 @@
 
 	                        _this.setState({
 	                            releaseDate: _releaseDate
+	                        }, function () {
+	                            _this.buildRequest();
 	                        });
 	                        break;
 	                    }
-	            }
-
-	            if (genres.length > 0) {
-	                genres = '&with_genres=' + genres.join(',');
-	            } else {
-	                genres = '';
 	            }
 
 	            if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
@@ -18404,12 +18412,32 @@
 	                    filters: false
 	                });
 	            }
+	        };
 
-	            var requestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
+	        _this.buildRequest = function () {
+	            var _this$state2 = _this.state,
+	                type = _this$state2.type,
+	                genres = _this$state2.genres,
+	                duration = _this$state2.duration,
+	                rating = _this$state2.rating,
+	                certification = _this$state2.certification,
+	                releaseDate = _this$state2.releaseDate,
+	                requestUrl = _this$state2.requestUrl;
+
+
+	            if (genres.length > 0) {
+	                genres = '&with_genres=' + genres.join(',');
+	            } else {
+	                genres = '';
+	            }
+
+	            var newRequestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
+
 	            _this.setState({
-	                requestUrl: requestUrl
+	                requestUrl: newRequestUrl
+	            }, function () {
+	                _this.getResults(newRequestUrl);
 	            });
-	            _this.getResults(requestUrl);
 	        };
 
 	        _this.getResults = function (requestUrl) {
@@ -18447,6 +18475,7 @@
 	            var _state = this.state,
 	                searchTerm = _state.searchTerm,
 	                filters = _state.filters,
+	                requestUrl = _state.requestUrl,
 	                data = _state.data;
 
 
