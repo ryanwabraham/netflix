@@ -134,9 +134,24 @@ aside {
         }
     }
 
-    label {
+    .filters__dropdown {
         display: none;
-        margin: 10px 0px;
+        position: absolute;
+        top: 100%;
+        background-color: $gray-dark;
+        padding: 10px;
+        border: 1px solid $text-gray;
+        border-radius: 5px;
+
+        &.visible {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+    }
+
+    label {
+        margin: 10px;
     }
 
     input[type="radio"], input[type="checkbox"] {

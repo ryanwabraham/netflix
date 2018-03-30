@@ -25,23 +25,24 @@ class Main extends React.Component {
             releaseDate: '',
             requestUrl: DEFAULT_REQUEST,
             data: '',
-            dropdownVisible: {
-                'type': false,
-                'genre': false,
-                'duration': false,
-                'rating': false,
-                'certification': false,
-                'releaseDate': false,
+            dropdowns: {
+                'typeIsVisible': false,
+                'genreIsVisible': false,
+                'durationIsVisible': false,
+                'ratingIsVisible': false,
+                'certificationIsVisible': false,
+                'releaseDateIsVisible': false,
             }
         };
     }
 
     handleDropdowns = (filter) => {
-        var currentState = this.state.dropdownVisible;
+        var currentState = this.state.dropdowns;
 
         var dropdownState = function() {
+            var dropdown = filter + 'IsVisible';
             var newDropdownState = currentState;
-            newDropdownState[filter] = !newDropdownState[filter];
+            newDropdownState[dropdown] = !newDropdownState[dropdown];
             return newDropdownState;
         }.bind(filter, currentState)();
 
@@ -213,7 +214,7 @@ class Main extends React.Component {
     }
 
     render() {
-        let {searchTerm, filters, requestUrl, data} = this.state;
+        let {searchTerm, filters, requestUrl, data, dropdowns} = this.state;
 
         if (initialRequest == true && !filters && searchTerm.length === 0) {
             this.getResults(DEFAULT_REQUEST);
@@ -233,7 +234,7 @@ class Main extends React.Component {
                 <Nav/>
                 <section id="results">
                     <Hero/>
-                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch} onDropdown={this.handleDropdowns}/>
+                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch} onDropdown={this.handleDropdowns} dropdowns={dropdowns}/>
                     {displayResults()}
                 </section>
             </main>

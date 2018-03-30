@@ -18270,11 +18270,12 @@
 	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 	        _this.handleDropdowns = function (filter) {
-	            var currentState = _this.state.dropdownVisible;
+	            var currentState = _this.state.dropdowns;
 
 	            var dropdownState = function () {
+	                var dropdown = filter + 'IsVisible';
 	                var newDropdownState = currentState;
-	                newDropdownState[filter] = !newDropdownState[filter];
+	                newDropdownState[dropdown] = !newDropdownState[dropdown];
 	                return newDropdownState;
 	            }.bind(filter, currentState)();
 
@@ -18477,13 +18478,13 @@
 	            releaseDate: '',
 	            requestUrl: DEFAULT_REQUEST,
 	            data: '',
-	            dropdownVisible: {
-	                'type': false,
-	                'genre': false,
-	                'duration': false,
-	                'rating': false,
-	                'certification': false,
-	                'releaseDate': false
+	            dropdowns: {
+	                'typeIsVisible': false,
+	                'genreIsVisible': false,
+	                'durationIsVisible': false,
+	                'ratingIsVisible': false,
+	                'certificationIsVisible': false,
+	                'releaseDateIsVisible': false
 	            }
 	        };
 	        return _this;
@@ -18496,7 +18497,8 @@
 	                searchTerm = _state.searchTerm,
 	                filters = _state.filters,
 	                requestUrl = _state.requestUrl,
-	                data = _state.data;
+	                data = _state.data,
+	                dropdowns = _state.dropdowns;
 
 
 	            if (initialRequest == true && !filters && searchTerm.length === 0) {
@@ -18524,7 +18526,7 @@
 	                    'section',
 	                    { id: 'results' },
 	                    _react2.default.createElement(_Hero2.default, null),
-	                    _react2.default.createElement(_Filters2.default, { onFilter: this.handleFilter, onSearch: this.handleSearch, onDropdown: this.handleDropdowns }),
+	                    _react2.default.createElement(_Filters2.default, { onFilter: this.handleFilter, onSearch: this.handleSearch, onDropdown: this.handleDropdowns, dropdowns: dropdowns }),
 	                    displayResults()
 	                )
 	            );
@@ -18831,16 +18833,20 @@
 	                                'Type'
 	                            ),
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'type--movie' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
-	                                'Movie'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'type--tv' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
-	                                'TV'
+	                                'div',
+	                                { className: this.props.dropdowns.typeIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'type--movie' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
+	                                    'Movie'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'type--tv' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
+	                                    'TV'
+	                                )
 	                            )
 	                        )
 	                    ),
@@ -18858,112 +18864,116 @@
 	                                'Genre'
 	                            ),
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--action' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
-	                                'Action'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--adventure' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
-	                                'Adventure'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--animation' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
-	                                'Animation'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--comedy' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
-	                                'Comedy'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--crime' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
-	                                'Crime'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--documentary' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
-	                                'Documentary'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--drama' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
-	                                'Drama'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--family' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
-	                                'Family'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--fantasy' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
-	                                'Fantasy'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--history' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
-	                                'History'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--horror' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
-	                                'Horror'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--musical' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
-	                                'Musical'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--mystery' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
-	                                'Mystery'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--romance' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
-	                                'Romance'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--sci-fi' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
-	                                'Science Fiction'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--thriller' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
-	                                'Thriller'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--war' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
-	                                'War'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'genre--western' },
-	                                _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
-	                                'Western'
+	                                'div',
+	                                { className: this.props.dropdowns.genreIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--action' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
+	                                    'Action'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--adventure' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
+	                                    'Adventure'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--animation' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
+	                                    'Animation'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--comedy' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
+	                                    'Comedy'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--crime' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
+	                                    'Crime'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--documentary' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
+	                                    'Documentary'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--drama' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
+	                                    'Drama'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--family' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
+	                                    'Family'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--fantasy' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
+	                                    'Fantasy'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--history' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
+	                                    'History'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--horror' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
+	                                    'Horror'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--musical' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
+	                                    'Musical'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--mystery' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
+	                                    'Mystery'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--romance' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
+	                                    'Romance'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--sci-fi' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
+	                                    'Science Fiction'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--thriller' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
+	                                    'Thriller'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--war' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
+	                                    'War'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'genre--western' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
+	                                    'Western'
+	                                )
 	                            )
 	                        )
 	                    ),
@@ -18981,34 +18991,38 @@
 	                                'Duration'
 	                            ),
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'duration--any' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'duration', value: '' }),
-	                                'Any Duration'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'duration--half-hour' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--half-hour', name: 'duration', value: '30' }),
-	                                'Half-Hour or Less'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'duration--one-hour' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--one-hour', name: 'duration', value: '60' }),
-	                                'One Hour or Less'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'duration--two-hours' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--two-hours', name: 'duration', value: '120' }),
-	                                'Two Hours or Less'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'duration--two-plus-hours' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--two-plus-hours', name: 'duration', value: '121' }),
-	                                '2+ Hours'
+	                                'div',
+	                                { className: this.props.dropdowns.durationIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'duration--any' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'duration', value: '' }),
+	                                    'Any Duration'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'duration--half-hour' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'duration--half-hour', name: 'duration', value: '30' }),
+	                                    'Half-Hour or Less'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'duration--one-hour' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'duration--one-hour', name: 'duration', value: '60' }),
+	                                    'One Hour or Less'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'duration--two-hours' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'duration--two-hours', name: 'duration', value: '120' }),
+	                                    'Two Hours or Less'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'duration--two-plus-hours' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'duration--two-plus-hours', name: 'duration', value: '121' }),
+	                                    '2+ Hours'
+	                                )
 	                            )
 	                        )
 	                    ),
@@ -19026,34 +19040,38 @@
 	                                'Rating'
 	                            ),
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'rating--any' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--any', name: 'rating', value: '' }),
-	                                'Any Rating'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'rating--two-stars' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--two-stars', name: 'rating', value: '2' }),
-	                                '2/10 +'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'rating--four-stars' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--four-stars', name: 'rating', value: '4' }),
-	                                '4/10 +'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'rating--six-stars' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--six-stars', name: 'rating', value: '6' }),
-	                                '6/10 +'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'rating--eight-stars' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--eight-stars', name: 'rating', value: '8' }),
-	                                '8/10 +'
+	                                'div',
+	                                { className: this.props.dropdowns.ratingIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'rating--any' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'rating--any', name: 'rating', value: '' }),
+	                                    'Any Rating'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'rating--two-stars' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'rating--two-stars', name: 'rating', value: '2' }),
+	                                    '2/10 +'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'rating--four-stars' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'rating--four-stars', name: 'rating', value: '4' }),
+	                                    '4/10 +'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'rating--six-stars' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'rating--six-stars', name: 'rating', value: '6' }),
+	                                    '6/10 +'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'rating--eight-stars' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'rating--eight-stars', name: 'rating', value: '8' }),
+	                                    '8/10 +'
+	                                )
 	                            )
 	                        )
 	                    ),
@@ -19071,34 +19089,38 @@
 	                                'Maturity Rating'
 	                            ),
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'certification--any' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
-	                                'Any'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'certification--g' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
-	                                'G'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'certification--pg' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
-	                                'PG'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'certification--pg-13' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
-	                                'PG-13'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'certification--r' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
-	                                'R'
+	                                'div',
+	                                { className: this.props.dropdowns.certificationIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'certification--any' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
+	                                    'Any'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'certification--g' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
+	                                    'G'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'certification--pg' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
+	                                    'PG'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'certification--pg-13' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
+	                                    'PG-13'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'certification--r' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
+	                                    'R'
+	                                )
 	                            )
 	                        )
 	                    ),
@@ -19116,52 +19138,56 @@
 	                                'Release Date'
 	                            ),
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--any' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--any', name: 'release-date', value: '' }),
-	                                'Any'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--1950' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1950', name: 'release-date', value: '1950' }),
-	                                'Before 1950'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--1960' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1960', name: 'release-date', value: '1960,1970' }),
-	                                '1960s'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--1970' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1970', name: 'release-date', value: '1970,1980' }),
-	                                '1970s'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--1980' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1980', name: 'release-date', value: '1980,1990' }),
-	                                '1980s'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--1990' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--1990', name: 'release-date', value: '1990,2000' }),
-	                                '1990s'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--2000' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--2000', name: 'release-date', value: '2000,2010' }),
-	                                '2000s'
-	                            ),
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'release-date--2010' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'release-date--2010', name: 'release-date', value: '2010,2020' }),
-	                                '2010 - Present'
+	                                'div',
+	                                { className: this.props.dropdowns.releaseDateIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--any' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--any', name: 'release-date', value: '' }),
+	                                    'Any'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--1950' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--1950', name: 'release-date', value: '1950' }),
+	                                    'Before 1950'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--1960' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--1960', name: 'release-date', value: '1960,1970' }),
+	                                    '1960s'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--1970' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--1970', name: 'release-date', value: '1970,1980' }),
+	                                    '1970s'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--1980' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--1980', name: 'release-date', value: '1980,1990' }),
+	                                    '1980s'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--1990' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--1990', name: 'release-date', value: '1990,2000' }),
+	                                    '1990s'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--2000' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--2000', name: 'release-date', value: '2000,2010' }),
+	                                    '2000s'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'label',
+	                                    { htmlFor: 'release-date--2010' },
+	                                    _react2.default.createElement('input', { type: 'radio', id: 'release-date--2010', name: 'release-date', value: '2010,2020' }),
+	                                    '2010 - Present'
+	                                )
 	                            )
 	                        )
 	                    )
@@ -19858,7 +19884,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background-color: #292929; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  z-index: 1; }\n  nav #logo {\n    width: 120px;\n    height: 100%;\n    background-repeat: no-repeat;\n    background-size: 100% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(40) + ");\n    text-indent: -9999px; }\n  nav #account {\n    display: flex;\n    align-items: center; }\n    nav #account .notifications {\n      width: 30px;\n      height: 30px;\n      margin-right: 20px;\n      background-image: url(" + __webpack_require__(41) + ");\n      background-size: 30px 30px; }\n    nav #account .avatar {\n      width: 38px;\n      height: 38px;\n      background-image: url(" + __webpack_require__(42) + ");\n      background-repeat: no-repeat;\n      background-size: 100% auto; }\n\naside {\n  position: sticky;\n  top: -1px;\n  display: flex;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  background-color: #1d1d1d;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);\n  z-index: 2; }\n  aside h3 {\n    position: relative;\n    color: #9a9a9a;\n    cursor: pointer; }\n    aside h3:after {\n      content: '';\n      position: absolute;\n      top: 8px;\n      right: -17px;\n      width: 10px;\n      height: 9px;\n      background-image: url(/img/dropdown.png);\n      background-size: 100% auto;\n      background-repeat: no-repeat;\n      transform: rotate(0deg);\n      transition-duration: .5s; }\n    aside h3.active {\n      color: #eee; }\n      aside h3.active:after {\n        transform: rotate(180deg);\n        transition-duration: .5s; }\n  aside #filters {\n    display: flex;\n    flex: 1;\n    align-items: center; }\n  aside section {\n    margin: 0px 25px; }\n    aside section:first-of-type {\n      margin-left: 0px; }\n  aside label {\n    display: none;\n    margin: 10px 0px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n  aside #search {\n    position: relative;\n    height: 100%; }\n  aside #search:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: '';\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(43) + "); }\n  aside input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    font-size: 18px;\n    font-weight: bold;\n    color: #eee;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    aside input[type=\"search\"]:focus {\n      outline: none; }\n\nsection#results {\n  width: 100%; }\n  section#results #hero {\n    height: 350px;\n    background: #000; }\n  section#results .hero__info__wrapper {\n    z-index: 2; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 54px 0px 0px 30px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results .hero__img {\n    position: absolute;\n    right: 0;\n    left: 0;\n    margin: auto; }\n  section#results .hero__logo {\n    width: 200px; }\n  section#results .button {\n    display: block;\n    width: 180px;\n    margin: 20px 0px;\n    padding: 10px;\n    text-align: center;\n    background: #d32f27;\n    color: #eee;\n    text-decoration: none;\n    font-size: 18px;\n    border-radius: 5px; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
+	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background-color: #292929; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  z-index: 1; }\n  nav #logo {\n    width: 120px;\n    height: 100%;\n    background-repeat: no-repeat;\n    background-size: 100% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(40) + ");\n    text-indent: -9999px; }\n  nav #account {\n    display: flex;\n    align-items: center; }\n    nav #account .notifications {\n      width: 30px;\n      height: 30px;\n      margin-right: 20px;\n      background-image: url(" + __webpack_require__(41) + ");\n      background-size: 30px 30px; }\n    nav #account .avatar {\n      width: 38px;\n      height: 38px;\n      background-image: url(" + __webpack_require__(42) + ");\n      background-repeat: no-repeat;\n      background-size: 100% auto; }\n\naside {\n  position: sticky;\n  top: -1px;\n  display: flex;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  background-color: #1d1d1d;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);\n  z-index: 2; }\n  aside h3 {\n    position: relative;\n    color: #9a9a9a;\n    cursor: pointer; }\n    aside h3:after {\n      content: '';\n      position: absolute;\n      top: 8px;\n      right: -17px;\n      width: 10px;\n      height: 9px;\n      background-image: url(/img/dropdown.png);\n      background-size: 100% auto;\n      background-repeat: no-repeat;\n      transform: rotate(0deg);\n      transition-duration: .5s; }\n    aside h3.active {\n      color: #eee; }\n      aside h3.active:after {\n        transform: rotate(180deg);\n        transition-duration: .5s; }\n  aside #filters {\n    display: flex;\n    flex: 1;\n    align-items: center; }\n  aside section {\n    margin: 0px 25px; }\n    aside section:first-of-type {\n      margin-left: 0px; }\n  aside .filters__dropdown {\n    display: none;\n    position: absolute;\n    top: 100%;\n    background-color: #292929;\n    padding: 10px;\n    border: 1px solid #9a9a9a;\n    border-radius: 5px; }\n    aside .filters__dropdown.visible {\n      display: flex;\n      flex-wrap: wrap;\n      flex-direction: column; }\n  aside label {\n    margin: 10px; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    margin-right: 10px; }\n  aside #search {\n    position: relative;\n    height: 100%; }\n  aside #search:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: '';\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(43) + "); }\n  aside input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    font-size: 18px;\n    font-weight: bold;\n    color: #eee;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    aside input[type=\"search\"]:focus {\n      outline: none; }\n\nsection#results {\n  width: 100%; }\n  section#results #hero {\n    height: 350px;\n    background: #000; }\n  section#results .hero__info__wrapper {\n    z-index: 2; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 54px 0px 0px 30px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results .hero__img {\n    position: absolute;\n    right: 0;\n    left: 0;\n    margin: auto; }\n  section#results .hero__logo {\n    width: 200px; }\n  section#results .button {\n    display: block;\n    width: 180px;\n    margin: 20px 0px;\n    padding: 10px;\n    text-align: center;\n    background: #d32f27;\n    color: #eee;\n    text-decoration: none;\n    font-size: 18px;\n    border-radius: 5px; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
 
 	// exports
 
