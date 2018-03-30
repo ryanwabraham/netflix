@@ -3,7 +3,6 @@ import {DebounceInput} from 'react-debounce-input';
 
 class Filters extends React.Component {
     handleDropdown = (filter) => {
-        console.log(filter);
         this.props.onDropdown(filter);
     }
     handleType = (e) => {

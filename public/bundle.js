@@ -18786,7 +18786,6 @@
 	        }
 
 	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleDropdown = function (filter) {
-	            console.log(filter);
 	            _this.props.onDropdown(filter);
 	        }, _this.handleType = function (e) {
 	            _this.props.onFilter(e, 'type');
@@ -18976,7 +18975,9 @@
 	                            { onChange: this.handleDuration },
 	                            _react2.default.createElement(
 	                                'h3',
-	                                null,
+	                                { onClick: function onClick() {
+	                                        return _this2.handleDropdown('duration');
+	                                    } },
 	                                'Duration'
 	                            ),
 	                            _react2.default.createElement(
@@ -19027,7 +19028,7 @@
 	                            _react2.default.createElement(
 	                                'label',
 	                                { htmlFor: 'rating--any' },
-	                                _react2.default.createElement('input', { type: 'radio', id: 'duration--any', name: 'rating', value: '' }),
+	                                _react2.default.createElement('input', { type: 'radio', id: 'rating--any', name: 'rating', value: '' }),
 	                                'Any Rating'
 	                            ),
 	                            _react2.default.createElement(
