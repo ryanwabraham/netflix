@@ -24,8 +24,28 @@ class Main extends React.Component {
             certification: '',
             releaseDate: '',
             requestUrl: DEFAULT_REQUEST,
-            data: ''
+            data: '',
+            dropdownVisible: {
+                'type': false,
+                'genre': false,
+                'duration': false,
+                'rating': false,
+                'certification': false,
+                'releaseDate': false,
+            }
         };
+    }
+
+    handleDropdowns = (filter) => {
+        var currentState = this.state.dropdownVisible;
+
+        var dropdownState = function() {
+            var newDropdownState = currentState;
+            newDropdownState[filter] = !newDropdownState[filter];
+            return newDropdownState;
+        }.bind(filter, currentState)();
+
+        this.setState(dropdownState);
     }
 
     handleSearch = (searchTerm) => {
@@ -213,7 +233,7 @@ class Main extends React.Component {
                 <Nav/>
                 <section id="results">
                     <Hero/>
-                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch}/>
+                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch} onDropdown={this.handleDropdowns}/>
                     {displayResults()}
                 </section>
             </main>

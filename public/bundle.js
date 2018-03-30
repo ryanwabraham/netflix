@@ -18269,6 +18269,18 @@
 
 	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
+	        _this.handleDropdowns = function (filter) {
+	            var currentState = _this.state.dropdownVisible;
+
+	            var dropdownState = function () {
+	                var newDropdownState = currentState;
+	                newDropdownState[filter] = !newDropdownState[filter];
+	                return newDropdownState;
+	            }.bind(filter, currentState)();
+
+	            _this.setState(dropdownState);
+	        };
+
 	        _this.handleSearch = function (searchTerm) {
 	            if (searchTerm.length > 0) {
 	                var request = encodeURIComponent(searchTerm);
@@ -18464,7 +18476,15 @@
 	            certification: '',
 	            releaseDate: '',
 	            requestUrl: DEFAULT_REQUEST,
-	            data: ''
+	            data: '',
+	            dropdownVisible: {
+	                'type': false,
+	                'genre': false,
+	                'duration': false,
+	                'rating': false,
+	                'certification': false,
+	                'releaseDate': false
+	            }
 	        };
 	        return _this;
 	    }
@@ -18504,7 +18524,7 @@
 	                    'section',
 	                    { id: 'results' },
 	                    _react2.default.createElement(_Hero2.default, null),
-	                    _react2.default.createElement(_Filters2.default, { onFilter: this.handleFilter, onSearch: this.handleSearch }),
+	                    _react2.default.createElement(_Filters2.default, { onFilter: this.handleFilter, onSearch: this.handleSearch, onDropdown: this.handleDropdowns }),
 	                    displayResults()
 	                )
 	            );
@@ -18765,7 +18785,10 @@
 	            args[_key] = arguments[_key];
 	        }
 
-	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleType = function (e) {
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleDropdown = function (filter) {
+	            console.log(filter);
+	            _this.props.onDropdown(filter);
+	        }, _this.handleType = function (e) {
 	            _this.props.onFilter(e, 'type');
 	        }, _this.handleGenre = function (e) {
 	            _this.props.onFilter(e, 'genre');
@@ -18787,6 +18810,8 @@
 	    _createClass(Filters, [{
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            return _react2.default.createElement(
 	                'aside',
 	                null,
@@ -18801,7 +18826,9 @@
 	                            { onChange: this.handleType },
 	                            _react2.default.createElement(
 	                                'h3',
-	                                null,
+	                                { onClick: function onClick() {
+	                                        return _this2.handleDropdown('type');
+	                                    } },
 	                                'Type'
 	                            ),
 	                            _react2.default.createElement(
@@ -18826,7 +18853,9 @@
 	                            null,
 	                            _react2.default.createElement(
 	                                'h3',
-	                                null,
+	                                { onClick: function onClick() {
+	                                        return _this2.handleDropdown('genre');
+	                                    } },
 	                                'Genre'
 	                            ),
 	                            _react2.default.createElement(
@@ -18990,7 +19019,9 @@
 	                            { onChange: this.handleRating },
 	                            _react2.default.createElement(
 	                                'h3',
-	                                null,
+	                                { onClick: function onClick() {
+	                                        return _this2.handleDropdown('rating');
+	                                    } },
 	                                'Rating'
 	                            ),
 	                            _react2.default.createElement(
@@ -19033,7 +19064,9 @@
 	                            { onChange: this.handleCertification },
 	                            _react2.default.createElement(
 	                                'h3',
-	                                null,
+	                                { onClick: function onClick() {
+	                                        return _this2.handleDropdown('certification');
+	                                    } },
 	                                'Maturity Rating'
 	                            ),
 	                            _react2.default.createElement(
@@ -19076,7 +19109,9 @@
 	                            { onChange: this.handleReleaseDate },
 	                            _react2.default.createElement(
 	                                'h3',
-	                                null,
+	                                { onClick: function onClick() {
+	                                        return _this2.handleDropdown('releaseDate');
+	                                    } },
 	                                'Release Date'
 	                            ),
 	                            _react2.default.createElement(

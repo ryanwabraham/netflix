@@ -2,6 +2,10 @@ import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
 
 class Filters extends React.Component {
+    handleDropdown = (filter) => {
+        console.log(filter);
+        this.props.onDropdown(filter);
+    }
     handleType = (e) => {
         this.props.onFilter(e, 'type');
     }
@@ -31,7 +35,7 @@ class Filters extends React.Component {
                 <div id="filters">
                     <section>
                         <form onChange={this.handleType}>
-                            <h3>Type</h3>
+                            <h3 onClick={() => this.handleDropdown('type')}>Type</h3>
                             <label htmlFor="type--movie">
                                 <input type="radio" id="type--movie" name="type" value="movie"></input>
                                 Movie
@@ -46,7 +50,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form>
-                            <h3>Genre</h3>
+                            <h3 onClick={() => this.handleDropdown('genre')}>Genre</h3>
                             <label htmlFor="genre--action">
                                 <input type="checkbox" id="genre--action" name="genre" value="28" onChange={this.handleGenre}></input>
                                 Action
@@ -141,7 +145,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form onChange={this.handleDuration}>
-                            <h3>Duration</h3>
+                            <h3 onClick={() => this.handleDropdown('duration')}>Duration</h3>
                             <label htmlFor="duration--any">
                                 <input type="radio" id="duration--any" name="duration" value=""></input>
                                 Any Duration
@@ -171,9 +175,9 @@ class Filters extends React.Component {
 
                     <section>
                         <form onChange={this.handleRating}>
-                            <h3>Rating</h3>
+                            <h3 onClick={() => this.handleDropdown('rating')}>Rating</h3>
                             <label htmlFor="rating--any">
-                                <input type="radio" id="duration--any" name="rating" value=""></input>
+                                <input type="radio" id="rating--any" name="rating" value=""></input>
                                 Any Rating
                             </label>
 
@@ -201,7 +205,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form onChange={this.handleCertification}>
-                            <h3>Maturity Rating</h3>
+                            <h3 onClick={() => this.handleDropdown('certification')}>Maturity Rating</h3>
                             <label htmlFor="certification--any">
                                 <input type="radio" id="certification--any" name="certification" value=""></input>
                                 Any
@@ -230,7 +234,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form onChange={this.handleReleaseDate}>
-                            <h3>Release Date</h3>
+                            <h3 onClick={() => this.handleDropdown('releaseDate')}>Release Date</h3>
                             <label htmlFor="release-date--any">
                                 <input type="radio" id="release-date--any" name="release-date" value=""></input>
                                 Any
