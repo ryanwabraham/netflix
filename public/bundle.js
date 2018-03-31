@@ -18248,6 +18248,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -18274,41 +18276,72 @@
 	                case 'type':
 	                    {
 	                        _this.setState({
-	                            typeIsVisible: !_this.state.typeIsVisible
+	                            typeIsVisible: !_this.state.typeIsVisible,
+	                            genreIsVisible: false,
+	                            durationIsVisible: false,
+	                            ratingIsVisible: false,
+	                            certificationIsVisible: false,
+	                            releaseDateIsVisible: false
 	                        });
 	                        break;
 	                    }
 	                case 'genre':
 	                    {
 	                        _this.setState({
-	                            genreIsVisible: !_this.state.genreIsVisible
+	                            typeIsVisible: false,
+	                            genreIsVisible: !_this.state.genreIsVisible,
+	                            durationIsVisible: false,
+	                            ratingIsVisible: false,
+	                            certificationIsVisible: false,
+	                            releaseDateIsVisible: false
 	                        });
 	                        break;
 	                    }
 	                case 'duration':
 	                    {
 	                        _this.setState({
-	                            durationIsVisible: !_this.state.durationIsVisible
+	                            typeIsVisible: false,
+	                            genreIsVisible: false,
+	                            durationIsVisible: !_this.state.durationIsVisible,
+	                            ratingIsVisible: false,
+	                            certificationIsVisible: false,
+	                            releaseDateIsVisible: false
 	                        });
 	                        break;
 	                    }
 	                case 'rating':
 	                    {
 	                        _this.setState({
-	                            ratingIsVisible: !_this.state.ratingIsVisible
+	                            typeIsVisible: false,
+	                            genreIsVisible: false,
+	                            durationIsVisible: false,
+	                            ratingIsVisible: !_this.state.ratingIsVisible,
+	                            certificationIsVisible: false,
+	                            releaseDateIsVisible: false
 	                        });
 	                        break;
 	                    }
 	                case 'certification':
 	                    {
-	                        _this.setState({
-	                            certificationIsVisible: !_this.state.certificationIsVisible
-	                        });
+	                        var _this$setState;
+
+	                        _this.setState((_this$setState = {
+	                            typeIsVisible: false,
+	                            genreIsVisible: false,
+	                            durationIsVisible: false,
+	                            ratingIsVisible: false,
+	                            certificationIsVisible: false
+	                        }, _defineProperty(_this$setState, 'certificationIsVisible', !_this.state.certificationIsVisible), _defineProperty(_this$setState, 'releaseDateIsVisible', false), _this$setState));
 	                        break;
 	                    }
 	                case 'releaseDate':
 	                    {
 	                        _this.setState({
+	                            typeIsVisible: false,
+	                            genreIsVisible: false,
+	                            durationIsVisible: false,
+	                            ratingIsVisible: false,
+	                            certificationIsVisible: false,
 	                            releaseDateIsVisible: !_this.state.releaseDateIsVisible
 	                        });
 	                        break;

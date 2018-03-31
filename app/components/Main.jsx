@@ -38,36 +38,67 @@ class Main extends React.Component {
         switch(filter) {
             case 'type': {
                 this.setState({
-                    typeIsVisible: !this.state.typeIsVisible
+                    typeIsVisible: !this.state.typeIsVisible,
+                    genreIsVisible: false,
+                    durationIsVisible: false,
+                    ratingIsVisible: false,
+                    certificationIsVisible: false,
+                    releaseDateIsVisible: false
                 });
                 break;
             }
             case 'genre': {
                 this.setState({
-                    genreIsVisible: !this.state.genreIsVisible
+                    typeIsVisible: false,
+                    genreIsVisible: !this.state.genreIsVisible,
+                    durationIsVisible: false,
+                    ratingIsVisible: false,
+                    certificationIsVisible: false,
+                    releaseDateIsVisible: false
                 });
                 break;
             }
             case 'duration': {
                 this.setState({
-                    durationIsVisible: !this.state.durationIsVisible
+                    typeIsVisible: false,
+                    genreIsVisible: false,
+                    durationIsVisible: !this.state.durationIsVisible,
+                    ratingIsVisible: false,
+                    certificationIsVisible: false,
+                    releaseDateIsVisible: false
                 });
                 break;
             }
             case 'rating': {
                 this.setState({
-                    ratingIsVisible: !this.state.ratingIsVisible
+                    typeIsVisible: false,
+                    genreIsVisible: false,
+                    durationIsVisible: false,
+                    ratingIsVisible: !this.state.ratingIsVisible,
+                    certificationIsVisible: false,
+                    releaseDateIsVisible: false
                 });
                 break;
             }
             case 'certification': {
                 this.setState({
-                    certificationIsVisible: !this.state.certificationIsVisible
+                    typeIsVisible: false,
+                    genreIsVisible: false,
+                    durationIsVisible: false,
+                    ratingIsVisible: false,
+                    certificationIsVisible: false,
+                    certificationIsVisible: !this.state.certificationIsVisible,
+                    releaseDateIsVisible: false
                 });
                 break;
             }
             case 'releaseDate': {
                 this.setState({
+                    typeIsVisible: false,
+                    genreIsVisible: false,
+                    durationIsVisible: false,
+                    ratingIsVisible: false,
+                    certificationIsVisible: false,
                     releaseDateIsVisible: !this.state.releaseDateIsVisible
                 });
                 break;
