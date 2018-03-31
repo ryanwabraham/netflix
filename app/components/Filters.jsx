@@ -35,7 +35,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={this.handleType}>
                             <h3 onClick={() => this.handleDropdown('type')}>Type</h3>
-                            <div className={this.props.dropdowns.typeIsVisible ? 'filters__dropdown visible': 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[0] ? 'filters__dropdown visible': 'filters__dropdown'}>
                                 <label htmlFor="type--movie">
                                     <input type="radio" id="type--movie" name="type" value="movie"></input>
                                     Movie
@@ -52,7 +52,7 @@ class Filters extends React.Component {
                     <section>
                         <form>
                             <h3 onClick={() => this.handleDropdown('genre')}>Genre</h3>
-                            <div className={this.props.dropdowns.genreIsVisible ? 'filters__dropdown visible': 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[1] ? 'filters__dropdown visible': 'filters__dropdown'}>
                                 <label htmlFor="genre--action">
                                     <input type="checkbox" id="genre--action" name="genre" value="28" onChange={this.handleGenre}></input>
                                     Action
@@ -149,7 +149,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={this.handleDuration}>
                             <h3 onClick={() => this.handleDropdown('duration')}>Duration</h3>
-                            <div className={this.props.dropdowns.durationIsVisible ? 'filters__dropdown visible': 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[2] ? 'filters__dropdown visible': 'filters__dropdown'}>
                                 <label htmlFor="duration--any">
                                     <input type="radio" id="duration--any" name="duration" value=""></input>
                                     Any Duration
@@ -181,7 +181,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={this.handleRating}>
                             <h3 onClick={() => this.handleDropdown('rating')}>Rating</h3>
-                            <div className={this.props.dropdowns.ratingIsVisible ? 'filters__dropdown visible': 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[3] ? 'filters__dropdown visible': 'filters__dropdown'}>
                                 <label htmlFor="rating--any">
                                     <input type="radio" id="rating--any" name="rating" value=""></input>
                                     Any Rating
@@ -213,7 +213,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={this.handleCertification}>
                             <h3 onClick={() => this.handleDropdown('certification')}>Maturity Rating</h3>
-                            <div className={this.props.dropdowns.certificationIsVisible ? 'filters__dropdown visible': 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[4] ? 'filters__dropdown visible': 'filters__dropdown'}>
                                 <label htmlFor="certification--any">
                                     <input type="radio" id="certification--any" name="certification" value=""></input>
                                     Any
@@ -244,7 +244,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={this.handleReleaseDate}>
                             <h3 onClick={() => this.handleDropdown('releaseDate')}>Release Date</h3>
-                            <div className={this.props.dropdowns.releaseDateIsVisible ? 'filters__dropdown visible': 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[5] ? 'filters__dropdown visible': 'filters__dropdown'}>
                                 <label htmlFor="release-date--any">
                                     <input type="radio" id="release-date--any" name="release-date" value=""></input>
                                     Any

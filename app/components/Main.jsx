@@ -25,28 +25,54 @@ class Main extends React.Component {
             releaseDate: '',
             requestUrl: DEFAULT_REQUEST,
             data: '',
-            dropdowns: {
-                'typeIsVisible': false,
-                'genreIsVisible': false,
-                'durationIsVisible': false,
-                'ratingIsVisible': false,
-                'certificationIsVisible': false,
-                'releaseDateIsVisible': false,
-            }
+            typeIsVisible: false,
+            genreIsVisible: false,
+            durationIsVisible: false,
+            ratingIsVisible: false,
+            certificationIsVisible: false,
+            releaseDateIsVisible: false
         };
     }
 
     handleDropdowns = (filter) => {
-        var currentState = this.state.dropdowns;
-
-        var dropdownState = function() {
-            var dropdown = filter + 'IsVisible';
-            var newDropdownState = currentState;
-            newDropdownState[dropdown] = !newDropdownState[dropdown];
-            return newDropdownState;
-        }.bind(filter, currentState)();
-
-        this.setState(dropdownState);
+        switch(filter) {
+            case 'type': {
+                this.setState({
+                    typeIsVisible: !this.state.typeIsVisible
+                });
+                break;
+            }
+            case 'genre': {
+                this.setState({
+                    genreIsVisible: !this.state.genreIsVisible
+                });
+                break;
+            }
+            case 'duration': {
+                this.setState({
+                    durationIsVisible: !this.state.durationIsVisible
+                });
+                break;
+            }
+            case 'rating': {
+                this.setState({
+                    ratingIsVisible: !this.state.ratingIsVisible
+                });
+                break;
+            }
+            case 'certification': {
+                this.setState({
+                    certificationIsVisible: !this.state.certificationIsVisible
+                });
+                break;
+            }
+            case 'releaseDate': {
+                this.setState({
+                    releaseDateIsVisible: !this.state.releaseDateIsVisible
+                });
+                break;
+            }
+        }
     }
 
     handleSearch = (searchTerm) => {
@@ -214,7 +240,8 @@ class Main extends React.Component {
     }
 
     render() {
-        let {searchTerm, filters, requestUrl, data, dropdowns} = this.state;
+        let {searchTerm, filters, requestUrl, data, typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible} = this.state;
+        let dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible];
 
         if (initialRequest == true && !filters && searchTerm.length === 0) {
             this.getResults(DEFAULT_REQUEST);

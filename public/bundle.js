@@ -18270,16 +18270,50 @@
 	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 	        _this.handleDropdowns = function (filter) {
-	            var currentState = _this.state.dropdowns;
-
-	            var dropdownState = function () {
-	                var dropdown = filter + 'IsVisible';
-	                var newDropdownState = currentState;
-	                newDropdownState[dropdown] = !newDropdownState[dropdown];
-	                return newDropdownState;
-	            }.bind(filter, currentState)();
-
-	            _this.setState(dropdownState);
+	            switch (filter) {
+	                case 'type':
+	                    {
+	                        _this.setState({
+	                            typeIsVisible: !_this.state.typeIsVisible
+	                        });
+	                        break;
+	                    }
+	                case 'genre':
+	                    {
+	                        _this.setState({
+	                            genreIsVisible: !_this.state.genreIsVisible
+	                        });
+	                        break;
+	                    }
+	                case 'duration':
+	                    {
+	                        _this.setState({
+	                            durationIsVisible: !_this.state.durationIsVisible
+	                        });
+	                        break;
+	                    }
+	                case 'rating':
+	                    {
+	                        _this.setState({
+	                            ratingIsVisible: !_this.state.ratingIsVisible
+	                        });
+	                        break;
+	                    }
+	                case 'certification':
+	                    {
+	                        _this.setState({
+	                            certificationIsVisible: !_this.state.certificationIsVisible
+	                        });
+	                        break;
+	                    }
+	                case 'releaseDate':
+	                    {
+	                        _this.setState({
+	                            releaseDateIsVisible: !_this.state.releaseDateIsVisible
+	                        });
+	                        break;
+	                    }
+	            }
 	        };
 
 	        _this.handleSearch = function (searchTerm) {
@@ -18478,14 +18512,12 @@
 	            releaseDate: '',
 	            requestUrl: DEFAULT_REQUEST,
 	            data: '',
-	            dropdowns: {
-	                'typeIsVisible': false,
-	                'genreIsVisible': false,
-	                'durationIsVisible': false,
-	                'ratingIsVisible': false,
-	                'certificationIsVisible': false,
-	                'releaseDateIsVisible': false
-	            }
+	            typeIsVisible: false,
+	            genreIsVisible: false,
+	            durationIsVisible: false,
+	            ratingIsVisible: false,
+	            certificationIsVisible: false,
+	            releaseDateIsVisible: false
 	        };
 	        return _this;
 	    }
@@ -18498,8 +18530,14 @@
 	                filters = _state.filters,
 	                requestUrl = _state.requestUrl,
 	                data = _state.data,
-	                dropdowns = _state.dropdowns;
+	                typeIsVisible = _state.typeIsVisible,
+	                genreIsVisible = _state.genreIsVisible,
+	                durationIsVisible = _state.durationIsVisible,
+	                ratingIsVisible = _state.ratingIsVisible,
+	                certificationIsVisible = _state.certificationIsVisible,
+	                releaseDateIsVisible = _state.releaseDateIsVisible;
 
+	            var dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible];
 
 	            if (initialRequest == true && !filters && searchTerm.length === 0) {
 	                this.getResults(DEFAULT_REQUEST);
@@ -18834,7 +18872,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns.typeIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[0] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'type--movie' },
@@ -18865,7 +18903,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns.genreIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[1] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--action' },
@@ -18992,7 +19030,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns.durationIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[2] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'duration--any' },
@@ -19041,7 +19079,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns.ratingIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[3] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'rating--any' },
@@ -19090,7 +19128,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns.certificationIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[4] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'certification--any' },
@@ -19139,7 +19177,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns.releaseDateIsVisible ? 'filters__dropdown visible' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[5] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'release-date--any' },
