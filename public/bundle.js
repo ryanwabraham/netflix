@@ -18860,18 +18860,8 @@
 
 	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleDropdown = function (filter) {
 	            _this.props.onDropdown(filter);
-	        }, _this.handleType = function (e) {
-	            _this.props.onFilter(e, 'type');
-	        }, _this.handleGenre = function (e) {
-	            _this.props.onFilter(e, 'genre');
-	        }, _this.handleDuration = function (e) {
-	            _this.props.onFilter(e, 'duration');
-	        }, _this.handleRating = function (e) {
-	            _this.props.onFilter(e, 'rating');
-	        }, _this.handleCertification = function (e) {
-	            _this.props.onFilter(e, 'certification');
-	        }, _this.handleReleaseDate = function (e) {
-	            _this.props.onFilter(e, 'releaseDate');
+	        }, _this.handleFilter = function (e, filter) {
+	            _this.props.onFilter(e, filter);
 	        }, _this.handleSearch = function (e) {
 	            var searchTerm = e.target.value;
 	            console.log(searchTerm);
@@ -18895,7 +18885,9 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'form',
-	                            { onChange: this.handleType },
+	                            { onChange: function onChange(e) {
+	                                    return _this2.handleFilter(e, 'type');
+	                                } },
 	                            _react2.default.createElement(
 	                                'h3',
 	                                { onClick: function onClick() {
@@ -18940,109 +18932,145 @@
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--action' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Action'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--adventure' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Adventure'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--animation' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Animation'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--comedy' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Comedy'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--crime' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Crime'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--documentary' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Documentary'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--drama' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Drama'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--family' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Family'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--fantasy' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Fantasy'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--history' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'History'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--horror' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Horror'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--musical' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Musical'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--mystery' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Mystery'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--romance' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Romance'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--sci-fi' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Science Fiction'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--thriller' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Thriller'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--war' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'War'
 	                                ),
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--western' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: this.handleGenre }),
+	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: function onChange(e) {
+	                                            return _this2.handleFilter(e, 'genre');
+	                                        } }),
 	                                    'Western'
 	                                )
 	                            )
@@ -19053,7 +19081,9 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'form',
-	                            { onChange: this.handleDuration },
+	                            { onChange: function onChange(e) {
+	                                    return _this2.handleFilter(e, 'duration');
+	                                } },
 	                            _react2.default.createElement(
 	                                'h3',
 	                                { onClick: function onClick() {
@@ -19102,7 +19132,9 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'form',
-	                            { onChange: this.handleRating },
+	                            { onChange: function onChange(e) {
+	                                    return _this2.handleFilter(e, 'rating');
+	                                } },
 	                            _react2.default.createElement(
 	                                'h3',
 	                                { onClick: function onClick() {
@@ -19151,7 +19183,9 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'form',
-	                            { onChange: this.handleCertification },
+	                            { onChange: function onChange(e) {
+	                                    return _this2.handleFilter(e, 'certification');
+	                                } },
 	                            _react2.default.createElement(
 	                                'h3',
 	                                { onClick: function onClick() {
@@ -19200,7 +19234,9 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'form',
-	                            { onChange: this.handleReleaseDate },
+	                            { onChange: function onChange(e) {
+	                                    return _this2.handleFilter(e, 'releaseDate');
+	                                } },
 	                            _react2.default.createElement(
 	                                'h3',
 	                                { onClick: function onClick() {
