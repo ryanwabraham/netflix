@@ -106,16 +106,19 @@ aside {
             background-image: url(/img/dropdown.png);
             background-size: 100% auto;
             background-repeat: no-repeat;
+            opacity: 0.5;
+            transform-origin: 50% 40%;
             transform: rotate(0deg);
-            transition-duration: .5s;
+            transition-duration: .4s;
         }
 
         &.active {
             color: $text;
 
             &:after {
+                opacity: 1;
                 transform: rotate(180deg);
-                transition-duration: .5s;
+                transition-duration: .4s;
             }
         }
     }
