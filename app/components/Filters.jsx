@@ -1,5 +1,7 @@
 import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class Filters extends React.Component {
     handleDropdown = (filter) => {
@@ -13,6 +15,8 @@ class Filters extends React.Component {
         this.props.onSearch(searchTerm);
     }
     render() {
+        const Range = Slider.Range;
+
         return (
             <aside>
                 <div id="filters">
@@ -134,7 +138,8 @@ class Filters extends React.Component {
                         <form onChange={(e) => this.handleFilter(e, 'duration')}>
                             <h3 onClick={() => this.handleDropdown('duration')} className={this.props.dropdowns[2] ? 'active': ''}>Duration</h3>
                             <div className={this.props.dropdowns[2] ? 'filters__dropdown visible animated quick fadeInUp': 'filters__dropdown'}>
-                                <label htmlFor="duration--any">
+                                <Range dots step={30} allowCross={false} defaultValue={[0, 240]} min={0} max={240} onAfterChange={(e) => this.handleFilter(e, 'duration')} />
+                                {/*<label htmlFor="duration--any">
                                     <input type="radio" id="duration--any" name="duration" value=""></input>
                                     Any Duration
                                 </label>
@@ -157,7 +162,7 @@ class Filters extends React.Component {
                                 <label htmlFor="duration--two-plus-hours">
                                     <input type="radio" id="duration--two-plus-hours" name="duration" value="121"></input>
                                     2+ Hours
-                                </label>
+                                </label>*/}
                             </div>
                         </form>
                     </section>

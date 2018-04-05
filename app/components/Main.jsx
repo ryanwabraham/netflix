@@ -19,7 +19,7 @@ class Main extends React.Component {
             filters: false,
             type: 'movie',
             genres: [],
-            duration: '',
+            duration: [],
             rating: '',
             certification: '',
             releaseDate: '',
@@ -153,14 +153,10 @@ class Main extends React.Component {
                 break;
             }
             case 'duration': {
-                let duration = e.target.value;
+                let duration = e;
 
-                if (duration != '') {
-                    if (duration >= 121) {
-                        duration = '&with_runtime.gte=' + duration;
-                    } else {
-                        duration = '&with_runtime.lte=' + duration;
-                    }
+                if (duration.length) {
+                    duration = '&with_runtime.gte=' + duration[0] + '&with_runtime.lte=' + duration[1];
                 }
 
                 this.setState({
