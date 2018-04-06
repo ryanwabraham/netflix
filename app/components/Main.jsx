@@ -267,7 +267,7 @@ class Main extends React.Component {
     }
 
     render() {
-        let {searchTerm, filters, requestUrl, data, typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible} = this.state;
+        let {searchTerm, filters, requestUrl, data, type, typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible} = this.state;
         let dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible];
 
         if (initialRequest == true && !filters && searchTerm.length === 0) {
@@ -288,7 +288,7 @@ class Main extends React.Component {
                 <Nav/>
                 <section id="results">
                     <Hero/>
-                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch} onDropdown={this.handleDropdowns} dropdowns={dropdowns}/>
+                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch} onDropdown={this.handleDropdowns} dropdowns={dropdowns} type={type}/>
                     {displayResults()}
                 </section>
             </main>
