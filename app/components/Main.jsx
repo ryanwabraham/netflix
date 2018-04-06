@@ -167,10 +167,10 @@ class Main extends React.Component {
                 break;
             }
             case 'rating': {
-                let rating = e.target.value;
+                let rating = e;
 
-                if (rating != '') {
-                    rating = '&vote_average.gte=' + rating;
+                if (rating.length) {
+                    rating = '&vote_average.gte=' + rating[0] + '&vote_average.lte=' + rating[1];
                 }
 
                 this.setState({

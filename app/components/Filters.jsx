@@ -135,7 +135,7 @@ class Filters extends React.Component {
                     </section>
 
                     <section>
-                        <form onChange={(e) => this.handleFilter(e, 'duration')}>
+                        <form>
                             <h3 onClick={() => this.handleDropdown('duration')} className={this.props.dropdowns[2] ? 'active' : ''}>Duration</h3>
                             <div className={this.props.dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                                 <div className={this.props.type === 'tv' ? 'distribution duration tv' : 'distribution duration'}></div>
@@ -152,33 +152,19 @@ class Filters extends React.Component {
                     </section>
 
                     <section>
-                        <form onChange={(e) => this.handleFilter(e, 'rating')}>
+                        <form>
                             <h3 onClick={() => this.handleDropdown('rating')} className={this.props.dropdowns[3] ? 'active' : ''}>Rating</h3>
-                            <div className={this.props.dropdowns[3] ? 'filters__dropdown visible' : 'filters__dropdown'}>
-                                <label htmlFor="rating--any">
-                                    <input type="radio" id="rating--any" name="rating" value=""></input>
-                                    Any Rating
-                                </label>
-
-                                <label htmlFor="rating--two-stars">
-                                    <input type="radio" id="rating--two-stars" name="rating" value="2"></input>
-                                    2/10 +
-                                </label>
-
-                                <label htmlFor="rating--four-stars">
-                                    <input type="radio" id="rating--four-stars" name="rating" value="4"></input>
-                                    4/10 +
-                                </label>
-
-                                <label htmlFor="rating--six-stars">
-                                    <input type="radio" id="rating--six-stars" name="rating" value="6"></input>
-                                    6/10 +
-                                </label>
-
-                                <label htmlFor="rating--eight-stars">
-                                    <input type="radio" id="rating--eight-stars" name="rating" value="8"></input>
-                                    8/10 +
-                                </label>
+                            <div className={this.props.dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
+                                <div className={'distribution rating'}></div>
+                                <Range dots step={2} allowCross={false} defaultValue={[0, 10]} min={0} max={10} onAfterChange={(e) => this.handleFilter(e, 'rating')} />
+                                <ul className={'slider-key'}>
+                                    <li>0/10</li>
+                                    <li>2/10</li>
+                                    <li>4/10</li>
+                                    <li>6/10</li>
+                                    <li>8/10</li>
+                                    <li>10/10</li>
+                                </ul>
                             </div>
                         </form>
                     </section>
@@ -215,7 +201,7 @@ class Filters extends React.Component {
                     </section>
 
                     <section>
-                        <form onChange={(e) => this.handleFilter(e, 'releaseDate')}>
+                        <form>
                             <h3 onClick={() => this.handleDropdown('releaseDate')} className={this.props.dropdowns[5] ? 'active' : ''}>Release Date</h3>
                             <div className={this.props.dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                                 <div className={'distribution releaseDate'}></div>

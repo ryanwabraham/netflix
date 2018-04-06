@@ -223,6 +223,10 @@ aside {
         &.releaseDate {
             background-image: url('../img/release-date-graph.png');
         }
+
+        &.rating {
+            background-image: url('../img/rating-bell-curve.png');
+        }
     }
 
     label {
