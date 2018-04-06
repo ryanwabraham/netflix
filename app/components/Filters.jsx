@@ -217,42 +217,18 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={(e) => this.handleFilter(e, 'releaseDate')}>
                             <h3 onClick={() => this.handleDropdown('releaseDate')} className={this.props.dropdowns[5] ? 'active' : ''}>Release Date</h3>
-                            <div className={this.props.dropdowns[5] ? 'filters__dropdown visible' : 'filters__dropdown'}>
-                                <label htmlFor="release-date--any">
-                                    <input type="radio" id="release-date--any" name="release-date" value=""></input>
-                                    Any
-                                </label>
-                                <label htmlFor="release-date--1950">
-                                    <input type="radio" id="release-date--1950" name="release-date" value="1950"></input>
-                                    Before 1950
-                                </label>
-                                <label htmlFor="release-date--1960">
-                                    <input type="radio" id="release-date--1960" name="release-date" value="1960,1970"></input>
-                                    1960s
-                                </label>
-                                <label htmlFor="release-date--1970">
-                                    <input type="radio" id="release-date--1970" name="release-date" value="1970,1980"></input>
-                                    1970s
-                                </label>
-                                <label htmlFor="release-date--1980">
-                                    <input type="radio" id="release-date--1980" name="release-date" value="1980,1990"></input>
-                                    1980s
-                                </label>
-
-                                <label htmlFor="release-date--1990">
-                                    <input type="radio" id="release-date--1990" name="release-date" value="1990,2000"></input>
-                                    1990s
-                                </label>
-
-                                <label htmlFor="release-date--2000">
-                                    <input type="radio" id="release-date--2000" name="release-date" value="2000,2010"></input>
-                                    2000s
-                                </label>
-
-                                <label htmlFor="release-date--2010">
-                                    <input type="radio" id="release-date--2010" name="release-date" value="2010,2020"></input>
-                                    2010 - Present
-                                </label>
+                            <div className={this.props.dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
+                                <div className={'distribution releaseDate'}></div>
+                                <Range dots step={20} allowCross={false} defaultValue={[1900, 2020]} min={1900} max={2020} onAfterChange={(e) => this.handleFilter(e, 'releaseDate')} />
+                                <ul className={'slider-key'}>
+                                    <li>1900</li>
+                                    <li>1920</li>
+                                    <li>1940</li>
+                                    <li>1960</li>
+                                    <li>1980</li>
+                                    <li>2000</li>
+                                    <li>Present</li>
+                                </ul>
                             </div>
                         </form>
                     </section>

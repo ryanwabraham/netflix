@@ -210,14 +210,18 @@ aside {
     .distribution {
         height: 70px;
         margin-bottom: -9px;
+        background-size: 100% 100%;
 
         &.duration {
             background-image: url('../img/duration-bell-curve.png');
-            background-size: 100% 100%;
 
             &.tv {
                 background-image: url('../img/tv-duration-bell-curve.png');
             }
+        }
+
+        &.releaseDate {
+            background-image: url('../img/release-date-graph.png');
         }
     }
 

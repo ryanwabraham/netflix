@@ -195,22 +195,13 @@ class Main extends React.Component {
                 break;
             }
             case 'releaseDate': {
-                let releaseDate = e.target.value;
+                let releaseDate = e;
 
-                if (type == 'movie') {
-                    var gte = '&primary_release_date.gte=';
-                    var lte = '&primary_release_date.lte=';
-                } else {
-                    var gte = '&first_air_date.gte=';
-                    var lte = '&first_air_date.lte=';
-                }
-
-                if (releaseDate != '') {
-                    if (releaseDate === '1950') {
-                        releaseDate = lte + parseInt(releaseDate);
+                if (releaseDate.length) {
+                    if (type == 'movie') {
+                        releaseDate = '&primary_release_date.gte=' + releaseDate[0] + '&primary_release_date.lte=' + releaseDate[1];
                     } else {
-                        releaseDate = e.target.value.split(',');
-                        releaseDate = gte + parseInt(releaseDate[0]) + lte + parseInt(releaseDate[1]);
+                        releaseDate = '&first_air_date.gte=' + releaseDate[0] + '&first_air_date.lte=' + releaseDate[1];
                     }
                 }
 
