@@ -30,7 +30,7 @@ class Results extends React.Component {
         }
 
         return (
-            <ul>
+            <ul className={'items'}>
                 {results}
             </ul>
         );

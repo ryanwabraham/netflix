@@ -18737,7 +18737,7 @@
 
 	            return _react2.default.createElement(
 	                'ul',
-	                null,
+	                { className: 'items' },
 	                results
 	            );
 	        }
@@ -18863,7 +18863,6 @@
 	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.handleDropdown = function (filter) {
 	            _this.props.onDropdown(filter);
 	        }, _this.handleFilter = function (e, filter) {
-	            console.log(e);
 	            _this.props.onFilter(e, filter);
 	        }, _this.handleSearch = function (e) {
 	            var searchTerm = e.target.value;
@@ -18901,7 +18900,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns[0] ? 'filters__dropdown visible animated quick fadeInUp' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[0] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'type--movie' },
@@ -18932,7 +18931,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns[1] ? 'filters__dropdown visible animated quick fadeInUp' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[1] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'genre--action' },
@@ -19097,10 +19096,40 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns[2] ? 'filters__dropdown visible animated quick fadeInUp' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                                _react2.default.createElement('div', { className: 'distribution duration' }),
 	                                _react2.default.createElement(Range, { dots: true, step: 30, allowCross: false, defaultValue: [0, 240], min: 0, max: 240, onAfterChange: function onAfterChange(e) {
 	                                        return _this2.handleFilter(e, 'duration');
-	                                    } })
+	                                    } }),
+	                                _react2.default.createElement(
+	                                    'ul',
+	                                    { className: 'slider-key' },
+	                                    _react2.default.createElement(
+	                                        'li',
+	                                        null,
+	                                        '0h'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'li',
+	                                        null,
+	                                        '1h'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'li',
+	                                        null,
+	                                        '2h'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'li',
+	                                        null,
+	                                        '3h'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'li',
+	                                        null,
+	                                        '4h'
+	                                    )
+	                                )
 	                            )
 	                        )
 	                    ),
@@ -19121,7 +19150,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns[3] ? 'filters__dropdown visible animated quick fadeInUp' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[3] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'rating--any' },
@@ -19172,7 +19201,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns[4] ? 'filters__dropdown visible animated quick fadeInUp' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[4] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'certification--any' },
@@ -19223,7 +19252,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: this.props.dropdowns[5] ? 'filters__dropdown visible animated quick fadeInUp' : 'filters__dropdown' },
+	                                { className: this.props.dropdowns[5] ? 'filters__dropdown visible' : 'filters__dropdown' },
 	                                _react2.default.createElement(
 	                                    'label',
 	                                    { htmlFor: 'release-date--any' },
@@ -29924,7 +29953,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background-color: #292929; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  z-index: 1; }\n  nav #logo {\n    width: 120px;\n    height: 100%;\n    background-repeat: no-repeat;\n    background-size: 100% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(184) + ");\n    text-indent: -9999px; }\n  nav #account {\n    display: flex;\n    align-items: center; }\n    nav #account .notifications {\n      width: 30px;\n      height: 30px;\n      margin-right: 20px;\n      background-image: url(" + __webpack_require__(185) + ");\n      background-size: 30px 30px; }\n    nav #account .avatar {\n      width: 38px;\n      height: 38px;\n      background-image: url(" + __webpack_require__(186) + ");\n      background-repeat: no-repeat;\n      background-size: 100% auto; }\n\naside {\n  position: sticky;\n  top: -1px;\n  display: flex;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  background-color: #1d1d1d;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);\n  z-index: 2; }\n  aside h3 {\n    position: relative;\n    color: #9a9a9a;\n    cursor: pointer; }\n    aside h3:after {\n      content: '';\n      position: absolute;\n      top: 8px;\n      right: -17px;\n      width: 10px;\n      height: 9px;\n      background-image: url(/img/dropdown.png);\n      background-size: 100% auto;\n      background-repeat: no-repeat;\n      opacity: 0.5;\n      transform-origin: 50% 40%;\n      transform: rotate(0deg);\n      transition-duration: .4s; }\n    aside h3.active {\n      color: #eee; }\n      aside h3.active:after {\n        opacity: 1;\n        transform: rotate(180deg);\n        transition-duration: .4s; }\n  aside #filters {\n    display: flex;\n    flex: 1;\n    align-items: center; }\n  aside section {\n    margin: 0px 25px; }\n    aside section:first-of-type {\n      margin-left: 0px; }\n  aside .filters__dropdown {\n    display: none;\n    position: absolute;\n    top: 100%;\n    background-color: #292929;\n    padding: 10px;\n    border: 1px solid #9a9a9a;\n    border-radius: 5px; }\n    aside .filters__dropdown.visible {\n      display: flex;\n      flex-wrap: wrap;\n      flex-direction: column; }\n  aside label {\n    position: relative;\n    margin: 10px;\n    color: #eee;\n    cursor: pointer; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    -webkit-appearance: none;\n    width: 16px;\n    height: 16px;\n    background: #3d3d3d;\n    border-radius: 4px;\n    margin: 0px 10px -2px 0px;\n    transition-duration: .2s; }\n    aside input[type=\"radio\"]:focus, aside input[type=\"checkbox\"]:focus {\n      outline: none; }\n  aside input[type=\"radio\"] {\n    border-radius: 50%; }\n    aside input[type=\"radio\"]:checked {\n      background: #eee;\n      border: 5px solid #d32f27;\n      transition-duration: .2s; }\n  aside input[type=checkbox]:checked {\n    background: #d32f27;\n    transition-duration: .2s; }\n    aside input[type=checkbox]:checked:after {\n      position: absolute;\n      top: 1px;\n      left: 3px;\n      content: '\\2714';\n      color: #eee;\n      animation-name: zoomIn;\n      animation-duration: .2s; }\n  aside input[type=radio]:checked:after {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%; }\n  aside #search {\n    position: relative;\n    height: 100%; }\n  aside #search:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: '';\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(187) + "); }\n  aside input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    font-size: 18px;\n    font-weight: bold;\n    color: #eee;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    aside input[type=\"search\"]:focus {\n      outline: none; }\n\nsection#results {\n  width: 100%; }\n  section#results #hero {\n    height: 350px;\n    background: #000; }\n  section#results .hero__info__wrapper {\n    z-index: 2; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 54px 0px 0px 30px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results .hero__img {\n    position: absolute;\n    right: 0;\n    left: 0;\n    margin: auto; }\n  section#results .hero__logo {\n    width: 200px; }\n  section#results .button {\n    display: block;\n    width: 180px;\n    margin: 20px 0px;\n    padding: 10px;\n    text-align: center;\n    background: #d32f27;\n    color: #eee;\n    text-decoration: none;\n    font-size: 18px;\n    border-radius: 5px; }\n  section#results ul {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul li img {\n        width: 100%; }\n      section#results ul li img:hover + .info {\n        display: block; }\n      section#results ul li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
+	exports.push([module.id, "* {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\nhtml, body {\n  width: 100%;\n  height: 100%;\n  background-color: #292929; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: \"Helvetica Neu\", Helvetica, sans-serif;\n  font-size: 16px;\n  font-weight: 800;\n  color: #9a9a9a;\n  line-height: 1.2; }\n\nmain {\n  display: flex;\n  background-color: #292929;\n  width: 100%;\n  height: 100%; }\n\nnav {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  z-index: 1; }\n  nav #logo {\n    width: 120px;\n    height: 100%;\n    background-repeat: no-repeat;\n    background-size: 100% auto;\n    background-position: center center;\n    background-image: url(" + __webpack_require__(184) + ");\n    text-indent: -9999px; }\n  nav #account {\n    display: flex;\n    align-items: center; }\n    nav #account .notifications {\n      width: 30px;\n      height: 30px;\n      margin-right: 20px;\n      background-image: url(" + __webpack_require__(185) + ");\n      background-size: 30px 30px; }\n    nav #account .avatar {\n      width: 38px;\n      height: 38px;\n      background-image: url(" + __webpack_require__(186) + ");\n      background-repeat: no-repeat;\n      background-size: 100% auto; }\n\naside {\n  position: sticky;\n  top: -1px;\n  display: flex;\n  width: 100%;\n  height: 75px;\n  padding: 0px 30px;\n  background-color: #1d1d1d;\n  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);\n  z-index: 2; }\n  aside h3 {\n    position: relative;\n    color: #9a9a9a;\n    cursor: pointer; }\n    aside h3:after {\n      content: '';\n      position: absolute;\n      top: 8px;\n      right: -17px;\n      width: 10px;\n      height: 9px;\n      background-image: url(/img/dropdown.png);\n      background-size: 100% auto;\n      background-repeat: no-repeat;\n      opacity: 0.5;\n      transform-origin: 50% 40%;\n      transform: rotate(0deg);\n      transition-duration: .4s; }\n    aside h3.active {\n      color: #eee; }\n      aside h3.active:after {\n        opacity: 1;\n        transform: rotate(180deg);\n        transition-duration: .4s; }\n  aside #filters {\n    display: flex;\n    flex: 1;\n    align-items: center; }\n  aside section {\n    margin: 0px 25px; }\n    aside section:first-of-type {\n      margin-left: 0px; }\n  aside .filters__dropdown {\n    display: none;\n    position: absolute;\n    top: 100%;\n    background-color: #292929;\n    padding: 10px;\n    border: 1px solid #9a9a9a;\n    border-radius: 5px; }\n    aside .filters__dropdown.visible {\n      display: flex;\n      flex-wrap: wrap;\n      flex-direction: column;\n      animation-duration: 0.4s;\n      animation-name: fadeInUp; }\n    aside .filters__dropdown.slider-wrapper {\n      width: 450px;\n      padding: 20px; }\n  aside .rc-slider-rail {\n    background-color: #3d3d3d; }\n  aside .rc-slider-track {\n    background-color: #d32f27; }\n  aside .rc-slider-dot {\n    border: none;\n    background-color: #3d3d3d; }\n  aside .rc-slider-dot-active {\n    background-color: #d32f27; }\n  aside .rc-slider-handle {\n    margin-left: -10px;\n    margin-top: -8px;\n    width: 20px;\n    height: 20px;\n    border: none;\n    background-color: #eee; }\n    aside .rc-slider-handle:active {\n      box-shadow: 0 0 5px #d32f27; }\n  aside ul.slider-key {\n    display: flex;\n    align-items: baseline;\n    justify-content: space-between;\n    margin: 16px 0px 0px 0px;\n    list-style: none;\n    padding: 0px; }\n    aside ul.slider-key li {\n      font-size: 12px;\n      color: #9a9a9a; }\n  aside .distribution {\n    height: 50px;\n    margin-bottom: -9px; }\n    aside .distribution.duration {\n      background-image: url(" + __webpack_require__(187) + ");\n      background-size: contain; }\n  aside label {\n    position: relative;\n    margin: 10px;\n    color: #eee;\n    cursor: pointer; }\n  aside input[type=\"radio\"], aside input[type=\"checkbox\"] {\n    -webkit-appearance: none;\n    width: 16px;\n    height: 16px;\n    background: #3d3d3d;\n    border-radius: 4px;\n    margin: 0px 10px -2px 0px;\n    transition-duration: .2s; }\n    aside input[type=\"radio\"]:focus, aside input[type=\"checkbox\"]:focus {\n      outline: none; }\n  aside input[type=\"radio\"] {\n    border-radius: 50%; }\n    aside input[type=\"radio\"]:checked {\n      background: #eee;\n      border: 5px solid #d32f27;\n      transition-duration: .2s; }\n  aside input[type=checkbox]:checked {\n    background: #d32f27;\n    transition-duration: .2s; }\n    aside input[type=checkbox]:checked:after {\n      position: absolute;\n      top: 1px;\n      left: 3px;\n      content: '\\2714';\n      color: #eee;\n      animation-name: zoomIn;\n      animation-duration: .2s; }\n  aside input[type=radio]:checked:after {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%; }\n  aside #search {\n    position: relative;\n    height: 100%; }\n  aside #search:before {\n    position: absolute;\n    left: 20px;\n    top: 20px;\n    width: 30px;\n    height: 30px;\n    background-size: 30px 30px;\n    content: '';\n    margin-top: 3px;\n    background-image: url(" + __webpack_require__(188) + "); }\n  aside input[type=\"search\"] {\n    width: 100%;\n    height: 100%;\n    background-color: #1d1d1d;\n    font-size: 18px;\n    font-weight: bold;\n    color: #eee;\n    -webkit-appearance: none;\n    padding: 10px 0px 10px 55px;\n    border: none; }\n    aside input[type=\"search\"]:focus {\n      outline: none; }\n\nsection#results {\n  width: 100%; }\n  section#results #hero {\n    height: 350px;\n    background: #000; }\n  section#results .hero__info__wrapper {\n    z-index: 2; }\n  section#results .hero__info {\n    width: 33.3%;\n    height: 100%;\n    padding: 54px 0px 0px 30px;\n    display: flex;\n    align-items: center;\n    background: -webkit-linear-gradient(right, transparent, black);\n    /* For Safari 5.1 to 6.0 */\n    background: -o-linear-gradient(left, transparent, black);\n    /* For Opera 11.1 to 12.0 */\n    background: -moz-linear-gradient(left, transparent, black);\n    /* For Firefox 3.6 to 15 */\n    background: linear-gradient(to left, transparent, black);\n    /* Standard syntax (must be last) */ }\n  section#results .hero__img {\n    position: absolute;\n    right: 0;\n    left: 0;\n    margin: auto; }\n  section#results .hero__logo {\n    width: 200px; }\n  section#results .button {\n    display: block;\n    width: 180px;\n    margin: 20px 0px;\n    padding: 10px;\n    text-align: center;\n    background: #d32f27;\n    color: #eee;\n    text-decoration: none;\n    font-size: 18px;\n    border-radius: 5px; }\n  section#results ul.items {\n    display: flex;\n    flex-wrap: wrap;\n    margin: 0px;\n    padding: 10px; }\n    section#results ul.items li {\n      position: relative;\n      display: inline-block;\n      width: 16.65%;\n      list-style-type: none;\n      padding: 10px;\n      font-size: 12px; }\n      section#results ul.items li img {\n        width: 100%; }\n      section#results ul.items li img:hover + .info {\n        display: block; }\n      section#results ul.items li .info {\n        display: none;\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        padding: 60px 10px 10px 10px;\n        line-height: 1.4;\n        background: -webkit-linear-gradient(bottom, transparent, black);\n        /* For Safari 5.1 to 6.0 */\n        background: -o-linear-gradient(bottom, transparent, black);\n        /* For Opera 11.1 to 12.0 */\n        background: -moz-linear-gradient(bottom, transparent, black);\n        /* For Firefox 3.6 to 15 */\n        background: linear-gradient(to bottom, transparent, black);\n        /* Standard syntax (must be last) */ }\n        section#results ul.items li .info .title {\n          color: #eee;\n          font-size: 16px; }\n\n.animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both; }\n  .animated.quick {\n    -webkit-animation-duration: 0.4s;\n    animation-duration: 0.4s;\n    -webkit-animation-fill-mode: both;\n    animation-fill-mode: both; }\n  .animated.zoomIn {\n    -webkit-animation-name: zoomIn;\n    animation-name: zoomIn; }\n  .animated.fadeInUp {\n    -webkit-animation-name: fadeInUp;\n    animation-name: fadeInUp; }\n\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    transform: scale3d(0.3, 0.3, 0.3); }\n  50% {\n    opacity: 1; } }\n\n@keyframes fadeInUp {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n", ""]);
 
 	// exports
 
@@ -29949,6 +29978,12 @@
 
 /***/ },
 /* 187 */
+/***/ function(module, exports) {
+
+	module.exports = "/img/duration-bell-curve.png";
+
+/***/ },
+/* 188 */
 /***/ function(module, exports) {
 
 	module.exports = "/img/search.svg";

@@ -151,6 +151,69 @@ aside {
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
+            animation-duration: 0.4s;
+            animation-name: fadeInUp;
+        }
+
+        &.slider-wrapper {
+            width: 450px;
+            padding: 20px;
+        }
+    }
+
+    //slider styles
+    .rc-slider-rail {
+        background-color: $gray;
+    }
+
+    .rc-slider-track {
+        background-color: $red;
+    }
+
+    .rc-slider-dot {
+        border: none;
+        background-color: $gray;
+    }
+
+    .rc-slider-dot-active {
+        background-color: $red;
+    }
+
+    .rc-slider-handle {
+        margin-left: -10px;
+        margin-top: -8px;
+        width: 20px;
+        height: 20px;
+        border: none;
+        background-color: $text;
+
+        &:active {
+            box-shadow: 0 0 5px $red;
+        }
+    }
+
+    ul.slider-key {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin: 16px 0px 0px 0px;
+        list-style: none;
+        padding: 0px;
+
+        li {
+            font-size: $font-size-s;
+            color: $text-gray;
+        }
+    }
+
+    //distribution graphs
+    .distribution {
+        height: 70px;
+        margin-bottom: -9px;
+
+        &.duration {
+            background-image: url('../img/duration-bell-curve.png');
+            background-size: contain;
         }
     }
 
@@ -288,7 +351,7 @@ section#results {
         border-radius: 5px;
     }
 
-    ul {
+    ul.items {
         display: flex;
         flex-wrap: wrap;
         margin: 0px;
