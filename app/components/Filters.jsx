@@ -40,7 +40,7 @@ class Filters extends React.Component {
                     <section>
                         <form>
                             <h3 onClick={() => this.handleDropdown('genre')} className={this.props.dropdowns[1] ? 'active' : ''}>Genre</h3>
-                            <div className={this.props.dropdowns[1] ? 'filters__dropdown visible' : 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper'}>
                                 <label htmlFor="genre--action">
                                     <input type="checkbox" id="genre--action" name="genre" value="28" onChange={(e) => this.handleFilter(e, 'genre')}></input>
                                     Action

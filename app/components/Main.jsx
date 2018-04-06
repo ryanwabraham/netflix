@@ -266,9 +266,15 @@ class Main extends React.Component {
             initialRequest = false;
         }
 
+        if (dropdowns.includes(true)) {
+            var dropdownIsOpen = true;
+        } else {
+            var dropdownIsOpen = false;
+        }
+
         let displayResults = () => {
             if (data.length > 0) {
-                return <Results resultData={data}/>;
+                return <Results resultData={data} dropdownIsOpen={dropdownIsOpen}/>;
             } else {
                 return <h3>No Results Found.</h3>;
             }

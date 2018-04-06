@@ -30,7 +30,7 @@ class Results extends React.Component {
         }
 
         return (
-            <ul className={'items'}>
+            <ul className={this.props.dropdownIsOpen ? 'items dropdown-open' : 'items'}>
                 {results}
             </ul>
         );
