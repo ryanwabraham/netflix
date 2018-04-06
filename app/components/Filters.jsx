@@ -147,30 +147,6 @@ class Filters extends React.Component {
                                     <li>3h</li>
                                     <li>4h</li>
                                 </ul>
-                                {/*<label htmlFor="duration--any">
-                                    <input type="radio" id="duration--any" name="duration" value=""></input>
-                                    Any Duration
-                                </label>
-
-                                <label htmlFor="duration--half-hour">
-                                    <input type="radio" id="duration--half-hour" name="duration" value="30"></input>
-                                    Half-Hour or Less
-                                </label>
-
-                                <label htmlFor="duration--one-hour">
-                                    <input type="radio" id="duration--one-hour" name="duration" value="60"></input>
-                                    One Hour or Less
-                                </label>
-
-                                <label htmlFor="duration--two-hours">
-                                    <input type="radio" id="duration--two-hours" name="duration" value="120"></input>
-                                    Two Hours or Less
-                                </label>
-
-                                <label htmlFor="duration--two-plus-hours">
-                                    <input type="radio" id="duration--two-plus-hours" name="duration" value="121"></input>
-                                    2+ Hours
-                                </label>*/}
                             </div>
                         </form>
                     </section>
