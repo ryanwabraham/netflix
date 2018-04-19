@@ -172,7 +172,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={(e) => this.handleFilter(e, 'certification')}>
                             <h3 onClick={() => this.handleDropdown('certification')} className={(this.props.dropdowns[4] ? 'active' : '') + ' ' + (this.props.certification.length > 0 ? 'applied' : '')}>Maturity Rating</h3>
-                            <div className={this.props.dropdowns[4] ? 'filters__dropdown visible' : 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper'}>
                                 <label htmlFor="certification--any">
                                     <input type="radio" id="certification--any" name="certification" value=""></input>
                                     Any
