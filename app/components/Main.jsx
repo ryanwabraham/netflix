@@ -31,7 +31,8 @@ class Main extends React.Component {
             durationIsVisible: false,
             ratingIsVisible: false,
             certificationIsVisible: false,
-            releaseDateIsVisible: false
+            releaseDateIsVisible: false,
+            searchIsVisible: false
         };
     }
 
@@ -237,6 +238,12 @@ class Main extends React.Component {
         }
     }
 
+    handleSearchTrigger = () => {
+        this.setState({
+            searchIsVisible: !this.state.searchIsVisible
+        });
+    }
+
     buildRequest = () => {
         var {type, genres, duration, rating, certification, releaseDate, requestUrl} = this.state;
 
@@ -287,7 +294,8 @@ class Main extends React.Component {
             durationIsVisible,
             ratingIsVisible,
             certificationIsVisible,
-            releaseDateIsVisible
+            releaseDateIsVisible,
+            searchIsVisible
         } = this.state;
 
         let dropdowns = [
@@ -296,7 +304,8 @@ class Main extends React.Component {
             durationIsVisible,
             ratingIsVisible,
             certificationIsVisible,
-            releaseDateIsVisible
+            releaseDateIsVisible,
+            searchIsVisible
         ];
 
         if (initialRequest == true && !filters && searchTerm.length === 0) {
@@ -327,6 +336,7 @@ class Main extends React.Component {
                         onFilter={this.handleFilter}
                         onSearch={this.handleSearch}
                         onDropdown={this.handleDropdowns}
+                        onSearchTrigger={this.handleSearchTrigger}
                         dropdowns={dropdowns}
                         typeIsSetByUser={typeIsSetByUser}
                         type={type}

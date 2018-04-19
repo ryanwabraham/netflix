@@ -1,5 +1,5 @@
 import React from 'react';
-import {DebounceInput} from 'react-debounce-input';
+import DebounceInput from 'react-debounce-input';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -13,6 +13,14 @@ class Filters extends React.Component {
     handleSearch = (e) => {
         var searchTerm = e.target.value;
         this.props.onSearch(searchTerm);
+    }
+    handleSearchTrigger = (e) => {
+        this.props.onSearchTrigger();
+    }
+    componentDidUpdate = () => {
+        if (this.props.dropdowns[6] === true) {
+            document.getElementById('search-input').focus();
+        }
     }
     render() {
         const Range = Slider.Range;
@@ -220,15 +228,18 @@ class Filters extends React.Component {
                     </section>
                 </div>
 
-                <form id="search">
+                <form id="search" onClick={() => this.handleSearchTrigger()}>
+                    <h3 className={this.props.dropdowns[6] ? 'active' : ''} id="search__placeholder">{this.props.dropdowns[6] ? 'Close' : 'Search Titles'}</h3>
                     <DebounceInput
-                        ref="searchInput"
-                        type="search" placeholder="Search Titles, Actors"
-                        autoFocus
+                        id="search-input"
+                        className={this.props.dropdowns[6] ? 'active' : ''}
+                        type="search"
                         minLength={2}
                         debounceTimeout={300}
                         onChange={this.handleSearch}
-                        />
+                        placeholder="Search Titles"
+                        autoFocus
+                    />
                 </form>
             </aside>
         )

@@ -82,7 +82,6 @@ nav {
 }
 
 aside {
-    position: sticky;
     top: -1px;
     display: flex;
     width: 100%;
@@ -147,6 +146,7 @@ aside {
     }
 
     section {
+        position: relative;
         margin: 0px 25px;
 
         &:first-of-type {
@@ -169,6 +169,7 @@ aside {
             flex-direction: column;
             animation-duration: 0.4s;
             animation-name: fadeInUp;
+            z-index: 1;
         }
 
         &.slider-wrapper {
@@ -309,35 +310,54 @@ aside {
     }
 
     #search {
-        position: relative;
-        height: 100%;
+        cursor: pointer;
+        min-width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 
-    #search:before {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        width: 30px;
-        height: 30px;
-        background-size: 30px 30px;
-        content: '';
-        margin-top: 3px;
-        background-image: url('../img/search.svg');
+    #search__placeholder {
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: -3px;
+            width: 30px;
+            height: 30px;
+            background-size: 30px 30px;
+            background-image: url(/img/search.svg);
+        }
+
+        &:after {
+            display: none;
+        }
     }
 
     input[type="search"] {
-        width: 100%;
-        height: 100%;
-        background-color: $black;
-        font-size: $font-size-m;
-        font-weight: bold;
-        color: $text;
-        -webkit-appearance: none;
-        padding: 10px 0px 10px 55px;
-        border: none;
+        display: none;
 
-        &:focus {
+        &.active {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 350px;
+            z-index: 2;
+            padding: 0px;
+            display: flex;
+            -webkit-appearance: none;
+            border: none;
+            text-align: center;
+            background-color: $black;
+            color: $text;
+            font-size: 5rem;
             outline: none;
+            animation-duration: .4s;
+            animation-name: fadeInUp;
         }
     }
 }

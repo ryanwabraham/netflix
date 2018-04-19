@@ -9,12 +9,12 @@
   "author": "Ryan Abraham",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.4",
+    "express": "^4.16.3",
     "npm": "^5.8.0",
     "rc-slider": "^8.6.1",
-    "react": "^16.2.0",
+    "react": "^16.3.2",
     "react-debounce-input": "^3.2.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -29,6 +29,6 @@
     "sass-loader": "^3.1.2",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.13"
+    "webpack": "^1.15.0"
   }
 }
