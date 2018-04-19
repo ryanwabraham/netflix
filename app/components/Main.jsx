@@ -25,6 +25,7 @@ class Main extends React.Component {
             releaseDate: '',
             requestUrl: DEFAULT_REQUEST,
             data: '',
+            typeIsSetByUser: false,
             typeIsVisible: false,
             genreIsVisible: false,
             durationIsVisible: false,
@@ -131,7 +132,8 @@ class Main extends React.Component {
             case 'type': {
                 let type = e.target.value;
                 this.setState({
-                    type: type
+                    type: type,
+                    typeIsSetByUser: true
                 }, () => {
                     this.buildRequest();
                 });
@@ -156,7 +158,11 @@ class Main extends React.Component {
                 let duration = e;
 
                 if (duration.length) {
-                    duration = '&with_runtime.gte=' + duration[0] + '&with_runtime.lte=' + duration[1];
+                    if (duration[0] === 0 && duration[1] === 240) {
+                        duration = '';
+                    } else {
+                        duration = '&with_runtime.gte=' + duration[0] + '&with_runtime.lte=' + duration[1];
+                    }
                 }
 
                 this.setState({
@@ -170,7 +176,11 @@ class Main extends React.Component {
                 let rating = e;
 
                 if (rating.length) {
-                    rating = '&vote_average.gte=' + rating[0] + '&vote_average.lte=' + rating[1];
+                    if (rating[0] === 0 && rating[1] === 10) {
+                        rating = '';
+                    } else {
+                        rating = '&vote_average.gte=' + rating[0] + '&vote_average.lte=' + rating[1];
+                    }
                 }
 
                 this.setState({
@@ -198,7 +208,9 @@ class Main extends React.Component {
                 let releaseDate = e;
 
                 if (releaseDate.length) {
-                    if (type == 'movie') {
+                    if (releaseDate[0] === 1900 && releaseDate[1] === 2020) {
+                        releaseDate = '';
+                    } else if (type == 'movie') {
                         releaseDate = '&primary_release_date.gte=' + releaseDate[0] + '&primary_release_date.lte=' + releaseDate[1];
                     } else {
                         releaseDate = '&first_air_date.gte=' + releaseDate[0] + '&first_air_date.lte=' + releaseDate[1];
@@ -269,6 +281,7 @@ class Main extends React.Component {
             releaseDate,
             requestUrl,
             data,
+            typeIsSetByUser,
             typeIsVisible,
             genreIsVisible,
             durationIsVisible,
@@ -315,6 +328,7 @@ class Main extends React.Component {
                         onSearch={this.handleSearch}
                         onDropdown={this.handleDropdowns}
                         dropdowns={dropdowns}
+                        typeIsSetByUser={typeIsSetByUser}
                         type={type}
                         genres={genres}
                         duration={duration}

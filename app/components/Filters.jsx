@@ -22,7 +22,7 @@ class Filters extends React.Component {
                 <div id="filters">
                     <section>
                         <form onChange={(e) => this.handleFilter(e, 'type')}>
-                            <h3 onClick={() => this.handleDropdown('type')} className={(this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.type.length > 0 ? 'applied' : '')}>Type</h3>
+                            <h3 onClick={() => this.handleDropdown('type')} className={(this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.typeIsSetByUser ? 'applied' : '')}>Type</h3>
                             <div className={this.props.dropdowns[0] ? 'filters__dropdown visible' : 'filters__dropdown'}>
                                 <label htmlFor="type--movie">
                                     <input type="radio" id="type--movie" name="type" value="movie"></input>

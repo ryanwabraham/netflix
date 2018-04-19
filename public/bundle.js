@@ -18382,7 +18382,8 @@
 	                    {
 	                        var _type = e.target.value;
 	                        _this.setState({
-	                            type: _type
+	                            type: _type,
+	                            typeIsSetByUser: true
 	                        }, function () {
 	                            _this.buildRequest();
 	                        });
@@ -18409,7 +18410,11 @@
 	                        var _duration = e;
 
 	                        if (_duration.length) {
-	                            _duration = '&with_runtime.gte=' + _duration[0] + '&with_runtime.lte=' + _duration[1];
+	                            if (_duration[0] === 0 && _duration[1] === 240) {
+	                                _duration = '';
+	                            } else {
+	                                _duration = '&with_runtime.gte=' + _duration[0] + '&with_runtime.lte=' + _duration[1];
+	                            }
 	                        }
 
 	                        _this.setState({
@@ -18424,7 +18429,11 @@
 	                        var _rating = e;
 
 	                        if (_rating.length) {
-	                            _rating = '&vote_average.gte=' + _rating[0] + '&vote_average.lte=' + _rating[1];
+	                            if (_rating[0] === 0 && _rating[1] === 10) {
+	                                _rating = '';
+	                            } else {
+	                                _rating = '&vote_average.gte=' + _rating[0] + '&vote_average.lte=' + _rating[1];
+	                            }
 	                        }
 
 	                        _this.setState({
@@ -18454,7 +18463,9 @@
 	                        var _releaseDate = e;
 
 	                        if (_releaseDate.length) {
-	                            if (type == 'movie') {
+	                            if (_releaseDate[0] === 1900 && _releaseDate[1] === 2020) {
+	                                _releaseDate = '';
+	                            } else if (type == 'movie') {
 	                                _releaseDate = '&primary_release_date.gte=' + _releaseDate[0] + '&primary_release_date.lte=' + _releaseDate[1];
 	                            } else {
 	                                _releaseDate = '&first_air_date.gte=' + _releaseDate[0] + '&first_air_date.lte=' + _releaseDate[1];
@@ -18532,6 +18543,7 @@
 	            releaseDate: '',
 	            requestUrl: DEFAULT_REQUEST,
 	            data: '',
+	            typeIsSetByUser: false,
 	            typeIsVisible: false,
 	            genreIsVisible: false,
 	            durationIsVisible: false,
@@ -18556,6 +18568,7 @@
 	                releaseDate = _state.releaseDate,
 	                requestUrl = _state.requestUrl,
 	                data = _state.data,
+	                typeIsSetByUser = _state.typeIsSetByUser,
 	                typeIsVisible = _state.typeIsVisible,
 	                genreIsVisible = _state.genreIsVisible,
 	                durationIsVisible = _state.durationIsVisible,
@@ -18602,6 +18615,7 @@
 	                        onSearch: this.handleSearch,
 	                        onDropdown: this.handleDropdowns,
 	                        dropdowns: dropdowns,
+	                        typeIsSetByUser: typeIsSetByUser,
 	                        type: type,
 	                        genres: genres,
 	                        duration: duration,
@@ -18910,7 +18924,7 @@
 	                                'h3',
 	                                { onClick: function onClick() {
 	                                        return _this2.handleDropdown('type');
-	                                    }, className: (this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.type.length > 0 ? 'applied' : '') },
+	                                    }, className: (this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.typeIsSetByUser ? 'applied' : '') },
 	                                'Type'
 	                            ),
 	                            _react2.default.createElement(
