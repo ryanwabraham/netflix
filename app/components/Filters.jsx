@@ -22,7 +22,7 @@ class Filters extends React.Component {
                 <div id="filters">
                     <section>
                         <form onChange={(e) => this.handleFilter(e, 'type')}>
-                            <h3 onClick={() => this.handleDropdown('type')} className={this.props.dropdowns[0] ? 'active' : ''}>Type</h3>
+                            <h3 onClick={() => this.handleDropdown('type')} className={(this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.type.length > 0 ? 'applied' : '')}>Type</h3>
                             <div className={this.props.dropdowns[0] ? 'filters__dropdown visible' : 'filters__dropdown'}>
                                 <label htmlFor="type--movie">
                                     <input type="radio" id="type--movie" name="type" value="movie"></input>
@@ -39,7 +39,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form>
-                            <h3 onClick={() => this.handleDropdown('genre')} className={this.props.dropdowns[1] ? 'active' : ''}>Genre</h3>
+                            <h3 onClick={() => this.handleDropdown('genre')} className={(this.props.dropdowns[1] ? 'active' : '') + ' ' + (this.props.genres.length > 0 ? 'applied' : '')}>Genre</h3>
                             <div className={this.props.dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper'}>
                                 <label htmlFor="genre--action">
                                     <input type="checkbox" id="genre--action" name="genre" value="28" onChange={(e) => this.handleFilter(e, 'genre')}></input>
@@ -136,7 +136,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form>
-                            <h3 onClick={() => this.handleDropdown('duration')} className={this.props.dropdowns[2] ? 'active' : ''}>Duration</h3>
+                            <h3 onClick={() => this.handleDropdown('duration')} className={(this.props.dropdowns[2] ? 'active' : '') + ' ' + (this.props.duration.length > 0 ? 'applied' : '')}>Duration</h3>
                             <div className={this.props.dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                                 <div className={this.props.type === 'tv' ? 'distribution duration tv' : 'distribution duration'}></div>
                                 <Range dots step={30} allowCross={false} defaultValue={[0, 240]} min={0} max={240} onAfterChange={(e) => this.handleFilter(e, 'duration')} />
@@ -153,7 +153,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form>
-                            <h3 onClick={() => this.handleDropdown('rating')} className={this.props.dropdowns[3] ? 'active' : ''}>Rating</h3>
+                            <h3 onClick={() => this.handleDropdown('rating')} className={(this.props.dropdowns[3] ? 'active' : '') + ' ' + (this.props.rating.length > 0 ? 'applied' : '')}>Rating</h3>
                             <div className={this.props.dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                                 <div className={'distribution rating'}></div>
                                 <Range dots step={2} allowCross={false} defaultValue={[0, 10]} min={0} max={10} onAfterChange={(e) => this.handleFilter(e, 'rating')} />
@@ -171,7 +171,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form onChange={(e) => this.handleFilter(e, 'certification')}>
-                            <h3 onClick={() => this.handleDropdown('certification')} className={this.props.dropdowns[4] ? 'active' : ''}>Maturity Rating</h3>
+                            <h3 onClick={() => this.handleDropdown('certification')} className={(this.props.dropdowns[4] ? 'active' : '') + ' ' + (this.props.certification.length > 0 ? 'applied' : '')}>Maturity Rating</h3>
                             <div className={this.props.dropdowns[4] ? 'filters__dropdown visible' : 'filters__dropdown'}>
                                 <label htmlFor="certification--any">
                                     <input type="radio" id="certification--any" name="certification" value=""></input>
@@ -202,7 +202,7 @@ class Filters extends React.Component {
 
                     <section>
                         <form>
-                            <h3 onClick={() => this.handleDropdown('releaseDate')} className={this.props.dropdowns[5] ? 'active' : ''}>Release Date</h3>
+                            <h3 onClick={() => this.handleDropdown('releaseDate')} className={(this.props.dropdowns[5] ? 'active' : '') + ' ' + (this.props.releaseDate.length > 0 ? 'applied' : '')}>Release Date</h3>
                             <div className={this.props.dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                                 <div className={'distribution releaseDate'}></div>
                                 <Range dots step={20} allowCross={false} defaultValue={[1900, 2020]} min={1900} max={2020} onAfterChange={(e) => this.handleFilter(e, 'releaseDate')} />

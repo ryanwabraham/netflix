@@ -258,8 +258,33 @@ class Main extends React.Component {
     }
 
     render() {
-        let {searchTerm, filters, requestUrl, data, type, typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible} = this.state;
-        let dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible];
+        let {
+            searchTerm,
+            filters,
+            type,
+            genres,
+            duration,
+            rating,
+            certification,
+            releaseDate,
+            requestUrl,
+            data,
+            typeIsVisible,
+            genreIsVisible,
+            durationIsVisible,
+            ratingIsVisible,
+            certificationIsVisible,
+            releaseDateIsVisible
+        } = this.state;
+
+        let dropdowns = [
+            typeIsVisible,
+            genreIsVisible,
+            durationIsVisible,
+            ratingIsVisible,
+            certificationIsVisible,
+            releaseDateIsVisible
+        ];
 
         if (initialRequest == true && !filters && searchTerm.length === 0) {
             this.getResults(DEFAULT_REQUEST);
@@ -285,7 +310,18 @@ class Main extends React.Component {
                 <Nav/>
                 <section id="results">
                     <Hero/>
-                    <Filters onFilter={this.handleFilter} onSearch={this.handleSearch} onDropdown={this.handleDropdowns} dropdowns={dropdowns} type={type}/>
+                    <Filters
+                        onFilter={this.handleFilter}
+                        onSearch={this.handleSearch}
+                        onDropdown={this.handleDropdowns}
+                        dropdowns={dropdowns}
+                        type={type}
+                        genres={genres}
+                        duration={duration}
+                        rating={rating}
+                        certification={certification}
+                        releaseDate={releaseDate}
+                    />
                     {displayResults()}
                 </section>
             </main>

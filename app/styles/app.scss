@@ -122,6 +122,22 @@ aside {
                 transition-duration: .4s;
             }
         }
+
+        &.applied {
+            color: $text;
+
+            &:after {
+                opacity: 1;
+                transform-origin: 50% 50%;
+                transform: rotate(0deg);
+                top: 0px;
+                width: 10px;
+                height: 10px;
+                border-radius: 5em;
+                background-color: $red;
+                background-image: none;
+            }
+        }
     }
 
     #filters {
