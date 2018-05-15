@@ -67,7 +67,7 @@ nav {
             width: 30px;
             height: 30px;
             margin-right: 20px;
-            background-image: url('../img/notifications.svg');
+            background-image: url(../img/notifications.svg);
             background-size: 30px 30px;
         }
 
@@ -172,6 +172,11 @@ aside {
             z-index: 1;
         }
 
+        &.type-wrapper {
+            width: 180px;
+            max-height: 59px;
+        }
+
         &.slider-wrapper {
             width: 450px;
             height: 139px;
@@ -272,6 +277,7 @@ aside {
         border-radius: 4px;
         margin: 0px 10px -2px 0px;
         transition-duration: .2s;
+        cursor: pointer;
 
         &:focus {
             outline: none;

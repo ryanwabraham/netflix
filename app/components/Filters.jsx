@@ -1,9 +1,21 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import DebounceInput from 'react-debounce-input';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 class Filters extends React.Component {
+    componentWillMount = () => {
+        document.addEventListener('click', this.handleClick, false);
+    }
+    componentWillUnmount = () => {
+        document.removeEventListener('click', this.handleClick, false);
+    }
+    handleClick = e => {
+        if (!ReactDOM.findDOMNode(this).contains(e.target)) {
+            this.handleDropdown();
+        }
+    }
     handleDropdown = (filter) => {
         this.props.onDropdown(filter);
     }
@@ -31,7 +43,7 @@ class Filters extends React.Component {
                     <section>
                         <form onChange={(e) => this.handleFilter(e, 'type')}>
                             <h3 onClick={() => this.handleDropdown('type')} className={(this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.typeIsSetByUser ? 'applied' : '')}>Type</h3>
-                            <div className={this.props.dropdowns[0] ? 'filters__dropdown visible' : 'filters__dropdown'}>
+                            <div className={this.props.dropdowns[0] ? 'filters__dropdown type-wrapper visible' : 'filters__dropdown type-wrapper'}>
                                 <label htmlFor="type--movie">
                                     <input type="radio" id="type--movie" name="type" value="movie"></input>
                                     Movie

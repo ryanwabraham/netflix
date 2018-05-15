@@ -105,6 +105,17 @@ class Main extends React.Component {
                 });
                 break;
             }
+            default: {
+                this.setState({
+                    typeIsVisible: false,
+                    genreIsVisible: false,
+                    durationIsVisible: false,
+                    ratingIsVisible: false,
+                    certificationIsVisible: false,
+                    releaseDateIsVisible: false
+                });
+                break;
+            }
         }
     }
 
