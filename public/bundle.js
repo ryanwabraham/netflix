@@ -19487,7 +19487,6 @@
 	var ADDITIONAL_CONFIG = '&sort_by=popularity.desc&language=en-US&original_language=en';
 	var DEFAULT_REQUEST = MOVIE_DB_URL + 'discover/movie?' + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
 	var BASE_FILTER_REQUEST = MOVIE_DB_URL + 'discover/';
-	var initialRequest = true;
 
 	var Main = function (_React$Component) {
 	    _inherits(Main, _React$Component);
@@ -19498,92 +19497,77 @@
 	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 	        _this.handleDropdowns = function (filter) {
+	            var _this$setState;
+
 	            switch (filter) {
 	                case 'type':
-	                    {
-	                        _this.setState({
-	                            typeIsVisible: !_this.state.typeIsVisible,
-	                            genreIsVisible: false,
-	                            durationIsVisible: false,
-	                            ratingIsVisible: false,
-	                            certificationIsVisible: false,
-	                            releaseDateIsVisible: false
-	                        });
-	                        break;
-	                    }
+	                    _this.setState({
+	                        typeIsVisible: !_this.state.typeIsVisible,
+	                        genreIsVisible: false,
+	                        durationIsVisible: false,
+	                        ratingIsVisible: false,
+	                        certificationIsVisible: false,
+	                        releaseDateIsVisible: false
+	                    });
+	                    break;
 	                case 'genre':
-	                    {
-	                        _this.setState({
-	                            typeIsVisible: false,
-	                            genreIsVisible: !_this.state.genreIsVisible,
-	                            durationIsVisible: false,
-	                            ratingIsVisible: false,
-	                            certificationIsVisible: false,
-	                            releaseDateIsVisible: false
-	                        });
-	                        break;
-	                    }
+	                    _this.setState({
+	                        typeIsVisible: false,
+	                        genreIsVisible: !_this.state.genreIsVisible,
+	                        durationIsVisible: false,
+	                        ratingIsVisible: false,
+	                        certificationIsVisible: false,
+	                        releaseDateIsVisible: false
+	                    });
+	                    break;
 	                case 'duration':
-	                    {
-	                        _this.setState({
-	                            typeIsVisible: false,
-	                            genreIsVisible: false,
-	                            durationIsVisible: !_this.state.durationIsVisible,
-	                            ratingIsVisible: false,
-	                            certificationIsVisible: false,
-	                            releaseDateIsVisible: false
-	                        });
-	                        break;
-	                    }
+	                    _this.setState({
+	                        typeIsVisible: false,
+	                        genreIsVisible: false,
+	                        durationIsVisible: !_this.state.durationIsVisible,
+	                        ratingIsVisible: false,
+	                        certificationIsVisible: false,
+	                        releaseDateIsVisible: false
+	                    });
+	                    break;
 	                case 'rating':
-	                    {
-	                        _this.setState({
-	                            typeIsVisible: false,
-	                            genreIsVisible: false,
-	                            durationIsVisible: false,
-	                            ratingIsVisible: !_this.state.ratingIsVisible,
-	                            certificationIsVisible: false,
-	                            releaseDateIsVisible: false
-	                        });
-	                        break;
-	                    }
+	                    _this.setState({
+	                        typeIsVisible: false,
+	                        genreIsVisible: false,
+	                        durationIsVisible: false,
+	                        ratingIsVisible: !_this.state.ratingIsVisible,
+	                        certificationIsVisible: false,
+	                        releaseDateIsVisible: false
+	                    });
+	                    break;
 	                case 'certification':
-	                    {
-	                        var _this$setState;
-
-	                        _this.setState((_this$setState = {
-	                            typeIsVisible: false,
-	                            genreIsVisible: false,
-	                            durationIsVisible: false,
-	                            ratingIsVisible: false,
-	                            certificationIsVisible: false
-	                        }, _defineProperty(_this$setState, 'certificationIsVisible', !_this.state.certificationIsVisible), _defineProperty(_this$setState, 'releaseDateIsVisible', false), _this$setState));
-	                        break;
-	                    }
+	                    _this.setState((_this$setState = {
+	                        typeIsVisible: false,
+	                        genreIsVisible: false,
+	                        durationIsVisible: false,
+	                        ratingIsVisible: false,
+	                        certificationIsVisible: false
+	                    }, _defineProperty(_this$setState, 'certificationIsVisible', !_this.state.certificationIsVisible), _defineProperty(_this$setState, 'releaseDateIsVisible', false), _this$setState));
+	                    break;
 	                case 'releaseDate':
-	                    {
-	                        _this.setState({
-	                            typeIsVisible: false,
-	                            genreIsVisible: false,
-	                            durationIsVisible: false,
-	                            ratingIsVisible: false,
-	                            certificationIsVisible: false,
-	                            releaseDateIsVisible: !_this.state.releaseDateIsVisible
-	                        });
-	                        break;
-	                    }
+	                    _this.setState({
+	                        typeIsVisible: false,
+	                        genreIsVisible: false,
+	                        durationIsVisible: false,
+	                        ratingIsVisible: false,
+	                        certificationIsVisible: false,
+	                        releaseDateIsVisible: !_this.state.releaseDateIsVisible
+	                    });
+	                    break;
 	                default:
-	                    {
-	                        _this.setState({
-	                            typeIsVisible: false,
-	                            genreIsVisible: false,
-	                            durationIsVisible: false,
-	                            ratingIsVisible: false,
-	                            certificationIsVisible: false,
-	                            releaseDateIsVisible: false
-	                        });
-	                        break;
-	                    }
+	                    _this.setState({
+	                        typeIsVisible: false,
+	                        genreIsVisible: false,
+	                        durationIsVisible: false,
+	                        ratingIsVisible: false,
+	                        certificationIsVisible: false,
+	                        releaseDateIsVisible: false
+	                    });
 	            }
 	        };
 
@@ -19776,6 +19760,7 @@
 	            });
 	        };
 
+	        _this.initialRequest = true;
 	        _this.state = {
 	            searchTerm: '',
 	            filters: false,
@@ -19825,9 +19810,9 @@
 
 	            var dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible, searchIsVisible];
 
-	            if (initialRequest == true && !filters && searchTerm.length === 0) {
+	            if (this.initialRequest == true && !filters && searchTerm.length === 0) {
 	                this.getResults(DEFAULT_REQUEST);
-	                initialRequest = false;
+	                this.initialRequest = false;
 	            }
 
 	            if (dropdowns.includes(true)) {

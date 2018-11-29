@@ -3,7 +3,6 @@ const API_KEY = '87dfa1c669eea853da609d4968d294be'; //borrowing this for now
 const ADDITIONAL_CONFIG = '&sort_by=popularity.desc&language=en-US&original_language=en';
 const DEFAULT_REQUEST = `${MOVIE_DB_URL}discover/movie?${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
 const BASE_FILTER_REQUEST = `${MOVIE_DB_URL}discover/`;
-var initialRequest = true;
 
 import React from 'react';
 import Nav from 'Nav';
@@ -14,6 +13,7 @@ import Filters from 'Filters';
 class Main extends React.Component {
     constructor(props) {
         super(props);
+        this.initialRequest = true;
         this.state = {
             searchTerm: '',
             filters: false,
@@ -38,7 +38,7 @@ class Main extends React.Component {
 
     handleDropdowns = (filter) => {
         switch(filter) {
-            case 'type': {
+            case 'type':
                 this.setState({
                     typeIsVisible: !this.state.typeIsVisible,
                     genreIsVisible: false,
@@ -48,8 +48,7 @@ class Main extends React.Component {
                     releaseDateIsVisible: false
                 });
                 break;
-            }
-            case 'genre': {
+            case 'genre':
                 this.setState({
                     typeIsVisible: false,
                     genreIsVisible: !this.state.genreIsVisible,
@@ -59,8 +58,7 @@ class Main extends React.Component {
                     releaseDateIsVisible: false
                 });
                 break;
-            }
-            case 'duration': {
+            case 'duration':
                 this.setState({
                     typeIsVisible: false,
                     genreIsVisible: false,
@@ -70,8 +68,7 @@ class Main extends React.Component {
                     releaseDateIsVisible: false
                 });
                 break;
-            }
-            case 'rating': {
+            case 'rating':
                 this.setState({
                     typeIsVisible: false,
                     genreIsVisible: false,
@@ -81,8 +78,7 @@ class Main extends React.Component {
                     releaseDateIsVisible: false
                 });
                 break;
-            }
-            case 'certification': {
+            case 'certification':
                 this.setState({
                     typeIsVisible: false,
                     genreIsVisible: false,
@@ -93,8 +89,7 @@ class Main extends React.Component {
                     releaseDateIsVisible: false
                 });
                 break;
-            }
-            case 'releaseDate': {
+            case 'releaseDate':
                 this.setState({
                     typeIsVisible: false,
                     genreIsVisible: false,
@@ -104,8 +99,7 @@ class Main extends React.Component {
                     releaseDateIsVisible: !this.state.releaseDateIsVisible
                 });
                 break;
-            }
-            default: {
+            default:
                 this.setState({
                     typeIsVisible: false,
                     genreIsVisible: false,
@@ -114,8 +108,6 @@ class Main extends React.Component {
                     certificationIsVisible: false,
                     releaseDateIsVisible: false
                 });
-                break;
-            }
         }
     }
 
@@ -319,9 +311,9 @@ class Main extends React.Component {
             searchIsVisible
         ];
 
-        if (initialRequest == true && !filters && searchTerm.length === 0) {
+        if (this.initialRequest == true && !filters && searchTerm.length === 0) {
             this.getResults(DEFAULT_REQUEST);
-            initialRequest = false;
+            this.initialRequest = false;
         }
 
         if (dropdowns.includes(true)) {
