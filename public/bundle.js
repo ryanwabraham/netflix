@@ -19552,13 +19552,7 @@
 	          releaseDate = _state.releaseDate;
 	      var genres = this.state.genres;
 
-
-	      if (genres.length > 0) {
-	        genres = '&with_genres=' + genres.join(',');
-	      } else {
-	        genres = '';
-	      }
-
+	      genres = genres.length > 0 ? '&with_genres=' + genres.join(',') : '';
 	      var newRequestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
 	      this.getResults(newRequestUrl);
 	    }
@@ -20074,501 +20068,501 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Filters = function (_React$Component) {
-	    _inherits(Filters, _React$Component);
+	  _inherits(Filters, _React$Component);
 
-	    function Filters() {
-	        var _ref;
+	  function Filters() {
+	    var _ref;
 
-	        var _temp, _this, _ret;
+	    var _temp, _this, _ret;
 
-	        _classCallCheck(this, Filters);
+	    _classCallCheck(this, Filters);
 
-	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	            args[_key] = arguments[_key];
-	        }
-
-	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
-	            document.addEventListener('click', _this.handleClick, false);
-	        }, _this.componentWillUnmount = function () {
-	            document.removeEventListener('click', _this.handleClick, false);
-	        }, _this.handleClick = function (e) {
-	            if (!_reactDom2.default.findDOMNode(_this).contains(e.target)) {
-	                _this.handleDropdown();
-	            }
-	        }, _this.handleDropdown = function (filter) {
-	            _this.props.onDropdown(filter);
-	        }, _this.handleFilter = function (e, filter) {
-	            _this.props.onFilter(e, filter);
-	        }, _this.handleSearch = function (e) {
-	            var searchTerm = e.target.value;
-	            _this.props.onSearch(searchTerm);
-	        }, _this.handleSearchTrigger = function (e) {
-	            _this.props.onSearchTrigger();
-	        }, _this.componentDidUpdate = function () {
-	            if (_this.props.dropdowns[6] === true) {
-	                document.getElementById('search-input').focus();
-	            }
-	        }, _temp), _possibleConstructorReturn(_this, _ret);
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
 	    }
 
-	    _createClass(Filters, [{
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+	      document.addEventListener('click', _this.handleClick, false);
+	    }, _this.componentDidUpdate = function () {
+	      if (_this.props.dropdowns[6] === true) {
+	        document.getElementById('search-input').focus();
+	      }
+	    }, _this.componentWillUnmount = function () {
+	      document.removeEventListener('click', _this.handleClick, false);
+	    }, _this.handleClick = function (e) {
+	      if (!_reactDom2.default.findDOMNode(_this).contains(e.target)) {
+	        _this.handleDropdown();
+	      }
+	    }, _this.handleDropdown = function (filter) {
+	      _this.props.onDropdown(filter);
+	    }, _this.handleFilter = function (e, filter) {
+	      _this.props.onFilter(e, filter);
+	    }, _this.handleSearch = function (e) {
+	      var searchTerm = e.target.value;
+	      _this.props.onSearch(searchTerm);
+	    }, _this.handleSearchTrigger = function (e) {
+	      _this.props.onSearchTrigger();
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
 
-	            var Range = _rcSlider2.default.Range;
+	  _createClass(Filters, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
 
-	            return _react2.default.createElement(
-	                'aside',
-	                null,
+	      var Range = _rcSlider2.default.Range;
+
+	      return _react2.default.createElement(
+	        'aside',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'filters' },
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              { onChange: function onChange(e) {
+	                  return _this2.handleFilter(e, 'type');
+	                } },
+	              _react2.default.createElement(
+	                'h3',
+	                { onClick: function onClick() {
+	                    return _this2.handleDropdown('type');
+	                  }, className: (this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.typeIsSetByUser ? 'applied' : '') },
+	                'Type'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.dropdowns[0] ? 'filters__dropdown type-wrapper visible' : 'filters__dropdown type-wrapper' },
 	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'filters' },
-	                    _react2.default.createElement(
-	                        'section',
-	                        null,
-	                        _react2.default.createElement(
-	                            'form',
-	                            { onChange: function onChange(e) {
-	                                    return _this2.handleFilter(e, 'type');
-	                                } },
-	                            _react2.default.createElement(
-	                                'h3',
-	                                { onClick: function onClick() {
-	                                        return _this2.handleDropdown('type');
-	                                    }, className: (this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.typeIsSetByUser ? 'applied' : '') },
-	                                'Type'
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: this.props.dropdowns[0] ? 'filters__dropdown type-wrapper visible' : 'filters__dropdown type-wrapper' },
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'type--movie' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
-	                                    'Movie'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'type--tv' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
-	                                    'TV'
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'section',
-	                        null,
-	                        _react2.default.createElement(
-	                            'form',
-	                            null,
-	                            _react2.default.createElement(
-	                                'h3',
-	                                { onClick: function onClick() {
-	                                        return _this2.handleDropdown('genre');
-	                                    }, className: (this.props.dropdowns[1] ? 'active' : '') + ' ' + (this.props.genres.length > 0 ? 'applied' : '') },
-	                                'Genre'
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: this.props.dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper' },
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--action' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Action'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--adventure' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Adventure'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--animation' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Animation'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--comedy' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Comedy'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--crime' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Crime'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--documentary' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Documentary'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--drama' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Drama'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--family' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Family'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--fantasy' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Fantasy'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--history' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'History'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--horror' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Horror'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--musical' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Musical'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--mystery' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Mystery'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--romance' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Romance'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--sci-fi' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Science Fiction'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--thriller' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Thriller'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--war' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'War'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'genre--western' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: function onChange(e) {
-	                                            return _this2.handleFilter(e, 'genre');
-	                                        } }),
-	                                    'Western'
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'section',
-	                        null,
-	                        _react2.default.createElement(
-	                            'form',
-	                            null,
-	                            _react2.default.createElement(
-	                                'h3',
-	                                { onClick: function onClick() {
-	                                        return _this2.handleDropdown('duration');
-	                                    }, className: (this.props.dropdowns[2] ? 'active' : '') + ' ' + (this.props.duration.length > 0 ? 'applied' : '') },
-	                                'Duration'
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: this.props.dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
-	                                _react2.default.createElement('div', { className: this.props.type === 'tv' ? 'distribution duration tv' : 'distribution duration' }),
-	                                _react2.default.createElement(Range, { dots: true, step: 30, allowCross: false, defaultValue: [0, 240], min: 0, max: 240, onAfterChange: function onAfterChange(e) {
-	                                        return _this2.handleFilter(e, 'duration');
-	                                    } }),
-	                                _react2.default.createElement(
-	                                    'ul',
-	                                    { className: 'slider-key' },
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '0h'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '1h'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '2h'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '3h'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '4h'
-	                                    )
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'section',
-	                        null,
-	                        _react2.default.createElement(
-	                            'form',
-	                            null,
-	                            _react2.default.createElement(
-	                                'h3',
-	                                { onClick: function onClick() {
-	                                        return _this2.handleDropdown('rating');
-	                                    }, className: (this.props.dropdowns[3] ? 'active' : '') + ' ' + (this.props.rating.length > 0 ? 'applied' : '') },
-	                                'Rating'
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: this.props.dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
-	                                _react2.default.createElement('div', { className: 'distribution rating' }),
-	                                _react2.default.createElement(Range, { dots: true, step: 2, allowCross: false, defaultValue: [0, 10], min: 0, max: 10, onAfterChange: function onAfterChange(e) {
-	                                        return _this2.handleFilter(e, 'rating');
-	                                    } }),
-	                                _react2.default.createElement(
-	                                    'ul',
-	                                    { className: 'slider-key' },
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '0/10'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '2/10'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '4/10'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '6/10'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '8/10'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '10/10'
-	                                    )
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'section',
-	                        null,
-	                        _react2.default.createElement(
-	                            'form',
-	                            { onChange: function onChange(e) {
-	                                    return _this2.handleFilter(e, 'certification');
-	                                } },
-	                            _react2.default.createElement(
-	                                'h3',
-	                                { onClick: function onClick() {
-	                                        return _this2.handleDropdown('certification');
-	                                    }, className: (this.props.dropdowns[4] ? 'active' : '') + ' ' + (this.props.certification.length > 0 ? 'applied' : '') },
-	                                'Maturity Rating'
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: this.props.dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper' },
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'certification--any' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
-	                                    'Any'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'certification--g' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
-	                                    'G'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'certification--pg' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
-	                                    'PG'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'certification--pg-13' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
-	                                    'PG-13'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'label',
-	                                    { htmlFor: 'certification--r' },
-	                                    _react2.default.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
-	                                    'R'
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'section',
-	                        null,
-	                        _react2.default.createElement(
-	                            'form',
-	                            null,
-	                            _react2.default.createElement(
-	                                'h3',
-	                                { onClick: function onClick() {
-	                                        return _this2.handleDropdown('releaseDate');
-	                                    }, className: (this.props.dropdowns[5] ? 'active' : '') + ' ' + (this.props.releaseDate.length > 0 ? 'applied' : '') },
-	                                'Release Date'
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: this.props.dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
-	                                _react2.default.createElement('div', { className: 'distribution releaseDate' }),
-	                                _react2.default.createElement(Range, { dots: true, step: 20, allowCross: false, defaultValue: [1900, 2020], min: 1900, max: 2020, onAfterChange: function onAfterChange(e) {
-	                                        return _this2.handleFilter(e, 'releaseDate');
-	                                    } }),
-	                                _react2.default.createElement(
-	                                    'ul',
-	                                    { className: 'slider-key' },
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '1900'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '1920'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '1940'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '1960'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '1980'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        '2000'
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        'li',
-	                                        null,
-	                                        'Present'
-	                                    )
-	                                )
-	                            )
-	                        )
-	                    )
+	                  'label',
+	                  { htmlFor: 'type--movie' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'type--movie', name: 'type', value: 'movie' }),
+	                  'Movie'
 	                ),
 	                _react2.default.createElement(
-	                    'form',
-	                    { id: 'search', onClick: function onClick() {
-	                            return _this2.handleSearchTrigger();
-	                        } },
-	                    _react2.default.createElement(
-	                        'h3',
-	                        { className: this.props.dropdowns[6] ? 'active' : '', id: 'search__placeholder' },
-	                        this.props.dropdowns[6] ? 'Close' : 'Search Titles'
-	                    ),
-	                    _react2.default.createElement(_reactDebounceInput2.default, {
-	                        id: 'search-input',
-	                        className: this.props.dropdowns[6] ? 'active' : '',
-	                        type: 'search',
-	                        minLength: 2,
-	                        debounceTimeout: 300,
-	                        onChange: this.handleSearch,
-	                        placeholder: 'Search Titles',
-	                        autoFocus: true
-	                    })
+	                  'label',
+	                  { htmlFor: 'type--tv' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'type--tv', name: 'type', value: 'tv' }),
+	                  'TV'
 	                )
-	            );
-	        }
-	    }]);
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              null,
+	              _react2.default.createElement(
+	                'h3',
+	                { onClick: function onClick() {
+	                    return _this2.handleDropdown('genre');
+	                  }, className: (this.props.dropdowns[1] ? 'active' : '') + ' ' + (this.props.genres.length > 0 ? 'applied' : '') },
+	                'Genre'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper' },
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--action' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--action', name: 'genre', value: '28', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Action'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--adventure' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--adventure', name: 'genre', value: '12', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Adventure'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--animation' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--animation', name: 'genre', value: '16', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Animation'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--comedy' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--comedy', name: 'genre', value: '35', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Comedy'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--crime' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--crime', name: 'genre', value: '80', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Crime'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--documentary' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--documentary', name: 'genre', value: '99', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Documentary'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--drama' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--drama', name: 'genre', value: '18', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Drama'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--family' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--family', name: 'genre', value: '10751', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Family'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--fantasy' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--fantasy', name: 'genre', value: '14', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Fantasy'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--history' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--history', name: 'genre', value: '36', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'History'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--horror' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--horror', name: 'genre', value: '27', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Horror'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--musical' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--musical', name: 'genre', value: '10402', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Musical'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--mystery' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--mystery', name: 'genre', value: '9648', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Mystery'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--romance' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--romance', name: 'genre', value: '10749', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Romance'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--sci-fi' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--sci-fi', name: 'genre', value: '878', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Science Fiction'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--thriller' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--thriller', name: 'genre', value: '53', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Thriller'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--war' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--war', name: 'genre', value: '10752', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'War'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'genre--western' },
+	                  _react2.default.createElement('input', { type: 'checkbox', id: 'genre--western', name: 'genre', value: '37', onChange: function onChange(e) {
+	                      return _this2.handleFilter(e, 'genre');
+	                    } }),
+	                  'Western'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              null,
+	              _react2.default.createElement(
+	                'h3',
+	                { onClick: function onClick() {
+	                    return _this2.handleDropdown('duration');
+	                  }, className: (this.props.dropdowns[2] ? 'active' : '') + ' ' + (this.props.duration.length > 0 ? 'applied' : '') },
+	                'Duration'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                _react2.default.createElement('div', { className: this.props.type === 'tv' ? 'distribution duration tv' : 'distribution duration' }),
+	                _react2.default.createElement(Range, { dots: true, step: 30, allowCross: false, defaultValue: [0, 240], min: 0, max: 240, onAfterChange: function onAfterChange(e) {
+	                    return _this2.handleFilter(e, 'duration');
+	                  } }),
+	                _react2.default.createElement(
+	                  'ul',
+	                  { className: 'slider-key' },
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '0h'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '1h'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '2h'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '3h'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '4h'
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              null,
+	              _react2.default.createElement(
+	                'h3',
+	                { onClick: function onClick() {
+	                    return _this2.handleDropdown('rating');
+	                  }, className: (this.props.dropdowns[3] ? 'active' : '') + ' ' + (this.props.rating.length > 0 ? 'applied' : '') },
+	                'Rating'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                _react2.default.createElement('div', { className: 'distribution rating' }),
+	                _react2.default.createElement(Range, { dots: true, step: 2, allowCross: false, defaultValue: [0, 10], min: 0, max: 10, onAfterChange: function onAfterChange(e) {
+	                    return _this2.handleFilter(e, 'rating');
+	                  } }),
+	                _react2.default.createElement(
+	                  'ul',
+	                  { className: 'slider-key' },
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '0/10'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '2/10'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '4/10'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '6/10'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '8/10'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '10/10'
+	                  )
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              { onChange: function onChange(e) {
+	                  return _this2.handleFilter(e, 'certification');
+	                } },
+	              _react2.default.createElement(
+	                'h3',
+	                { onClick: function onClick() {
+	                    return _this2.handleDropdown('certification');
+	                  }, className: (this.props.dropdowns[4] ? 'active' : '') + ' ' + (this.props.certification.length > 0 ? 'applied' : '') },
+	                'Maturity Rating'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper' },
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'certification--any' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'certification--any', name: 'certification', value: '' }),
+	                  'Any'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'certification--g' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'certification--g', name: 'certification', value: 'G' }),
+	                  'G'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'certification--pg' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'certification--pg', name: 'certification', value: 'PG' }),
+	                  'PG'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'certification--pg-13' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'certification--pg-13', name: 'certification', value: 'PG-13' }),
+	                  'PG-13'
+	                ),
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'certification--r' },
+	                  _react2.default.createElement('input', { type: 'radio', id: 'certification--r', name: 'certification', value: 'R' }),
+	                  'R'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              null,
+	              _react2.default.createElement(
+	                'h3',
+	                { onClick: function onClick() {
+	                    return _this2.handleDropdown('releaseDate');
+	                  }, className: (this.props.dropdowns[5] ? 'active' : '') + ' ' + (this.props.releaseDate.length > 0 ? 'applied' : '') },
+	                'Release Date'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: this.props.dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                _react2.default.createElement('div', { className: 'distribution releaseDate' }),
+	                _react2.default.createElement(Range, { dots: true, step: 20, allowCross: false, defaultValue: [1900, 2020], min: 1900, max: 2020, onAfterChange: function onAfterChange(e) {
+	                    return _this2.handleFilter(e, 'releaseDate');
+	                  } }),
+	                _react2.default.createElement(
+	                  'ul',
+	                  { className: 'slider-key' },
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '1900'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '1920'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '1940'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '1960'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '1980'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '2000'
+	                  ),
+	                  _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    'Present'
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { id: 'search', onClick: function onClick() {
+	              return _this2.handleSearchTrigger();
+	            } },
+	          _react2.default.createElement(
+	            'h3',
+	            { className: this.props.dropdowns[6] ? 'active' : '', id: 'search__placeholder' },
+	            this.props.dropdowns[6] ? 'Close' : 'Search Titles'
+	          ),
+	          _react2.default.createElement(_reactDebounceInput2.default, {
+	            id: 'search-input',
+	            className: this.props.dropdowns[6] ? 'active' : '',
+	            type: 'search',
+	            minLength: 2,
+	            debounceTimeout: 300,
+	            onChange: this.handleSearch,
+	            placeholder: 'Search Titles',
+	            autoFocus: true
+	          })
+	        )
+	      );
+	    }
+	  }]);
 
-	    return Filters;
+	  return Filters;
 	}(_react2.default.Component);
 
 	;
