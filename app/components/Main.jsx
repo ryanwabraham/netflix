@@ -82,7 +82,7 @@ class Main extends React.Component {
   }
 
   handleDropdowns (filter) {
-    const {
+    let {
       typeIsVisible,
       genreIsVisible,
       durationIsVisible,
@@ -93,75 +93,40 @@ class Main extends React.Component {
 
     switch (filter) {
       case 'type':
-        this.setState({
-          typeIsVisible: !typeIsVisible,
-          genreIsVisible: false,
-          durationIsVisible: false,
-          ratingIsVisible: false,
-          certificationIsVisible: false,
-          releaseDateIsVisible: false
-        });
+        typeIsVisible = !typeIsVisible;
         break;
       case 'genre':
-        this.setState({
-          typeIsVisible: false,
-          genreIsVisible: !genreIsVisible,
-          durationIsVisible: false,
-          ratingIsVisible: false,
-          certificationIsVisible: false,
-          releaseDateIsVisible: false
-        });
+        genreIsVisible = !genreIsVisible;
         break;
       case 'duration':
-        this.setState({
-          typeIsVisible: false,
-          genreIsVisible: false,
-          durationIsVisible: !durationIsVisible,
-          ratingIsVisible: false,
-          certificationIsVisible: false,
-          releaseDateIsVisible: false
-        });
+        durationIsVisible = !durationIsVisible;
         break;
       case 'rating':
-        this.setState({
-          typeIsVisible: false,
-          genreIsVisible: false,
-          durationIsVisible: false,
-          ratingIsVisible: !ratingIsVisible,
-          certificationIsVisible: false,
-          releaseDateIsVisible: false
-        });
+        ratingIsVisible = !ratingIsVisible;
         break;
       case 'certification':
-        this.setState({
-          typeIsVisible: false,
-          genreIsVisible: false,
-          durationIsVisible: false,
-          ratingIsVisible: false,
-          certificationIsVisible: !certificationIsVisible,
-          releaseDateIsVisible: false
-        });
+        certificationIsVisible = !certificationIsVisible;
         break;
       case 'releaseDate':
-        this.setState({
-          typeIsVisible: false,
-          genreIsVisible: false,
-          durationIsVisible: false,
-          ratingIsVisible: false,
-          certificationIsVisible: false,
-          releaseDateIsVisible: !releaseDateIsVisible
-        });
+        releaseDateIsVisible = !releaseDateIsVisible;
         break;
       default:
-        this.setState({
-          typeIsVisible: false,
-          genreIsVisible: false,
-          durationIsVisible: false,
-          ratingIsVisible: false,
-          certificationIsVisible: false,
-          releaseDateIsVisible: false
-        });
+        typeIsVisible = false;
+        genreIsVisible = false;
+        durationIsVisible = false;
+        ratingIsVisible = false;
+        certificationIsVisible = false;
+        releaseDateIsVisible = false;
     }
+
+    this.setState({
+      typeIsVisible: typeIsVisible,
+      genreIsVisible: genreIsVisible,
+      durationIsVisible: durationIsVisible,
+      ratingIsVisible: ratingIsVisible,
+      certificationIsVisible: certificationIsVisible,
+      releaseDateIsVisible: releaseDateIsVisible
+    });
   }
 
   handleFilter (e, filter) {
