@@ -9,6 +9,7 @@
   "author": "Ryan Abraham",
   "license": "MIT",
   "dependencies": {
+    "eslint-config-airbnb": "^17.1.0",
     "express": "^4.16.3",
     "npm": "^5.8.0",
     "rc-slider": "^8.6.1",
