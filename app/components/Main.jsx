@@ -206,7 +206,6 @@ class Main extends React.Component {
                 break;
             case 'releaseDate':
                 let releaseDate = e;
-                console.log(e);
 
                 if (releaseDate.length > 0) {
                     if (releaseDate[0] === 1900 && releaseDate[1] === 2020) {

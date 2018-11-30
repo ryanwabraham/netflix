@@ -1,8 +1,8 @@
 import React from 'react';
 import GenreData from 'genreData';
 
-var ResultItem = ({title, genres, rating, poster}) => {
-    var genreList = '';
+let ResultItem = ({title, genres, rating, poster}) => {
+    let genreList = '';
     genres.forEach(function(genre, genreCount) {
         GenreData.genres.forEach(function(item, index) {
             if (genreCount < 3 && item.id === genre) {

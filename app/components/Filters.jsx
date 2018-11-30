@@ -23,7 +23,7 @@ class Filters extends React.Component {
         this.props.onFilter(e, filter);
     }
     handleSearch = (e) => {
-        var searchTerm = e.target.value;
+        let searchTerm = e.target.value;
         this.props.onSearch(searchTerm);
     }
     handleSearchTrigger = (e) => {

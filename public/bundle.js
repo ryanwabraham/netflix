@@ -19673,7 +19673,6 @@
 	                    break;
 	                case 'releaseDate':
 	                    var _releaseDate = e;
-	                    console.log(e);
 
 	                    if (_releaseDate.length > 0) {
 	                        if (_releaseDate[0] === 1900 && _releaseDate[1] === 2020) {
@@ -19965,15 +19964,11 @@
 	                    if (result.media_type == 'person') {
 	                        console.log('this is a person');
 	                    } else {
-	                        if (!result.name) {
-	                            var title = result.original_title;
-	                        } else {
-	                            var title = result.name;
-	                        }
+	                        var title = !result.name ? result.original_title : result.name,
+	                            key = result.id,
+	                            genres = result.genre_ids,
+	                            rating = result.vote_average;
 
-	                        var key = result.id;
-	                        var genres = result.genre_ids;
-	                        var rating = result.vote_average;
 	                        if (result.poster_path !== null) {
 	                            var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
 	                            return _react2.default.createElement(_ResultItem2.default, { key: key, title: title, genres: genres, rating: rating, poster: poster });
