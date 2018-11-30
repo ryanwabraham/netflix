@@ -36,6 +36,36 @@ class Main extends React.Component {
     };
   }
 
+  getResults (requestUrl) {
+    console.log(`requestUrl: '${requestUrl}`);
+
+    fetch(requestUrl).then(response => response.json()).then((data) => {
+      this.setState({
+        data: data.results
+      });
+    }).catch((err) => {
+      console.log(`There has been an error: ${err}`);
+    });
+  }
+
+  buildRequest () {
+    let { type, genres, duration, rating, certification, releaseDate, requestUrl } = this.state;
+
+    if (genres.length > 0) {
+      genres = `&with_genres=${genres.join(',')}`;
+    } else {
+      genres = '';
+    }
+
+    const newRequestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
+
+    this.setState({
+      requestUrl: newRequestUrl
+    }, () => {
+      this.getResults(newRequestUrl);
+    });
+  }
+
   handleDropdowns (filter) {
     switch (filter) {
       case 'type':
@@ -108,25 +138,6 @@ class Main extends React.Component {
           certificationIsVisible: false,
           releaseDateIsVisible: false
         });
-    }
-  }
-
-  handleSearch (searchTerm) {
-    if (searchTerm.length > 0) {
-      const request = encodeURIComponent(searchTerm);
-      const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
-      this.setState({
-        searchTerm: searchTerm,
-        requestUrl: requestUrl
-      }, () => {
-        this.getResults(requestUrl);
-      });
-    } else {
-      this.setState({
-        searchTerm: searchTerm
-      }, () => {
-        this.buildRequest();
-      });
     }
   }
 
@@ -238,39 +249,28 @@ class Main extends React.Component {
     }
   }
 
+  handleSearch (searchTerm) {
+    if (searchTerm.length > 0) {
+      const request = encodeURIComponent(searchTerm);
+      const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
+      this.setState({
+        searchTerm: searchTerm,
+        requestUrl: requestUrl
+      }, () => {
+        this.getResults(requestUrl);
+      });
+    } else {
+      this.setState({
+        searchTerm: searchTerm
+      }, () => {
+        this.buildRequest();
+      });
+    }
+  }
+
   handleSearchTrigger () {
     this.setState({
       searchIsVisible: !this.state.searchIsVisible
-    });
-  }
-
-  buildRequest () {
-    let { type, genres, duration, rating, certification, releaseDate, requestUrl } = this.state;
-
-    if (genres.length > 0) {
-      genres = `&with_genres=${genres.join(',')}`;
-    } else {
-      genres = '';
-    }
-
-    const newRequestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
-
-    this.setState({
-      requestUrl: newRequestUrl
-    }, () => {
-      this.getResults(newRequestUrl);
-    });
-  }
-
-  getResults (requestUrl) {
-    console.log(`requestUrl: '${requestUrl}`);
-
-    fetch(requestUrl).then(response => response.json()).then((data) => {
-      this.setState({
-        data: data.results
-      });
-    }).catch((err) => {
-      console.log(`There has been an error: ${err}`);
     });
   }
 
@@ -310,7 +310,7 @@ class Main extends React.Component {
 
     let displayResults = () => {
       if (data.length > 0) {
-        return <Results resultData={data} dropdownIsOpen={dropdownIsOpen}/>;
+        return <Results resultData={data} dropdownIsOpen={dropdownIsOpen} />;
       } else {
         return <h3>No Results Found.</h3>;
       }
