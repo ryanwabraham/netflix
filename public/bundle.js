@@ -19599,108 +19599,98 @@
 	                certification = _this$state.certification,
 	                releaseDate = _this$state.releaseDate;
 
+
 	            switch (filter) {
 	                case 'type':
-	                    {
-	                        var _type = e.target.value;
-	                        _this.setState({
-	                            type: _type,
-	                            typeIsSetByUser: true
-	                        }, function () {
-	                            _this.buildRequest();
-	                        });
-	                        break;
-	                    }
+	                    var _type = e.target.value;
+	                    _this.setState({
+	                        type: _type,
+	                        typeIsSetByUser: true
+	                    }, function () {
+	                        _this.buildRequest();
+	                    });
+	                    break;
 	                case 'genre':
-	                    {
-	                        if (e.target.checked) {
-	                            genres.push(e.target.value);
-	                        } else {
-	                            var index = genres.indexOf(e.target.value);
-	                            genres.splice(index, 1);
-	                        }
-
-	                        _this.setState({
-	                            genres: genres
-	                        }, function () {
-	                            _this.buildRequest();
-	                        });
-	                        break;
+	                    if (e.target.checked) {
+	                        genres.push(e.target.value);
+	                    } else {
+	                        var index = genres.indexOf(e.target.value);
+	                        genres.splice(index, 1);
 	                    }
+
+	                    _this.setState({
+	                        genres: genres
+	                    }, function () {
+	                        _this.buildRequest();
+	                    });
+	                    break;
 	                case 'duration':
-	                    {
-	                        var _duration = e;
+	                    var _duration = e;
 
-	                        if (_duration.length) {
-	                            if (_duration[0] === 0 && _duration[1] === 240) {
-	                                _duration = '';
-	                            } else {
-	                                _duration = '&with_runtime.gte=' + _duration[0] + '&with_runtime.lte=' + _duration[1];
-	                            }
+	                    if (_duration.length) {
+	                        if (_duration[0] === 0 && _duration[1] === 240) {
+	                            _duration = '';
+	                        } else {
+	                            _duration = '&with_runtime.gte=' + _duration[0] + '&with_runtime.lte=' + _duration[1];
 	                        }
-
-	                        _this.setState({
-	                            duration: _duration
-	                        }, function () {
-	                            _this.buildRequest();
-	                        });
-	                        break;
 	                    }
+
+	                    _this.setState({
+	                        duration: _duration
+	                    }, function () {
+	                        _this.buildRequest();
+	                    });
+	                    break;
 	                case 'rating':
-	                    {
-	                        var _rating = e;
+	                    var _rating = e;
 
-	                        if (_rating.length) {
-	                            if (_rating[0] === 0 && _rating[1] === 10) {
-	                                _rating = '';
-	                            } else {
-	                                _rating = '&vote_average.gte=' + _rating[0] + '&vote_average.lte=' + _rating[1];
-	                            }
+	                    if (_rating.length) {
+	                        if (_rating[0] === 0 && _rating[1] === 10) {
+	                            _rating = '';
+	                        } else {
+	                            _rating = '&vote_average.gte=' + _rating[0] + '&vote_average.lte=' + _rating[1];
 	                        }
-
-	                        _this.setState({
-	                            rating: _rating
-	                        }, function () {
-	                            _this.buildRequest();
-	                        });
-	                        break;
 	                    }
+
+	                    _this.setState({
+	                        rating: _rating
+	                    }, function () {
+	                        _this.buildRequest();
+	                    });
+	                    break;
 	                case 'certification':
-	                    {
-	                        var _certification = e.target.value;
+	                    var _certification = e.target.value;
 
-	                        if (_certification != '') {
-	                            _certification = '&certification_country=US&certification=' + _certification;
-	                        }
-
-	                        _this.setState({
-	                            certification: _certification
-	                        }, function () {
-	                            _this.buildRequest();
-	                        });
-	                        break;
+	                    if (_certification != '') {
+	                        _certification = '&certification_country=US&certification=' + _certification;
 	                    }
+
+	                    _this.setState({
+	                        certification: _certification
+	                    }, function () {
+	                        _this.buildRequest();
+	                    });
+	                    break;
 	                case 'releaseDate':
-	                    {
-	                        var _releaseDate = e;
+	                    var _releaseDate = e;
+	                    console.log(e);
 
-	                        if (_releaseDate.length) {
-	                            if (_releaseDate[0] === 1900 && _releaseDate[1] === 2020) {
-	                                _releaseDate = '';
-	                            } else if (type == 'movie') {
-	                                _releaseDate = '&primary_release_date.gte=' + _releaseDate[0] + '&primary_release_date.lte=' + _releaseDate[1];
-	                            } else {
-	                                _releaseDate = '&first_air_date.gte=' + _releaseDate[0] + '&first_air_date.lte=' + _releaseDate[1];
-	                            }
+	                    if (_releaseDate.length > 0) {
+	                        if (_releaseDate[0] === 1900 && _releaseDate[1] === 2020) {
+	                            _releaseDate = '';
+	                        } else if (_this.state.type == 'tv') {
+	                            _releaseDate = '&first_air_date.gte=' + _releaseDate[0] + '&first_air_date.lte=' + _releaseDate[1];
+	                        } else {
+	                            _releaseDate = '&primary_release_date.gte=' + _releaseDate[0] + '&primary_release_date.lte=' + _releaseDate[1];
 	                        }
-
-	                        _this.setState({
-	                            releaseDate: _releaseDate
-	                        }, function () {
-	                            _this.buildRequest();
-	                        });
-	                        break;
 	                    }
+
+	                    _this.setState({
+	                        releaseDate: _releaseDate
+	                    }, function () {
+	                        _this.buildRequest();
+	                    });
+	                    break;
 	            }
 
 	            if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
@@ -19810,16 +19800,7 @@
 
 	            var dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible, searchIsVisible];
 
-	            if (this.initialRequest == true && !filters && searchTerm.length === 0) {
-	                this.getResults(DEFAULT_REQUEST);
-	                this.initialRequest = false;
-	            }
-
-	            if (dropdowns.includes(true)) {
-	                var dropdownIsOpen = true;
-	            } else {
-	                var dropdownIsOpen = false;
-	            }
+	            var dropdownIsOpen = dropdowns.includes(true) ? true : false;
 
 	            var displayResults = function displayResults() {
 	                if (data.length > 0) {
@@ -19832,6 +19813,11 @@
 	                    );
 	                }
 	            };
+
+	            if (this.initialRequest == true && !filters && searchTerm.length === 0) {
+	                this.getResults(DEFAULT_REQUEST);
+	                this.initialRequest = false;
+	            }
 
 	            return _react2.default.createElement(
 	                'main',
