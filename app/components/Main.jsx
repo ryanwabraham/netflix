@@ -13,6 +13,13 @@ const BASE_FILTER_REQUEST = `${MOVIE_DB_URL}discover/`;
 class Main extends React.Component {
   constructor (props) {
     super(props);
+    this.getResults = this.getResults.bind(this);
+    this.buildRequest = this.buildRequest.bind(this);
+    this.handleDropdowns = this.handleDropdowns.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleSearchTrigger = this.handleSearchTrigger.bind(this);
     this.initialRequest = true;
     this.state = {
       searchTerm: '',
@@ -49,7 +56,15 @@ class Main extends React.Component {
   }
 
   buildRequest () {
-    let { type, genres, duration, rating, certification, releaseDate, requestUrl } = this.state;
+    const {
+      type,
+      duration,
+      rating,
+      certification,
+      releaseDate
+    } = this.state;
+
+    let { genres } = this.state;
 
     if (genres.length > 0) {
       genres = `&with_genres=${genres.join(',')}`;
@@ -67,10 +82,19 @@ class Main extends React.Component {
   }
 
   handleDropdowns (filter) {
+    const {
+      typeIsVisible,
+      genreIsVisible,
+      durationIsVisible,
+      ratingIsVisible,
+      certificationIsVisible,
+      releaseDateIsVisible
+    } = this.state;
+
     switch (filter) {
       case 'type':
         this.setState({
-          typeIsVisible: !this.state.typeIsVisible,
+          typeIsVisible: !typeIsVisible,
           genreIsVisible: false,
           durationIsVisible: false,
           ratingIsVisible: false,
@@ -81,7 +105,7 @@ class Main extends React.Component {
       case 'genre':
         this.setState({
           typeIsVisible: false,
-          genreIsVisible: !this.state.genreIsVisible,
+          genreIsVisible: !genreIsVisible,
           durationIsVisible: false,
           ratingIsVisible: false,
           certificationIsVisible: false,
@@ -92,7 +116,7 @@ class Main extends React.Component {
         this.setState({
           typeIsVisible: false,
           genreIsVisible: false,
-          durationIsVisible: !this.state.durationIsVisible,
+          durationIsVisible: !durationIsVisible,
           ratingIsVisible: false,
           certificationIsVisible: false,
           releaseDateIsVisible: false
@@ -103,7 +127,7 @@ class Main extends React.Component {
           typeIsVisible: false,
           genreIsVisible: false,
           durationIsVisible: false,
-          ratingIsVisible: !this.state.ratingIsVisible,
+          ratingIsVisible: !ratingIsVisible,
           certificationIsVisible: false,
           releaseDateIsVisible: false
         });
@@ -114,8 +138,7 @@ class Main extends React.Component {
           genreIsVisible: false,
           durationIsVisible: false,
           ratingIsVisible: false,
-          certificationIsVisible: false,
-          certificationIsVisible: !this.state.certificationIsVisible,
+          certificationIsVisible: !certificationIsVisible,
           releaseDateIsVisible: false
         });
         break;
@@ -126,7 +149,7 @@ class Main extends React.Component {
           durationIsVisible: false,
           ratingIsVisible: false,
           certificationIsVisible: false,
-          releaseDateIsVisible: !this.state.releaseDateIsVisible
+          releaseDateIsVisible: !releaseDateIsVisible
         });
         break;
       default:
@@ -142,111 +165,87 @@ class Main extends React.Component {
   }
 
   handleFilter (e, filter) {
-    let { type, genres, duration, rating, certification, releaseDate } = this.state;
+    let {
+      type,
+      typeIsSetByUser,
+      genres,
+      duration,
+      rating,
+      certification,
+      releaseDate
+    } = this.state;
+
+    let filtersSet = true;
+    const filterList = [type, genres, duration, rating, certification, releaseDate];
 
     switch (filter) {
       case 'type':
-        const type = e.target.value;
-        this.setState({
-          type: type,
-          typeIsSetByUser: true
-        }, () => {
-          this.buildRequest();
-        });
+        type = e.target.value;
+        typeIsSetByUser = true;
         break;
       case 'genre':
         if (e.target.checked) {
           genres.push(e.target.value);
         } else {
-          let index = genres.indexOf(e.target.value);
-          genres.splice(index, 1);
+          genres.splice(genres.indexOf(e.target.value), 1);
         }
-
-        this.setState({
-          genres: genres
-        }, () => {
-          this.buildRequest();
-        });
         break;
       case 'duration':
-        let duration = e;
-
-        if (duration.length) {
-          if (duration[0] === 0 && duration[1] === 240) {
+        if (e.length) {
+          if (e[0] === 0 && e[1] === 240) {
             duration = '';
           } else {
-            duration = '&with_runtime.gte=' + duration[0] + '&with_runtime.lte=' + duration[1];
+            duration = `&with_runtime.gte=${e[0]}&with_runtime.lte=${e[1]}`;
           }
         }
-
-        this.setState({
-          duration: duration
-        }, () => {
-          this.buildRequest();
-        });
         break;
       case 'rating':
-        let rating = e;
-
-        if (rating.length) {
-          if (rating[0] === 0 && rating[1] === 10) {
+        if (e.length) {
+          if (e[0] === 0 && e[1] === 10) {
             rating = '';
           } else {
-            rating = '&vote_average.gte=' + rating[0] + '&vote_average.lte=' + rating[1];
+            rating = `&vote_average.gte=${e[0]}&vote_average.lte=${e[1]}`;
           }
         }
-
-        this.setState({
-          rating: rating
-        }, () => {
-          this.buildRequest();
-        });
         break;
       case 'certification':
-        let certification = e.target.value;
-
-        if (certification != '') {
-          certification = '&certification_country=US&certification=' + certification;
+        if (e.target.value !== '') {
+          certification = `&certification_country=US&certification=${e.target.value}`;
         }
-
-        this.setState({
-          certification: certification
-        }, () => {
-          this.buildRequest();
-        });
         break;
       case 'releaseDate':
-        let releaseDate = e;
-
-        if (releaseDate.length > 0) {
-          if (releaseDate[0] === 1900 && releaseDate[1] === 2020) {
+        if (e.length > 0) {
+          if (e[0] === 1900 && e[1] === 2020) {
             releaseDate = '';
-          } else if (this.state.type == 'tv') {
-            releaseDate = '&first_air_date.gte=' + releaseDate[0] + '&first_air_date.lte=' + releaseDate[1];
+          } else if (type === 'tv') {
+            releaseDate = `&first_air_date.gte=${e[0]}&first_air_date.lte=${e[1]}`;
           } else {
-            releaseDate = '&primary_release_date.gte=' + releaseDate[0] + '&primary_release_date.lte=' + releaseDate[1];
+            releaseDate = `&primary_release_date.gte=${e[0]}&primary_release_date.lte=${e[1]}`;
           }
         }
-
-        this.setState({
-          releaseDate: releaseDate
-        }, () => {
-          this.buildRequest();
-        });
-      break;
+        break;
       default:
         console.log('no changes to filters');
     }
 
-    if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
-      this.setState({
-        filters: true
-      });
-    } else {
-      this.setState({
-        filters: false
-      });
+    for (let i = 0; i < filterList.length; i += 1) {
+      if (!filterList[i].length) {
+        filtersSet = false;
+      }
     }
+
+    this.setState({
+      type: type,
+      typeIsSetByUser: typeIsSetByUser,
+      genres: genres,
+      duration: duration,
+      rating: rating,
+      certification: certification,
+      releaseDate: releaseDate,
+      filters: filtersSet
+    }, () => {
+      this.buildRequest();
+    });
   }
 
   handleSearch (searchTerm) {

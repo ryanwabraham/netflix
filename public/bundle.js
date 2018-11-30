@@ -19474,8 +19474,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -19483,373 +19481,371 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var MOVIE_DB_URL = 'https://api.themoviedb.org/3/';
-	var API_KEY = '87dfa1c669eea853da609d4968d294be'; //borrowing this for now
+	var API_KEY = '87dfa1c669eea853da609d4968d294be'; // borrowing this for now
 	var ADDITIONAL_CONFIG = '&sort_by=popularity.desc&language=en-US&original_language=en';
 	var DEFAULT_REQUEST = MOVIE_DB_URL + 'discover/movie?' + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
 	var BASE_FILTER_REQUEST = MOVIE_DB_URL + 'discover/';
 
 	var Main = function (_React$Component) {
-	    _inherits(Main, _React$Component);
+	  _inherits(Main, _React$Component);
 
-	    function Main(props) {
-	        _classCallCheck(this, Main);
+	  function Main(props) {
+	    _classCallCheck(this, Main);
 
-	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-	        _this.handleDropdowns = function (filter) {
-	            var _this$setState;
+	    _this.getResults = _this.getResults.bind(_this);
+	    _this.buildRequest = _this.buildRequest.bind(_this);
+	    _this.handleDropdowns = _this.handleDropdowns.bind(_this);
+	    _this.handleFilter = _this.handleFilter.bind(_this);
+	    _this.handleFilter = _this.handleFilter.bind(_this);
+	    _this.handleSearch = _this.handleSearch.bind(_this);
+	    _this.handleSearchTrigger = _this.handleSearchTrigger.bind(_this);
+	    _this.initialRequest = true;
+	    _this.state = {
+	      searchTerm: '',
+	      filters: false,
+	      type: 'movie',
+	      genres: [],
+	      duration: [],
+	      rating: '',
+	      certification: '',
+	      releaseDate: '',
+	      requestUrl: DEFAULT_REQUEST,
+	      data: '',
+	      typeIsSetByUser: false,
+	      typeIsVisible: false,
+	      genreIsVisible: false,
+	      durationIsVisible: false,
+	      ratingIsVisible: false,
+	      certificationIsVisible: false,
+	      releaseDateIsVisible: false,
+	      searchIsVisible: false
+	    };
+	    return _this;
+	  }
 
-	            switch (filter) {
-	                case 'type':
-	                    _this.setState({
-	                        typeIsVisible: !_this.state.typeIsVisible,
-	                        genreIsVisible: false,
-	                        durationIsVisible: false,
-	                        ratingIsVisible: false,
-	                        certificationIsVisible: false,
-	                        releaseDateIsVisible: false
-	                    });
-	                    break;
-	                case 'genre':
-	                    _this.setState({
-	                        typeIsVisible: false,
-	                        genreIsVisible: !_this.state.genreIsVisible,
-	                        durationIsVisible: false,
-	                        ratingIsVisible: false,
-	                        certificationIsVisible: false,
-	                        releaseDateIsVisible: false
-	                    });
-	                    break;
-	                case 'duration':
-	                    _this.setState({
-	                        typeIsVisible: false,
-	                        genreIsVisible: false,
-	                        durationIsVisible: !_this.state.durationIsVisible,
-	                        ratingIsVisible: false,
-	                        certificationIsVisible: false,
-	                        releaseDateIsVisible: false
-	                    });
-	                    break;
-	                case 'rating':
-	                    _this.setState({
-	                        typeIsVisible: false,
-	                        genreIsVisible: false,
-	                        durationIsVisible: false,
-	                        ratingIsVisible: !_this.state.ratingIsVisible,
-	                        certificationIsVisible: false,
-	                        releaseDateIsVisible: false
-	                    });
-	                    break;
-	                case 'certification':
-	                    _this.setState((_this$setState = {
-	                        typeIsVisible: false,
-	                        genreIsVisible: false,
-	                        durationIsVisible: false,
-	                        ratingIsVisible: false,
-	                        certificationIsVisible: false
-	                    }, _defineProperty(_this$setState, 'certificationIsVisible', !_this.state.certificationIsVisible), _defineProperty(_this$setState, 'releaseDateIsVisible', false), _this$setState));
-	                    break;
-	                case 'releaseDate':
-	                    _this.setState({
-	                        typeIsVisible: false,
-	                        genreIsVisible: false,
-	                        durationIsVisible: false,
-	                        ratingIsVisible: false,
-	                        certificationIsVisible: false,
-	                        releaseDateIsVisible: !_this.state.releaseDateIsVisible
-	                    });
-	                    break;
-	                default:
-	                    _this.setState({
-	                        typeIsVisible: false,
-	                        genreIsVisible: false,
-	                        durationIsVisible: false,
-	                        ratingIsVisible: false,
-	                        certificationIsVisible: false,
-	                        releaseDateIsVisible: false
-	                    });
-	            }
-	        };
+	  _createClass(Main, [{
+	    key: 'getResults',
+	    value: function getResults(requestUrl) {
+	      var _this2 = this;
 
-	        _this.handleSearch = function (searchTerm) {
-	            if (searchTerm.length > 0) {
-	                var request = encodeURIComponent(searchTerm);
-	                var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
-	                _this.setState({
-	                    searchTerm: searchTerm,
-	                    requestUrl: requestUrl
-	                }, function () {
-	                    _this.getResults(requestUrl);
-	                });
-	            } else {
-	                _this.setState({
-	                    searchTerm: searchTerm
-	                }, function () {
-	                    _this.buildRequest();
-	                });
-	            }
-	        };
+	      console.log('requestUrl: \'' + requestUrl);
 
-	        _this.handleFilter = function (e, filter) {
-	            var _this$state = _this.state,
-	                type = _this$state.type,
-	                genres = _this$state.genres,
-	                duration = _this$state.duration,
-	                rating = _this$state.rating,
-	                certification = _this$state.certification,
-	                releaseDate = _this$state.releaseDate;
+	      fetch(requestUrl).then(function (response) {
+	        return response.json();
+	      }).then(function (data) {
+	        _this2.setState({
+	          data: data.results
+	        });
+	      }).catch(function (err) {
+	        console.log('There has been an error: ' + err);
+	      });
+	    }
+	  }, {
+	    key: 'buildRequest',
+	    value: function buildRequest() {
+	      var _this3 = this;
+
+	      var _state = this.state,
+	          type = _state.type,
+	          duration = _state.duration,
+	          rating = _state.rating,
+	          certification = _state.certification,
+	          releaseDate = _state.releaseDate;
+	      var genres = this.state.genres;
 
 
-	            switch (filter) {
-	                case 'type':
-	                    var _type = e.target.value;
-	                    _this.setState({
-	                        type: _type,
-	                        typeIsSetByUser: true
-	                    }, function () {
-	                        _this.buildRequest();
-	                    });
-	                    break;
-	                case 'genre':
-	                    if (e.target.checked) {
-	                        genres.push(e.target.value);
-	                    } else {
-	                        var index = genres.indexOf(e.target.value);
-	                        genres.splice(index, 1);
-	                    }
+	      if (genres.length > 0) {
+	        genres = '&with_genres=' + genres.join(',');
+	      } else {
+	        genres = '';
+	      }
 
-	                    _this.setState({
-	                        genres: genres
-	                    }, function () {
-	                        _this.buildRequest();
-	                    });
-	                    break;
-	                case 'duration':
-	                    var _duration = e;
+	      var newRequestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
 
-	                    if (_duration.length) {
-	                        if (_duration[0] === 0 && _duration[1] === 240) {
-	                            _duration = '';
-	                        } else {
-	                            _duration = '&with_runtime.gte=' + _duration[0] + '&with_runtime.lte=' + _duration[1];
-	                        }
-	                    }
-
-	                    _this.setState({
-	                        duration: _duration
-	                    }, function () {
-	                        _this.buildRequest();
-	                    });
-	                    break;
-	                case 'rating':
-	                    var _rating = e;
-
-	                    if (_rating.length) {
-	                        if (_rating[0] === 0 && _rating[1] === 10) {
-	                            _rating = '';
-	                        } else {
-	                            _rating = '&vote_average.gte=' + _rating[0] + '&vote_average.lte=' + _rating[1];
-	                        }
-	                    }
-
-	                    _this.setState({
-	                        rating: _rating
-	                    }, function () {
-	                        _this.buildRequest();
-	                    });
-	                    break;
-	                case 'certification':
-	                    var _certification = e.target.value;
-
-	                    if (_certification != '') {
-	                        _certification = '&certification_country=US&certification=' + _certification;
-	                    }
-
-	                    _this.setState({
-	                        certification: _certification
-	                    }, function () {
-	                        _this.buildRequest();
-	                    });
-	                    break;
-	                case 'releaseDate':
-	                    var _releaseDate = e;
-
-	                    if (_releaseDate.length > 0) {
-	                        if (_releaseDate[0] === 1900 && _releaseDate[1] === 2020) {
-	                            _releaseDate = '';
-	                        } else if (_this.state.type == 'tv') {
-	                            _releaseDate = '&first_air_date.gte=' + _releaseDate[0] + '&first_air_date.lte=' + _releaseDate[1];
-	                        } else {
-	                            _releaseDate = '&primary_release_date.gte=' + _releaseDate[0] + '&primary_release_date.lte=' + _releaseDate[1];
-	                        }
-	                    }
-
-	                    _this.setState({
-	                        releaseDate: _releaseDate
-	                    }, function () {
-	                        _this.buildRequest();
-	                    });
-	                    break;
-	            }
-
-	            if (type.length > 0 || genres.length > 0 || duration.length > 0 || rating.length > 0 || certification.length > 0 || releaseDate.length > 0) {
-	                _this.setState({
-	                    filters: true
-	                });
-	            } else {
-	                _this.setState({
-	                    filters: false
-	                });
-	            }
-	        };
-
-	        _this.handleSearchTrigger = function () {
-	            _this.setState({
-	                searchIsVisible: !_this.state.searchIsVisible
-	            });
-	        };
-
-	        _this.buildRequest = function () {
-	            var _this$state2 = _this.state,
-	                type = _this$state2.type,
-	                genres = _this$state2.genres,
-	                duration = _this$state2.duration,
-	                rating = _this$state2.rating,
-	                certification = _this$state2.certification,
-	                releaseDate = _this$state2.releaseDate,
-	                requestUrl = _this$state2.requestUrl;
+	      this.setState({
+	        requestUrl: newRequestUrl
+	      }, function () {
+	        _this3.getResults(newRequestUrl);
+	      });
+	    }
+	  }, {
+	    key: 'handleDropdowns',
+	    value: function handleDropdowns(filter) {
+	      var _state2 = this.state,
+	          typeIsVisible = _state2.typeIsVisible,
+	          genreIsVisible = _state2.genreIsVisible,
+	          durationIsVisible = _state2.durationIsVisible,
+	          ratingIsVisible = _state2.ratingIsVisible,
+	          certificationIsVisible = _state2.certificationIsVisible,
+	          releaseDateIsVisible = _state2.releaseDateIsVisible;
 
 
-	            if (genres.length > 0) {
-	                genres = '&with_genres=' + genres.join(',');
-	            } else {
-	                genres = '';
-	            }
-
-	            var newRequestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
-
-	            _this.setState({
-	                requestUrl: newRequestUrl
-	            }, function () {
-	                _this.getResults(newRequestUrl);
-	            });
-	        };
-
-	        _this.getResults = function (requestUrl) {
-	            console.log('requestUrl: ' + requestUrl);
-
-	            fetch(requestUrl).then(function (response) {
-	                return response.json();
-	            }).then(function (data) {
-	                _this.setState({
-	                    data: data.results
-	                });
-	            }).catch(function (err) {
-	                console.log("There has been an error:" + err);
-	            });
-	        };
-
-	        _this.initialRequest = true;
-	        _this.state = {
-	            searchTerm: '',
-	            filters: false,
-	            type: 'movie',
-	            genres: [],
-	            duration: [],
-	            rating: '',
-	            certification: '',
-	            releaseDate: '',
-	            requestUrl: DEFAULT_REQUEST,
-	            data: '',
-	            typeIsSetByUser: false,
+	      switch (filter) {
+	        case 'type':
+	          this.setState({
+	            typeIsVisible: !typeIsVisible,
+	            genreIsVisible: false,
+	            durationIsVisible: false,
+	            ratingIsVisible: false,
+	            certificationIsVisible: false,
+	            releaseDateIsVisible: false
+	          });
+	          break;
+	        case 'genre':
+	          this.setState({
+	            typeIsVisible: false,
+	            genreIsVisible: !genreIsVisible,
+	            durationIsVisible: false,
+	            ratingIsVisible: false,
+	            certificationIsVisible: false,
+	            releaseDateIsVisible: false
+	          });
+	          break;
+	        case 'duration':
+	          this.setState({
+	            typeIsVisible: false,
+	            genreIsVisible: false,
+	            durationIsVisible: !durationIsVisible,
+	            ratingIsVisible: false,
+	            certificationIsVisible: false,
+	            releaseDateIsVisible: false
+	          });
+	          break;
+	        case 'rating':
+	          this.setState({
+	            typeIsVisible: false,
+	            genreIsVisible: false,
+	            durationIsVisible: false,
+	            ratingIsVisible: !ratingIsVisible,
+	            certificationIsVisible: false,
+	            releaseDateIsVisible: false
+	          });
+	          break;
+	        case 'certification':
+	          this.setState({
+	            typeIsVisible: false,
+	            genreIsVisible: false,
+	            durationIsVisible: false,
+	            ratingIsVisible: false,
+	            certificationIsVisible: !certificationIsVisible,
+	            releaseDateIsVisible: false
+	          });
+	          break;
+	        case 'releaseDate':
+	          this.setState({
 	            typeIsVisible: false,
 	            genreIsVisible: false,
 	            durationIsVisible: false,
 	            ratingIsVisible: false,
 	            certificationIsVisible: false,
-	            releaseDateIsVisible: false,
-	            searchIsVisible: false
-	        };
-	        return _this;
+	            releaseDateIsVisible: !releaseDateIsVisible
+	          });
+	          break;
+	        default:
+	          this.setState({
+	            typeIsVisible: false,
+	            genreIsVisible: false,
+	            durationIsVisible: false,
+	            ratingIsVisible: false,
+	            certificationIsVisible: false,
+	            releaseDateIsVisible: false
+	          });
+	      }
 	    }
+	  }, {
+	    key: 'handleFilter',
+	    value: function handleFilter(e, filter) {
+	      var _this4 = this;
 
-	    _createClass(Main, [{
-	        key: 'render',
-	        value: function render() {
-	            var _state = this.state,
-	                searchTerm = _state.searchTerm,
-	                filters = _state.filters,
-	                type = _state.type,
-	                genres = _state.genres,
-	                duration = _state.duration,
-	                rating = _state.rating,
-	                certification = _state.certification,
-	                releaseDate = _state.releaseDate,
-	                requestUrl = _state.requestUrl,
-	                data = _state.data,
-	                typeIsSetByUser = _state.typeIsSetByUser,
-	                typeIsVisible = _state.typeIsVisible,
-	                genreIsVisible = _state.genreIsVisible,
-	                durationIsVisible = _state.durationIsVisible,
-	                ratingIsVisible = _state.ratingIsVisible,
-	                certificationIsVisible = _state.certificationIsVisible,
-	                releaseDateIsVisible = _state.releaseDateIsVisible,
-	                searchIsVisible = _state.searchIsVisible;
+	      var _state3 = this.state,
+	          type = _state3.type,
+	          typeIsSetByUser = _state3.typeIsSetByUser,
+	          genres = _state3.genres,
+	          duration = _state3.duration,
+	          rating = _state3.rating,
+	          certification = _state3.certification,
+	          releaseDate = _state3.releaseDate;
 
 
-	            var dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible, searchIsVisible];
+	      var filtersSet = true;
+	      var filterList = [type, genres, duration, rating, certification, releaseDate];
 
-	            var dropdownIsOpen = dropdowns.includes(true) ? true : false;
-
-	            var displayResults = function displayResults() {
-	                if (data.length > 0) {
-	                    return _react2.default.createElement(_Results2.default, { resultData: data, dropdownIsOpen: dropdownIsOpen });
-	                } else {
-	                    return _react2.default.createElement(
-	                        'h3',
-	                        null,
-	                        'No Results Found.'
-	                    );
-	                }
-	            };
-
-	            if (this.initialRequest == true && !filters && searchTerm.length === 0) {
-	                this.getResults(DEFAULT_REQUEST);
-	                this.initialRequest = false;
+	      switch (filter) {
+	        case 'type':
+	          type = e.target.value;
+	          typeIsSetByUser = true;
+	          break;
+	        case 'genre':
+	          console.log(genres);
+	          if (e.target.checked) {
+	            genres.push(e.target.value);
+	          } else {
+	            genres.splice(genres.indexOf(e.target.value), 1);
+	          }
+	          break;
+	        case 'duration':
+	          if (e.length) {
+	            if (e[0] === 0 && e[1] === 240) {
+	              duration = '';
+	            } else {
+	              duration = '&with_runtime.gte=' + e[0] + '&with_runtime.lte=' + e[1];
 	            }
+	          }
+	          break;
+	        case 'rating':
+	          if (e.length) {
+	            if (e[0] === 0 && e[1] === 10) {
+	              rating = '';
+	            } else {
+	              rating = '&vote_average.gte=' + e[0] + '&vote_average.lte=' + e[1];
+	            }
+	          }
+	          break;
+	        case 'certification':
+	          if (e.target.value !== '') {
+	            certification = '&certification_country=US&certification=' + e.target.value;
+	          }
+	          break;
+	        case 'releaseDate':
+	          if (e.length > 0) {
+	            if (e[0] === 1900 && e[1] === 2020) {
+	              releaseDate = '';
+	            } else if (type === 'tv') {
+	              releaseDate = '&first_air_date.gte=' + e[0] + '&first_air_date.lte=' + e[1];
+	            } else {
+	              releaseDate = '&primary_release_date.gte=' + e[0] + '&primary_release_date.lte=' + e[1];
+	            }
+	          }
+	          break;
+	        default:
+	          console.log('no changes to filters');
+	      }
 
-	            return _react2.default.createElement(
-	                'main',
-	                null,
-	                _react2.default.createElement(_Nav2.default, null),
-	                _react2.default.createElement(
-	                    'section',
-	                    { id: 'results' },
-	                    _react2.default.createElement(_Hero2.default, null),
-	                    _react2.default.createElement(_Filters2.default, {
-	                        onFilter: this.handleFilter,
-	                        onSearch: this.handleSearch,
-	                        onDropdown: this.handleDropdowns,
-	                        onSearchTrigger: this.handleSearchTrigger,
-	                        dropdowns: dropdowns,
-	                        typeIsSetByUser: typeIsSetByUser,
-	                        type: type,
-	                        genres: genres,
-	                        duration: duration,
-	                        rating: rating,
-	                        certification: certification,
-	                        releaseDate: releaseDate
-	                    }),
-	                    displayResults()
-	                )
-	            );
+	      for (var i = 0; i < filterList.length; i += 1) {
+	        if (!filterList[i].length) {
+	          filtersSet = false;
 	        }
-	    }]);
+	      }
 
-	    return Main;
+	      this.setState({
+	        type: type,
+	        typeIsSetByUser: typeIsSetByUser,
+	        genres: genres,
+	        duration: duration,
+	        rating: rating,
+	        certification: certification,
+	        releaseDate: releaseDate,
+	        filters: filtersSet
+	      }, function () {
+	        _this4.buildRequest();
+	      });
+	    }
+	  }, {
+	    key: 'handleSearch',
+	    value: function handleSearch(searchTerm) {
+	      var _this5 = this;
+
+	      if (searchTerm.length > 0) {
+	        var request = encodeURIComponent(searchTerm);
+	        var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
+	        this.setState({
+	          searchTerm: searchTerm,
+	          requestUrl: requestUrl
+	        }, function () {
+	          _this5.getResults(requestUrl);
+	        });
+	      } else {
+	        this.setState({
+	          searchTerm: searchTerm
+	        }, function () {
+	          _this5.buildRequest();
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'handleSearchTrigger',
+	    value: function handleSearchTrigger() {
+	      this.setState({
+	        searchIsVisible: !this.state.searchIsVisible
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _state4 = this.state,
+	          searchTerm = _state4.searchTerm,
+	          filters = _state4.filters,
+	          type = _state4.type,
+	          genres = _state4.genres,
+	          duration = _state4.duration,
+	          rating = _state4.rating,
+	          certification = _state4.certification,
+	          releaseDate = _state4.releaseDate,
+	          requestUrl = _state4.requestUrl,
+	          data = _state4.data,
+	          typeIsSetByUser = _state4.typeIsSetByUser,
+	          typeIsVisible = _state4.typeIsVisible,
+	          genreIsVisible = _state4.genreIsVisible,
+	          durationIsVisible = _state4.durationIsVisible,
+	          ratingIsVisible = _state4.ratingIsVisible,
+	          certificationIsVisible = _state4.certificationIsVisible,
+	          releaseDateIsVisible = _state4.releaseDateIsVisible,
+	          searchIsVisible = _state4.searchIsVisible;
+
+
+	      var dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible, searchIsVisible];
+
+	      var dropdownIsOpen = dropdowns.includes(true) ? true : false;
+
+	      var displayResults = function displayResults() {
+	        if (data.length > 0) {
+	          return _react2.default.createElement(_Results2.default, { resultData: data, dropdownIsOpen: dropdownIsOpen });
+	        } else {
+	          return _react2.default.createElement(
+	            'h3',
+	            null,
+	            'No Results Found.'
+	          );
+	        }
+	      };
+
+	      if (this.initialRequest === true && !filters && searchTerm.length === 0) {
+	        this.getResults(DEFAULT_REQUEST);
+	        this.initialRequest = false;
+	      }
+
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'section',
+	          { id: 'results' },
+	          _react2.default.createElement(_Hero2.default, null),
+	          _react2.default.createElement(_Filters2.default, {
+	            onFilter: this.handleFilter,
+	            onSearch: this.handleSearch,
+	            onDropdown: this.handleDropdowns,
+	            onSearchTrigger: this.handleSearchTrigger,
+	            dropdowns: dropdowns,
+	            typeIsSetByUser: typeIsSetByUser,
+	            type: type,
+	            genres: genres,
+	            duration: duration,
+	            rating: rating,
+	            certification: certification,
+	            releaseDate: releaseDate
+	          }),
+	          displayResults()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Main;
 	}(_react2.default.Component);
-
-	;
 
 	module.exports = Main;
 
