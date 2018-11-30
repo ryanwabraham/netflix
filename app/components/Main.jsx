@@ -30,7 +30,6 @@ class Main extends React.Component {
       rating: '',
       certification: '',
       releaseDate: '',
-      requestUrl: DEFAULT_REQUEST,
       data: '',
       typeIsSetByUser: false,
       typeIsVisible: false,
@@ -63,22 +62,10 @@ class Main extends React.Component {
       certification,
       releaseDate
     } = this.state;
-
     let { genres } = this.state;
-
-    if (genres.length > 0) {
-      genres = `&with_genres=${genres.join(',')}`;
-    } else {
-      genres = '';
-    }
-
+    genres = genres.length > 0 ? `&with_genres=${genres.join(',')}` : '';
     const newRequestUrl = `${BASE_FILTER_REQUEST}${type}?${genres}${duration}${rating}${certification}${releaseDate}${ADDITIONAL_CONFIG}&api_key=${API_KEY}`;
-
-    this.setState({
-      requestUrl: newRequestUrl
-    }, () => {
-      this.getResults(newRequestUrl);
-    });
+    this.getResults(newRequestUrl);
   }
 
   handleDropdowns (filter) {
@@ -94,20 +81,50 @@ class Main extends React.Component {
     switch (filter) {
       case 'type':
         typeIsVisible = !typeIsVisible;
+        genreIsVisible = false;
+        durationIsVisible = false;
+        ratingIsVisible = false;
+        certificationIsVisible = false;
+        releaseDateIsVisible = false;
         break;
       case 'genre':
+        typeIsVisible = false;
         genreIsVisible = !genreIsVisible;
+        durationIsVisible = false;
+        ratingIsVisible = false;
+        certificationIsVisible = false;
+        releaseDateIsVisible = false;
         break;
       case 'duration':
+        typeIsVisible = false;
+        genreIsVisible = false;
         durationIsVisible = !durationIsVisible;
+        ratingIsVisible = false;
+        certificationIsVisible = false;
+        releaseDateIsVisible = false;
         break;
       case 'rating':
+        typeIsVisible = false;
+        genreIsVisible = false;
+        durationIsVisible = false;
         ratingIsVisible = !ratingIsVisible;
+        certificationIsVisible = false;
+        releaseDateIsVisible = false;
         break;
       case 'certification':
+        typeIsVisible = false;
+        genreIsVisible = false;
+        durationIsVisible = false;
+        ratingIsVisible = false;
         certificationIsVisible = !certificationIsVisible;
+        releaseDateIsVisible = false;
         break;
       case 'releaseDate':
+        typeIsVisible = false;
+        genreIsVisible = false;
+        durationIsVisible = false;
+        ratingIsVisible = false;
+        certificationIsVisible = false;
         releaseDateIsVisible = !releaseDateIsVisible;
         break;
       default:
@@ -130,17 +147,16 @@ class Main extends React.Component {
   }
 
   handleFilter (e, filter) {
+    let filtersSet = true;
     let {
       type,
       typeIsSetByUser,
-      genres,
       duration,
       rating,
       certification,
       releaseDate
     } = this.state;
-
-    let filtersSet = true;
+    const { genres } = this.state;
     const filterList = [type, genres, duration, rating, certification, releaseDate];
 
     switch (filter) {
@@ -218,8 +234,7 @@ class Main extends React.Component {
       const request = encodeURIComponent(searchTerm);
       const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
       this.setState({
-        searchTerm: searchTerm,
-        requestUrl: requestUrl
+        searchTerm: searchTerm
       }, () => {
         this.getResults(requestUrl);
       });
@@ -233,13 +248,14 @@ class Main extends React.Component {
   }
 
   handleSearchTrigger () {
+    const { searchIsVisible } = this.state;
     this.setState({
-      searchIsVisible: !this.state.searchIsVisible
+      searchIsVisible: !searchIsVisible
     });
   }
 
   render () {
-    let {
+    const {
       searchTerm,
       filters,
       type,
@@ -248,7 +264,6 @@ class Main extends React.Component {
       rating,
       certification,
       releaseDate,
-      requestUrl,
       data,
       typeIsSetByUser,
       typeIsVisible,
@@ -260,7 +275,7 @@ class Main extends React.Component {
       searchIsVisible
     } = this.state;
 
-    let dropdowns = [
+    const dropdowns = [
       typeIsVisible,
       genreIsVisible,
       durationIsVisible,
@@ -270,15 +285,17 @@ class Main extends React.Component {
       searchIsVisible
     ];
 
-    let dropdownIsOpen = dropdowns.includes(true) ? true : false;
+    const dropdownIsOpen = dropdowns.includes(true);
 
-    let displayResults = () => {
+    const displayResults = () => {
+      let response = '';
       if (data.length > 0) {
-        return <Results resultData={data} dropdownIsOpen={dropdownIsOpen} />;
+        response = <Results resultData={data} dropdownIsOpen={dropdownIsOpen} />;
       } else {
-        return <h3>No Results Found.</h3>;
+        response = '<h3>No Results Found.</h3>';
       }
-    }
+      return response;
+    };
 
     if (this.initialRequest === true && !filters && searchTerm.length === 0) {
       this.getResults(DEFAULT_REQUEST);
