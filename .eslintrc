@@ -1,3 +1,14 @@
 {
-  "extends": ["airbnb-standard"]
+  "extends": ["airbnb-standard"],
+  "parser": "babel-eslint",
+  "rules": {
+    "object-shorthand": [2, "consistent"],
+    "react/destructuring-assignment": [
+      "warn",
+      "always",
+      {
+        "ignoreClassFields": true
+      }
+    ],
+  }
 }

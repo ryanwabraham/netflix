@@ -20084,7 +20084,9 @@
 	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
 	      document.addEventListener('click', _this.handleClick, false);
 	    }, _this.componentDidUpdate = function () {
-	      if (_this.props.dropdowns[6] === true) {
+	      var dropdowns = _this.props.dropdowns;
+
+	      if (dropdowns[6] === true) {
 	        document.getElementById('search-input').focus();
 	      }
 	    }, _this.componentWillUnmount = function () {
@@ -20564,8 +20566,6 @@
 
 	  return Filters;
 	}(_react2.default.Component);
-
-	;
 
 	module.exports = Filters;
 
