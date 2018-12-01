@@ -19494,78 +19494,42 @@
 
 	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-	    _this.getResults = _this.getResults.bind(_this);
-	    _this.buildRequest = _this.buildRequest.bind(_this);
-	    _this.handleDropdowns = _this.handleDropdowns.bind(_this);
-	    _this.handleFilter = _this.handleFilter.bind(_this);
-	    _this.handleFilter = _this.handleFilter.bind(_this);
-	    _this.handleSearch = _this.handleSearch.bind(_this);
-	    _this.handleSearchTrigger = _this.handleSearchTrigger.bind(_this);
-	    _this.initialRequest = true;
-	    _this.state = {
-	      searchTerm: '',
-	      filters: false,
-	      type: 'movie',
-	      genres: [],
-	      duration: [],
-	      rating: '',
-	      certification: '',
-	      releaseDate: '',
-	      data: '',
-	      typeIsSetByUser: false,
-	      typeIsVisible: false,
-	      genreIsVisible: false,
-	      durationIsVisible: false,
-	      ratingIsVisible: false,
-	      certificationIsVisible: false,
-	      releaseDateIsVisible: false,
-	      searchIsVisible: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Main, [{
-	    key: 'getResults',
-	    value: function getResults(requestUrl) {
-	      var _this2 = this;
-
+	    _this.getResults = function (requestUrl) {
 	      console.log('requestUrl: \'' + requestUrl);
 
 	      fetch(requestUrl).then(function (response) {
 	        return response.json();
 	      }).then(function (data) {
-	        _this2.setState({
+	        _this.setState({
 	          data: data.results
 	        });
 	      }).catch(function (err) {
 	        console.log('There has been an error: ' + err);
 	      });
-	    }
-	  }, {
-	    key: 'buildRequest',
-	    value: function buildRequest() {
-	      var _state = this.state,
-	          type = _state.type,
-	          duration = _state.duration,
-	          rating = _state.rating,
-	          certification = _state.certification,
-	          releaseDate = _state.releaseDate;
-	      var genres = this.state.genres;
+	    };
+
+	    _this.buildRequest = function () {
+	      var _this$state = _this.state,
+	          type = _this$state.type,
+	          duration = _this$state.duration,
+	          rating = _this$state.rating,
+	          certification = _this$state.certification,
+	          releaseDate = _this$state.releaseDate;
+	      var genres = _this.state.genres;
 
 	      genres = genres.length > 0 ? '&with_genres=' + genres.join(',') : '';
 	      var newRequestUrl = '' + BASE_FILTER_REQUEST + type + '?' + genres + duration + rating + certification + releaseDate + ADDITIONAL_CONFIG + '&api_key=' + API_KEY;
-	      this.getResults(newRequestUrl);
-	    }
-	  }, {
-	    key: 'handleDropdowns',
-	    value: function handleDropdowns(filter) {
-	      var _state2 = this.state,
-	          typeIsVisible = _state2.typeIsVisible,
-	          genreIsVisible = _state2.genreIsVisible,
-	          durationIsVisible = _state2.durationIsVisible,
-	          ratingIsVisible = _state2.ratingIsVisible,
-	          certificationIsVisible = _state2.certificationIsVisible,
-	          releaseDateIsVisible = _state2.releaseDateIsVisible;
+	      _this.getResults(newRequestUrl);
+	    };
+
+	    _this.handleDropdowns = function (filter) {
+	      var _this$state2 = _this.state,
+	          typeIsVisible = _this$state2.typeIsVisible,
+	          genreIsVisible = _this$state2.genreIsVisible,
+	          durationIsVisible = _this$state2.durationIsVisible,
+	          ratingIsVisible = _this$state2.ratingIsVisible,
+	          certificationIsVisible = _this$state2.certificationIsVisible,
+	          releaseDateIsVisible = _this$state2.releaseDateIsVisible;
 
 
 	      switch (filter) {
@@ -19626,7 +19590,7 @@
 	          releaseDateIsVisible = false;
 	      }
 
-	      this.setState({
+	      _this.setState({
 	        typeIsVisible: typeIsVisible,
 	        genreIsVisible: genreIsVisible,
 	        durationIsVisible: durationIsVisible,
@@ -19634,21 +19598,18 @@
 	        certificationIsVisible: certificationIsVisible,
 	        releaseDateIsVisible: releaseDateIsVisible
 	      });
-	    }
-	  }, {
-	    key: 'handleFilter',
-	    value: function handleFilter(e, filter) {
-	      var _this3 = this;
+	    };
 
+	    _this.handleFilter = function (e, filter) {
 	      var filtersSet = true;
-	      var _state3 = this.state,
-	          type = _state3.type,
-	          typeIsSetByUser = _state3.typeIsSetByUser,
-	          duration = _state3.duration,
-	          rating = _state3.rating,
-	          certification = _state3.certification,
-	          releaseDate = _state3.releaseDate;
-	      var genres = this.state.genres;
+	      var _this$state3 = _this.state,
+	          type = _this$state3.type,
+	          typeIsSetByUser = _this$state3.typeIsSetByUser,
+	          duration = _this$state3.duration,
+	          rating = _this$state3.rating,
+	          certification = _this$state3.certification,
+	          releaseDate = _this$state3.releaseDate;
+	      var genres = _this.state.genres;
 
 	      var filterList = [type, genres, duration, rating, certification, releaseDate];
 
@@ -19708,7 +19669,7 @@
 	        }
 	      }
 
-	      this.setState({
+	      _this.setState({
 	        type: type,
 	        typeIsSetByUser: typeIsSetByUser,
 	        genres: genres,
@@ -19718,60 +19679,80 @@
 	        releaseDate: releaseDate,
 	        filters: filtersSet
 	      }, function () {
-	        _this3.buildRequest();
+	        _this.buildRequest();
 	      });
-	    }
-	  }, {
-	    key: 'handleSearch',
-	    value: function handleSearch(searchTerm) {
-	      var _this4 = this;
+	    };
 
+	    _this.handleSearch = function (searchTerm) {
 	      if (searchTerm.length > 0) {
 	        var request = encodeURIComponent(searchTerm);
 	        var requestUrl = MOVIE_DB_URL + 'search/multi?query=' + request + '&api_key=' + API_KEY + ADDITIONAL_CONFIG;
-	        this.setState({
+	        _this.setState({
 	          searchTerm: searchTerm
 	        }, function () {
-	          _this4.getResults(requestUrl);
+	          _this.getResults(requestUrl);
 	        });
 	      } else {
-	        this.setState({
+	        _this.setState({
 	          searchTerm: searchTerm
 	        }, function () {
-	          _this4.buildRequest();
+	          _this.buildRequest();
 	        });
 	      }
-	    }
-	  }, {
-	    key: 'handleSearchTrigger',
-	    value: function handleSearchTrigger() {
-	      var searchIsVisible = this.state.searchIsVisible;
+	    };
 
-	      this.setState({
+	    _this.handleSearchTrigger = function () {
+	      var searchIsVisible = _this.state.searchIsVisible;
+
+	      _this.setState({
 	        searchIsVisible: !searchIsVisible
 	      });
-	    }
-	  }, {
+	    };
+
+	    _this.initialRequest = true;
+	    _this.state = {
+	      searchTerm: '',
+	      filters: false,
+	      type: 'movie',
+	      genres: [],
+	      duration: [],
+	      rating: '',
+	      certification: '',
+	      releaseDate: '',
+	      data: '',
+	      typeIsSetByUser: false,
+	      typeIsVisible: false,
+	      genreIsVisible: false,
+	      durationIsVisible: false,
+	      ratingIsVisible: false,
+	      certificationIsVisible: false,
+	      releaseDateIsVisible: false,
+	      searchIsVisible: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
-	      var _state4 = this.state,
-	          searchTerm = _state4.searchTerm,
-	          filters = _state4.filters,
-	          type = _state4.type,
-	          genres = _state4.genres,
-	          duration = _state4.duration,
-	          rating = _state4.rating,
-	          certification = _state4.certification,
-	          releaseDate = _state4.releaseDate,
-	          data = _state4.data,
-	          typeIsSetByUser = _state4.typeIsSetByUser,
-	          typeIsVisible = _state4.typeIsVisible,
-	          genreIsVisible = _state4.genreIsVisible,
-	          durationIsVisible = _state4.durationIsVisible,
-	          ratingIsVisible = _state4.ratingIsVisible,
-	          certificationIsVisible = _state4.certificationIsVisible,
-	          releaseDateIsVisible = _state4.releaseDateIsVisible,
-	          searchIsVisible = _state4.searchIsVisible;
+	      var _state = this.state,
+	          searchTerm = _state.searchTerm,
+	          filters = _state.filters,
+	          type = _state.type,
+	          genres = _state.genres,
+	          duration = _state.duration,
+	          rating = _state.rating,
+	          certification = _state.certification,
+	          releaseDate = _state.releaseDate,
+	          data = _state.data,
+	          typeIsSetByUser = _state.typeIsSetByUser,
+	          typeIsVisible = _state.typeIsVisible,
+	          genreIsVisible = _state.genreIsVisible,
+	          durationIsVisible = _state.durationIsVisible,
+	          ratingIsVisible = _state.ratingIsVisible,
+	          certificationIsVisible = _state.certificationIsVisible,
+	          releaseDateIsVisible = _state.releaseDateIsVisible,
+	          searchIsVisible = _state.searchIsVisible;
 
 
 	      var dropdowns = [typeIsVisible, genreIsVisible, durationIsVisible, ratingIsVisible, certificationIsVisible, releaseDateIsVisible, searchIsVisible];
@@ -20084,9 +20065,7 @@
 	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
 	      document.addEventListener('click', _this.handleClick, false);
 	    }, _this.componentDidUpdate = function () {
-	      var dropdowns = _this.props.dropdowns;
-
-	      if (dropdowns[6] === true) {
+	      if (_this.props.dropdowns[6] === true) {
 	        document.getElementById('search-input').focus();
 	      }
 	    }, _this.componentWillUnmount = function () {

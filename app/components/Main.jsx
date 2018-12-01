@@ -13,13 +13,6 @@ const BASE_FILTER_REQUEST = `${MOVIE_DB_URL}discover/`;
 class Main extends React.Component {
   constructor (props) {
     super(props);
-    this.getResults = this.getResults.bind(this);
-    this.buildRequest = this.buildRequest.bind(this);
-    this.handleDropdowns = this.handleDropdowns.bind(this);
-    this.handleFilter = this.handleFilter.bind(this);
-    this.handleFilter = this.handleFilter.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSearchTrigger = this.handleSearchTrigger.bind(this);
     this.initialRequest = true;
     this.state = {
       searchTerm: '',
@@ -42,7 +35,7 @@ class Main extends React.Component {
     };
   }
 
-  getResults (requestUrl) {
+  getResults = (requestUrl) => {
     console.log(`requestUrl: '${requestUrl}`);
 
     fetch(requestUrl).then(response => response.json()).then((data) => {
@@ -54,7 +47,7 @@ class Main extends React.Component {
     });
   }
 
-  buildRequest () {
+  buildRequest = () => {
     const {
       type,
       duration,
@@ -68,7 +61,7 @@ class Main extends React.Component {
     this.getResults(newRequestUrl);
   }
 
-  handleDropdowns (filter) {
+  handleDropdowns = (filter) => {
     let {
       typeIsVisible,
       genreIsVisible,
@@ -146,7 +139,7 @@ class Main extends React.Component {
     });
   }
 
-  handleFilter (e, filter) {
+  handleFilter = (e, filter) => {
     let filtersSet = true;
     let {
       type,
@@ -229,7 +222,7 @@ class Main extends React.Component {
     });
   }
 
-  handleSearch (searchTerm) {
+  handleSearch = (searchTerm) => {
     if (searchTerm.length > 0) {
       const request = encodeURIComponent(searchTerm);
       const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
@@ -247,7 +240,7 @@ class Main extends React.Component {
     }
   }
 
-  handleSearchTrigger () {
+  handleSearchTrigger = () => {
     const { searchIsVisible } = this.state;
     this.setState({
       searchIsVisible: !searchIsVisible
