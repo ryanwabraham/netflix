@@ -19852,22 +19852,22 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function Nav() {
-	    return _react2.default.createElement(
-	        "nav",
-	        null,
-	        _react2.default.createElement(
-	            "div",
-	            { id: "logo" },
-	            "Netflix"
-	        ),
-	        _react2.default.createElement(
-	            "div",
-	            { id: "account" },
-	            _react2.default.createElement("span", { className: "notifications" }),
-	            _react2.default.createElement("span", { className: "avatar" })
-	        )
-	    );
-	};
+	  return _react2.default.createElement(
+	    "nav",
+	    null,
+	    _react2.default.createElement(
+	      "div",
+	      { id: "logo" },
+	      "Netflix"
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { id: "account" },
+	      _react2.default.createElement("span", { className: "notifications" }),
+	      _react2.default.createElement("span", { className: "avatar" })
+	    )
+	  );
+	}
 
 	module.exports = Nav;
 
@@ -19884,26 +19884,26 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function Hero() {
-	    return _react2.default.createElement(
-	        "section",
-	        { id: "hero" },
-	        _react2.default.createElement("img", { className: "hero__img", srcSet: "img/x-files-hero.jpg 1x, img/x-files-hero@2x.jpg 2x" }),
+	  return _react2.default.createElement(
+	    "section",
+	    { id: "hero" },
+	    _react2.default.createElement("img", { className: "hero__img", alt: "The X Files", srcSet: "img/x-files-hero.jpg 1x, img/x-files-hero@2x.jpg 2x" }),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "hero__info" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "hero__info__wrapper" },
+	        _react2.default.createElement("img", { className: "hero__logo", src: "img/x-files-logo.png", alt: "The X Files" }),
 	        _react2.default.createElement(
-	            "div",
-	            { className: "hero__info" },
-	            _react2.default.createElement(
-	                "div",
-	                { className: "hero__info__wrapper" },
-	                _react2.default.createElement("img", { className: "hero__logo", src: "img/x-files-logo.png", alt: "The X Files" }),
-	                _react2.default.createElement(
-	                    "a",
-	                    { href: "#", className: "button" },
-	                    "Play"
-	                )
-	            )
+	          "a",
+	          { href: "#", className: "button" },
+	          "Play"
 	        )
-	    );
-	};
+	      )
+	    )
+	  );
+	}
 
 	module.exports = Hero;
 
