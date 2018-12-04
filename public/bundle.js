@@ -19747,7 +19747,7 @@
 	      filters: false,
 	      type: 'movie',
 	      genres: [],
-	      duration: [],
+	      duration: '',
 	      rating: '',
 	      certification: '',
 	      releaseDate: '',
@@ -20137,12 +20137,7 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var Range = _rcSlider2.default.Range;
 	      var _props = this.props,
-	          onFilter = _props.onFilter,
-	          onSearch = _props.onSearch,
-	          onDropdown = _props.onDropdown,
-	          onSearchTrigger = _props.onSearchTrigger,
 	          dropdowns = _props.dropdowns,
 	          typeIsSetByUser = _props.typeIsSetByUser,
 	          type = _props.type,
@@ -20151,6 +20146,7 @@
 	          rating = _props.rating,
 	          certification = _props.certification,
 	          releaseDate = _props.releaseDate;
+	      var Range = _rcSlider2.default.Range;
 
 
 	      return _react2.default.createElement(
@@ -20372,9 +20368,17 @@
 	                'div',
 	                { className: dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
 	                _react2.default.createElement('div', { className: type === 'tv' ? 'distribution duration tv' : 'distribution duration' }),
-	                _react2.default.createElement(Range, { dots: true, step: 30, allowCross: false, defaultValue: [0, 240], min: 0, max: 240, onAfterChange: function onAfterChange(e) {
+	                _react2.default.createElement(Range, {
+	                  dots: true,
+	                  step: 30,
+	                  allowCross: false,
+	                  defaultValue: [0, 240],
+	                  min: 0,
+	                  max: 240,
+	                  onAfterChange: function onAfterChange(e) {
 	                    return _this2.handleFilter(e, 'duration');
-	                  } }),
+	                  }
+	                }),
 	                _react2.default.createElement(
 	                  'ul',
 	                  { className: 'slider-key' },
@@ -20532,9 +20536,17 @@
 	                'div',
 	                { className: dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
 	                _react2.default.createElement('div', { className: 'distribution releaseDate' }),
-	                _react2.default.createElement(Range, { dots: true, step: 20, allowCross: false, defaultValue: [1900, 2020], min: 1900, max: 2020, onAfterChange: function onAfterChange(e) {
+	                _react2.default.createElement(Range, {
+	                  dots: true,
+	                  step: 20,
+	                  allowCross: false,
+	                  defaultValue: [1900, 2020],
+	                  min: 1900,
+	                  max: 2020,
+	                  onAfterChange: function onAfterChange(e) {
 	                    return _this2.handleFilter(e, 'releaseDate');
-	                  } }),
+	                  }
+	                }),
 	                _react2.default.createElement(
 	                  'ul',
 	                  { className: 'slider-key' },
@@ -20617,7 +20629,7 @@
 	  typeIsSetByUser: _propTypes2.default.bool.isRequired,
 	  type: _propTypes2.default.string.isRequired,
 	  genres: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
-	  duration: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+	  duration: _propTypes2.default.string.isRequired,
 	  rating: _propTypes2.default.string.isRequired,
 	  certification: _propTypes2.default.string.isRequired,
 	  releaseDate: _propTypes2.default.string.isRequired

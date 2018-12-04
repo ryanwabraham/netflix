@@ -19,7 +19,7 @@ class Main extends React.Component {
       filters: false,
       type: 'movie',
       genres: [],
-      duration: [],
+      duration: '',
       rating: '',
       certification: '',
       releaseDate: '',
