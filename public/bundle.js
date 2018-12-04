@@ -20101,7 +20101,9 @@
 	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Filters.__proto__ || Object.getPrototypeOf(Filters)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
 	      document.addEventListener('click', _this.handleClick, false);
 	    }, _this.componentDidUpdate = function () {
-	      if (_this.props.dropdowns[6] === true) {
+	      var dropdowns = _this.props.dropdowns;
+
+	      if (dropdowns[6] === true) {
 	        document.getElementById('search-input').focus();
 	      }
 	    }, _this.componentWillUnmount = function () {
@@ -20111,14 +20113,22 @@
 	        _this.handleDropdown();
 	      }
 	    }, _this.handleDropdown = function (filter) {
-	      _this.props.onDropdown(filter);
+	      var onDropdown = _this.props.onDropdown;
+
+	      onDropdown(filter);
 	    }, _this.handleFilter = function (e, filter) {
-	      _this.props.onFilter(e, filter);
+	      var onFilter = _this.props.onFilter;
+
+	      onFilter(e, filter);
 	    }, _this.handleSearch = function (e) {
+	      var onSearch = _this.props.onSearch;
+
 	      var searchTerm = e.target.value;
-	      _this.props.onSearch(searchTerm);
+	      onSearch(searchTerm);
 	    }, _this.handleSearchTrigger = function (e) {
-	      _this.props.onSearchTrigger();
+	      var onSearchTrigger = _this.props.onSearchTrigger;
+
+	      onSearchTrigger();
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
@@ -20128,6 +20138,20 @@
 	      var _this2 = this;
 
 	      var Range = _rcSlider2.default.Range;
+	      var _props = this.props,
+	          onFilter = _props.onFilter,
+	          onSearch = _props.onSearch,
+	          onDropdown = _props.onDropdown,
+	          onSearchTrigger = _props.onSearchTrigger,
+	          dropdowns = _props.dropdowns,
+	          typeIsSetByUser = _props.typeIsSetByUser,
+	          type = _props.type,
+	          genres = _props.genres,
+	          duration = _props.duration,
+	          rating = _props.rating,
+	          certification = _props.certification,
+	          releaseDate = _props.releaseDate;
+
 
 	      return _react2.default.createElement(
 	        'aside',
@@ -20147,12 +20171,12 @@
 	                'h3',
 	                { onClick: function onClick() {
 	                    return _this2.handleDropdown('type');
-	                  }, className: (this.props.dropdowns[0] ? 'active' : '') + ' ' + (this.props.typeIsSetByUser ? 'applied' : '') },
+	                  }, className: (dropdowns[0] ? 'active' : '') + ' ' + (typeIsSetByUser ? 'applied' : '') },
 	                'Type'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: this.props.dropdowns[0] ? 'filters__dropdown type-wrapper visible' : 'filters__dropdown type-wrapper' },
+	                { className: dropdowns[0] ? 'filters__dropdown type-wrapper visible' : 'filters__dropdown type-wrapper' },
 	                _react2.default.createElement(
 	                  'label',
 	                  { htmlFor: 'type--movie' },
@@ -20178,12 +20202,12 @@
 	                'h3',
 	                { onClick: function onClick() {
 	                    return _this2.handleDropdown('genre');
-	                  }, className: (this.props.dropdowns[1] ? 'active' : '') + ' ' + (this.props.genres.length > 0 ? 'applied' : '') },
+	                  }, className: (dropdowns[1] ? 'active' : '') + ' ' + (genres.length > 0 ? 'applied' : '') },
 	                'Genre'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: this.props.dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper' },
+	                { className: dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper' },
 	                _react2.default.createElement(
 	                  'label',
 	                  { htmlFor: 'genre--action' },
@@ -20341,13 +20365,13 @@
 	                'h3',
 	                { onClick: function onClick() {
 	                    return _this2.handleDropdown('duration');
-	                  }, className: (this.props.dropdowns[2] ? 'active' : '') + ' ' + (this.props.duration.length > 0 ? 'applied' : '') },
+	                  }, className: (dropdowns[2] ? 'active' : '') + ' ' + (duration.length > 0 ? 'applied' : '') },
 	                'Duration'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: this.props.dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
-	                _react2.default.createElement('div', { className: this.props.type === 'tv' ? 'distribution duration tv' : 'distribution duration' }),
+	                { className: dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                _react2.default.createElement('div', { className: type === 'tv' ? 'distribution duration tv' : 'distribution duration' }),
 	                _react2.default.createElement(Range, { dots: true, step: 30, allowCross: false, defaultValue: [0, 240], min: 0, max: 240, onAfterChange: function onAfterChange(e) {
 	                    return _this2.handleFilter(e, 'duration');
 	                  } }),
@@ -20393,12 +20417,12 @@
 	                'h3',
 	                { onClick: function onClick() {
 	                    return _this2.handleDropdown('rating');
-	                  }, className: (this.props.dropdowns[3] ? 'active' : '') + ' ' + (this.props.rating.length > 0 ? 'applied' : '') },
+	                  }, className: (dropdowns[3] ? 'active' : '') + ' ' + (rating.length > 0 ? 'applied' : '') },
 	                'Rating'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: this.props.dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                { className: dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
 	                _react2.default.createElement('div', { className: 'distribution rating' }),
 	                _react2.default.createElement(Range, { dots: true, step: 2, allowCross: false, defaultValue: [0, 10], min: 0, max: 10, onAfterChange: function onAfterChange(e) {
 	                    return _this2.handleFilter(e, 'rating');
@@ -20452,12 +20476,12 @@
 	                'h3',
 	                { onClick: function onClick() {
 	                    return _this2.handleDropdown('certification');
-	                  }, className: (this.props.dropdowns[4] ? 'active' : '') + ' ' + (this.props.certification.length > 0 ? 'applied' : '') },
+	                  }, className: (dropdowns[4] ? 'active' : '') + ' ' + (certification.length > 0 ? 'applied' : '') },
 	                'Maturity Rating'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: this.props.dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper' },
+	                { className: dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper' },
 	                _react2.default.createElement(
 	                  'label',
 	                  { htmlFor: 'certification--any' },
@@ -20501,12 +20525,12 @@
 	                'h3',
 	                { onClick: function onClick() {
 	                    return _this2.handleDropdown('releaseDate');
-	                  }, className: (this.props.dropdowns[5] ? 'active' : '') + ' ' + (this.props.releaseDate.length > 0 ? 'applied' : '') },
+	                  }, className: (dropdowns[5] ? 'active' : '') + ' ' + (releaseDate.length > 0 ? 'applied' : '') },
 	                'Release Date'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: this.props.dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
+	                { className: dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper' },
 	                _react2.default.createElement('div', { className: 'distribution releaseDate' }),
 	                _react2.default.createElement(Range, { dots: true, step: 20, allowCross: false, defaultValue: [1900, 2020], min: 1900, max: 2020, onAfterChange: function onAfterChange(e) {
 	                    return _this2.handleFilter(e, 'releaseDate');
@@ -20561,12 +20585,12 @@
 	            } },
 	          _react2.default.createElement(
 	            'h3',
-	            { className: this.props.dropdowns[6] ? 'active' : '', id: 'search__placeholder' },
-	            this.props.dropdowns[6] ? 'Close' : 'Search Titles'
+	            { className: dropdowns[6] ? 'active' : '', id: 'search__placeholder' },
+	            dropdowns[6] ? 'Close' : 'Search Titles'
 	          ),
 	          _react2.default.createElement(_reactDebounceInput2.default, {
 	            id: 'search-input',
-	            className: this.props.dropdowns[6] ? 'active' : '',
+	            className: dropdowns[6] ? 'active' : '',
 	            type: 'search',
 	            minLength: 2,
 	            debounceTimeout: 300,
@@ -20583,10 +20607,6 @@
 	}(_react2.default.Component);
 
 	module.exports = Filters;
-
-	// Filters.defaultProps = {
-	//   duration: '',
-	// };
 
 	Filters.propTypes = {
 	  onFilter: _propTypes2.default.func.isRequired,
