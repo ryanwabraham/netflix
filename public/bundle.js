@@ -58,10 +58,11 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _appStyles = __webpack_require__(194);
 
-	// App css
-	__webpack_require__(194);
+	var _appStyles2 = _interopRequireDefault(_appStyles);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_reactDom2.default.render(_react2.default.createElement(_Main2.default, null), document.getElementById('app'));
 

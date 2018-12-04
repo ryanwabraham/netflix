@@ -22,17 +22,25 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015'],
           plugins: ['transform-class-properties']
         },
-        test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       },
       {
         test: /\.json$/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader' // compiles Sass to CSS, using Node Sass by default
+        ]
       },
       {
         test: /\.css$/,

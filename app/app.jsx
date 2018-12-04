@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from 'Main';
-
-// App css
-require('style!css!sass!appStyles');
+import appStyles from 'appStyles';
 
 ReactDOM.render(
   <Main />,
