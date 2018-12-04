@@ -19913,8 +19913,6 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -19923,60 +19921,50 @@
 
 	var _ResultItem2 = _interopRequireDefault(_ResultItem);
 
+	var _propTypes = __webpack_require__(31);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var Results = function Results(_ref) {
+	  var resultData = _ref.resultData,
+	      dropdownIsOpen = _ref.dropdownIsOpen;
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  console.log(resultData);
+	  var results = '';
+	  if (resultData) {
+	    results = resultData.map(function (result) {
+	      if (result.media_type === 'person') {
+	        console.log('this is a person');
+	      } else {
+	        var title = !result.name ? result.original_title : result.name;
+	        var key = result.id;
+	        var genres = result.genre_ids;
+	        var rating = result.vote_average;
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Results = function (_React$Component) {
-	    _inherits(Results, _React$Component);
-
-	    function Results() {
-	        _classCallCheck(this, Results);
-
-	        return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
-	    }
-
-	    _createClass(Results, [{
-	        key: 'render',
-	        value: function render() {
-	            var results = '';
-
-	            if (this.props.resultData) {
-	                results = this.props.resultData.map(function (result) {
-	                    if (result.media_type == 'person') {
-	                        console.log('this is a person');
-	                    } else {
-	                        var title = !result.name ? result.original_title : result.name,
-	                            key = result.id,
-	                            genres = result.genre_ids,
-	                            rating = result.vote_average;
-
-	                        if (result.poster_path !== null) {
-	                            var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
-	                            return _react2.default.createElement(_ResultItem2.default, { key: key, title: title, genres: genres, rating: rating, poster: poster });
-	                        }
-	                    }
-	                });
-	            }
-
-	            return _react2.default.createElement(
-	                'ul',
-	                { className: this.props.dropdownIsOpen ? 'items dropdown-open' : 'items' },
-	                results
-	            );
+	        if (result.poster_path !== null) {
+	          var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
+	          return _react2.default.createElement(_ResultItem2.default, { key: key, title: title, genres: genres, rating: rating, poster: poster });
 	        }
-	    }]);
+	      }
+	      return '';
+	    });
+	  }
 
-	    return Results;
-	}(_react2.default.Component);
-
-	;
+	  return _react2.default.createElement(
+	    'ul',
+	    { className: dropdownIsOpen ? 'items dropdown-open' : 'items' },
+	    results
+	  );
+	};
 
 	module.exports = Results;
+
+	Results.propTypes = {
+	  resultData: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
+	  dropdownIsOpen: _propTypes2.default.bool.isRequired
+	};
 
 /***/ }),
 /* 29 */

@@ -1,36 +1,41 @@
 import React from 'react';
 import ResultItem from 'ResultItem';
+import PropTypes from 'prop-types';
 
-class Results extends React.Component {
-    render() {
-        let results = '';
+const Results = ({ resultData, dropdownIsOpen }) => {
+  console.log(resultData);
+  let results = '';
+  if (resultData) {
+    results = resultData.map((result) => {
+      if (result.media_type === 'person') {
+        console.log('this is a person');
+      } else {
+        const title = !result.name ? result.original_title : result.name;
+        const key = result.id;
+        const genres = result.genre_ids;
+        const rating = result.vote_average;
 
-        if (this.props.resultData) {
-            results = this.props.resultData.map(function(result) {
-                if (result.media_type == 'person') {
-                    console.log('this is a person');
-                } else {
-                    let title = !result.name ? result.original_title : result.name,
-                        key = result.id,
-                        genres = result.genre_ids,
-                        rating = result.vote_average;
-
-                    if (result.poster_path !== null) {
-                        var poster = 'http://image.tmdb.org/t/p/w500' + result.poster_path;
-                        return (
-                            <ResultItem key={key} title={title} genres={genres} rating={rating} poster={poster} />
-                        );
-                    }
-                }
-            });
+        if (result.poster_path !== null) {
+          const poster = `http://image.tmdb.org/t/p/w500${result.poster_path}`;
+          return (
+            <ResultItem key={key} title={title} genres={genres} rating={rating} poster={poster} />
+          );
         }
+      }
+      return '';
+    });
+  }
 
-        return (
-            <ul className={this.props.dropdownIsOpen ? 'items dropdown-open' : 'items'}>
-                {results}
-            </ul>
-        );
-    }
+  return (
+    <ul className={dropdownIsOpen ? 'items dropdown-open' : 'items'}>
+      {results}
+    </ul>
+  );
 };
 
 module.exports = Results;
+
+Results.propTypes = {
+  resultData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dropdownIsOpen: PropTypes.bool.isRequired
+};
