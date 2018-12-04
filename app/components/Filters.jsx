@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import DebounceInput from 'react-debounce-input';
 import Slider from 'rc-slider';
+import PropTypes from 'prop-types';
 import 'rc-slider/assets/index.css';
 
 class Filters extends React.Component {
@@ -267,3 +268,18 @@ class Filters extends React.Component {
 }
 
 module.exports = Filters;
+
+Filters.propTypes = {
+  onFilter: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  onDropdown: PropTypes.func.isRequired,
+  onSearchTrigger: PropTypes.func.isRequired,
+  dropdowns: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  typeIsSetByUser: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  duration: PropTypes.arrayOf(PropTypes.string).isRequired,
+  rating: PropTypes.string.isRequired,
+  certification: PropTypes.string.isRequired,
+  releaseDate: PropTypes.string.isRequired
+};
