@@ -1,5 +1,5 @@
 {
-  "name": "Netflix Filtering Demo",
+  "name": "netflix-filtering-demo",
   "version": "1.0.0",
   "description": "Discover movies and series by filtering",
   "main": "index.js",

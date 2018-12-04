@@ -7,7 +7,7 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
-      //components here
+      // components here
       appStyles: 'app/styles/app.scss',
       genreData: 'app/data/genres.json',
       Filters: 'app/components/Filters.jsx',
@@ -43,5 +43,5 @@ module.exports = {
         loader: 'file-loader?name=[name].[ext]&publicPath=/img/&outputPath=public/img/'
       }
     ]
-  },
+  }
 };

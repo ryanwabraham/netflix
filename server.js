@@ -1,10 +1,8 @@
-var express = require('express');
+const express = require('express');
 
-// Create our app
-var app = express();
-
+const app = express();
 app.use(express.static('public'));
 
-app.listen(3000, function () {
+app.listen(3000, () => {
   console.log('Express server is up on port 3000');
 });
