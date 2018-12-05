@@ -299,6 +299,9 @@ class Main extends React.Component {
       <main>
         <Nav />
         <section id="results">
+          <div id="mobile-disclaimer">
+            Sorry, this demo is currently only available for desktop devices.
+          </div>
           <Hero />
           <Filters
             onFilter={this.handleFilter}
