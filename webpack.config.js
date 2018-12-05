@@ -19,7 +19,7 @@ module.exports = {
     },
     extensions: ['*', '.js', '.json', '.jsx']
   },
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
