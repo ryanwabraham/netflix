@@ -36,14 +36,10 @@ class Main extends React.Component {
   }
 
   getResults = (requestUrl) => {
-    console.log(`requestUrl: '${requestUrl}`);
-
     fetch(requestUrl).then(response => response.json()).then((data) => {
       this.setState({
         data: data.results
       });
-    }).catch((err) => {
-      console.log(`There has been an error: ${err}`);
     });
   }
 
@@ -199,7 +195,7 @@ class Main extends React.Component {
         }
         break;
       default:
-        console.log('no changes to filters');
+        break;
     }
 
     for (let i = 0; i < filterList.length; i += 1) {
