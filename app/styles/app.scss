@@ -55,7 +55,7 @@ nav {
         background-repeat: no-repeat;
         background-size: 100% auto;
         background-position: center center;
-        background-image: url(../img/logo.svg);
+        background-image: url('../img/logo.svg');
         text-indent: -9999px;
     }
 
@@ -67,14 +67,14 @@ nav {
             width: 30px;
             height: 30px;
             margin-right: 20px;
-            background-image: url(../img/notifications.svg);
+            background-image: url('../img/notifications.svg');
             background-size: 30px 30px;
         }
 
         .avatar {
             width: 38px;
             height: 38px;
-            background-image: url(../img/audrey-horne.png);
+            background-image: url('../img/audrey-horne.png');
             background-repeat: no-repeat;
             background-size: 100% auto;
         }
@@ -103,7 +103,7 @@ aside {
             right: -17px;
             width: 10px;
             height: 9px;
-            background-image: url(/img/dropdown.png);
+            background-image: url('../img/dropdown.png');
             background-size: 100% auto;
             background-repeat: no-repeat;
             opacity: 0.5;
@@ -334,7 +334,7 @@ aside {
             width: 30px;
             height: 30px;
             background-size: 30px 30px;
-            background-image: url(/img/search.svg);
+            background-image: url('../img/search.svg');
         }
 
         &:after {
