@@ -5,7 +5,7 @@ module.exports = {
     filename: './public/bundle.js'
   },
   resolve: {
-    root: __dirname,
+    modules: [__dirname, 'node_modules'],
     alias: {
       // components here
       appStyles: 'app/styles/app.scss',
@@ -17,22 +17,19 @@ module.exports = {
       Results: 'app/components/Results.jsx',
       ResultItem: 'app/components/ResultItem.jsx'
     },
-    extensions: ['', '.js', '.json', '.jsx']
+    extensions: ['*', '.js', '.json', '.jsx']
   },
+  mode: 'development',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015'],
-          plugins: ['transform-class-properties']
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['babel-plugin-transform-class-properties']
         },
         exclude: /(node_modules|bower_components)/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       },
       {
         test: /\.scss$/,
