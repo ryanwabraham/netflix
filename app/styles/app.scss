@@ -461,16 +461,17 @@ section#results {
             padding: 10px;
             font-size: $font-size-s;
 
+            &:hover > .info {
+                display: block; //display info when hovering over poster
+            }
+
             img {
                 width: 100%;
             }
 
-            img:hover + .info {
-                display: block; //display info when hovering over poster
-            }
-
             .info {
                 display: none;
+                pointer-events: none;
                 position: absolute;
                 bottom: 10px;
                 left: 10px;
