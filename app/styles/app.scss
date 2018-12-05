@@ -436,6 +436,11 @@ section#results {
         border-radius: 5px;
     }
 
+    #no-results {
+        text-align: center;
+        padding: 20px;
+    }
+
     ul.items {
         display: flex;
         flex-wrap: wrap;

@@ -282,17 +282,30 @@ class Main extends React.Component {
 
     const displayResults = () => {
       let response = '';
-      if (data.length > 0) {
-        response = <Results resultData={data} dropdownIsOpen={dropdownIsOpen} />;
+      if (this.initialRequest) {
+        response = '';
+      } else if (!data.length) {
+        response = (
+          <h3 id="no-results">
+            No Results Found.
+          </h3>
+        );
       } else {
-        response = '<h3>No Results Found.</h3>';
+        response = <Results resultData={data} dropdownIsOpen={dropdownIsOpen} />;
       }
       return response;
     };
 
     if (this.initialRequest === true && !filters && searchTerm.length === 0) {
-      this.getResults(DEFAULT_REQUEST);
-      this.initialRequest = false;
+      const sendInitialRequest = new Promise((resolve, reject) => {
+        this.getResults(DEFAULT_REQUEST);
+        resolve();
+      });
+
+      sendInitialRequest.then(() => {
+        displayResults();
+        this.initialRequest = false;
+      });
     }
 
     return (
