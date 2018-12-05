@@ -254,7 +254,7 @@ class Filters extends React.Component {
           <section>
             <form onChange={e => this.handleFilter(e, 'certification')}>
               <h3 onClick={() => this.handleDropdown('certification')} className={`${(dropdowns[4] ? 'active' : '')} ${(certification.length > 0 ? 'applied' : '')}`}>
-                Maturity Rating
+                Maturity
               </h3>
               <div className={dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper'}>
                 <label htmlFor="certification--any">
