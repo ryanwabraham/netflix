@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './app/app.jsx',
+  entry: './src/app.jsx',
   output: {
     path: __dirname,
     filename: './public/bundle.js'
@@ -8,14 +8,14 @@ module.exports = {
     modules: [__dirname, 'node_modules'],
     alias: {
       // components here
-      appStyles: 'app/styles/app.scss',
-      genreData: 'app/data/genres.json',
-      Filters: 'app/components/Filters.jsx',
-      Main: 'app/components/Main.jsx',
-      Nav: 'app/components/Nav.jsx',
-      Hero: 'app/components/Hero.jsx',
-      Results: 'app/components/Results.jsx',
-      ResultItem: 'app/components/ResultItem.jsx'
+      appStyles: 'src/styles/app.scss',
+      genreData: 'src/data/genres.json',
+      Filters: 'src/components/Filters.jsx',
+      Main: 'src/components/Main.jsx',
+      Nav: 'src/components/Nav.jsx',
+      Hero: 'src/components/Hero.jsx',
+      Results: 'src/components/Results.jsx',
+      ResultItem: 'src/components/ResultItem.jsx'
     },
     extensions: ['*', '.js', '.json', '.jsx']
   },

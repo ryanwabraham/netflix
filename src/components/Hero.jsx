@@ -16,4 +16,4 @@ function Hero () {
   );
 }
 
-module.exports = Hero;
+export default Hero;

@@ -30,9 +30,9 @@ const Results = ({ resultData, dropdownIsOpen }) => {
   );
 };
 
-module.exports = Results;
-
 Results.propTypes = {
   resultData: PropTypes.arrayOf(PropTypes.object).isRequired,
   dropdownIsOpen: PropTypes.bool.isRequired
 };
+
+export default Results;

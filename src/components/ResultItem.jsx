@@ -33,11 +33,11 @@ const ResultItem = ({ title, genres, rating, poster }) => {
   );
 };
 
-module.exports = ResultItem;
-
 ResultItem.propTypes = {
   title: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.number).isRequired,
   rating: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired
 };
+
+export default ResultItem;

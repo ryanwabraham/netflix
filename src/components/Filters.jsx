@@ -348,8 +348,6 @@ class Filters extends React.Component {
   }
 }
 
-module.exports = Filters;
-
 Filters.propTypes = {
   onFilter: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
@@ -364,3 +362,5 @@ Filters.propTypes = {
   certification: PropTypes.string.isRequired,
   releaseDate: PropTypes.string.isRequired
 };
+
+export default Filters;
