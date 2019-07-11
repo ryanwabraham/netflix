@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Hero () {
+function Hero() {
   return (
     <section id="hero">
       <img className="hero__img" alt="The X Files" srcSet="img/x-files-hero.jpg 1x, img/x-files-hero@2x.jpg 2x" />

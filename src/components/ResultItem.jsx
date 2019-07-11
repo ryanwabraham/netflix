@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const ResultItem = ({ title, genres, rating, poster }) => {
   let genreList = '';
   genres.forEach((genre, genreCount) => {
-    GenreData.genres.forEach((item, index) => {
+    GenreData.genres.forEach((item) => {
       if (genreCount < 3 && item.id === genre) {
         genreList += `${item.name}, `;
       }
@@ -37,7 +37,7 @@ ResultItem.propTypes = {
   title: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.number).isRequired,
   rating: PropTypes.number.isRequired,
-  poster: PropTypes.string.isRequired
+  poster: PropTypes.string.isRequired,
 };
 
 export default ResultItem;

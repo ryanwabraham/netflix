@@ -11,7 +11,7 @@ const DEFAULT_REQUEST = `${MOVIE_DB_URL}discover/movie?${ADDITIONAL_CONFIG}&api_
 const BASE_FILTER_REQUEST = `${MOVIE_DB_URL}discover/`;
 
 class Main extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.initialRequest = true;
     this.state = {
@@ -31,14 +31,14 @@ class Main extends React.Component {
       ratingIsVisible: false,
       certificationIsVisible: false,
       releaseDateIsVisible: false,
-      searchIsVisible: false
+      searchIsVisible: false,
     };
   }
 
   getResults = (requestUrl) => {
     fetch(requestUrl).then(response => response.json()).then((data) => {
       this.setState({
-        data: data.results
+        data: data.results,
       });
     });
   }
@@ -49,7 +49,7 @@ class Main extends React.Component {
       duration,
       rating,
       certification,
-      releaseDate
+      releaseDate,
     } = this.state;
     let { genres } = this.state;
     genres = genres.length > 0 ? `&with_genres=${genres.join(',')}` : '';
@@ -64,7 +64,7 @@ class Main extends React.Component {
       durationIsVisible,
       ratingIsVisible,
       certificationIsVisible,
-      releaseDateIsVisible
+      releaseDateIsVisible,
     } = this.state;
 
     switch (filter) {
@@ -131,7 +131,7 @@ class Main extends React.Component {
       durationIsVisible: durationIsVisible,
       ratingIsVisible: ratingIsVisible,
       certificationIsVisible: certificationIsVisible,
-      releaseDateIsVisible: releaseDateIsVisible
+      releaseDateIsVisible: releaseDateIsVisible,
     });
   }
 
@@ -143,7 +143,7 @@ class Main extends React.Component {
       duration,
       rating,
       certification,
-      releaseDate
+      releaseDate,
     } = this.state;
     const { genres } = this.state;
     const filterList = [type, genres, duration, rating, certification, releaseDate];
@@ -212,7 +212,7 @@ class Main extends React.Component {
       rating: rating,
       certification: certification,
       releaseDate: releaseDate,
-      filters: filtersSet
+      filters: filtersSet,
     }, () => {
       this.buildRequest();
     });
@@ -223,13 +223,13 @@ class Main extends React.Component {
       const request = encodeURIComponent(searchTerm);
       const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
       this.setState({
-        searchTerm: searchTerm
+        searchTerm: searchTerm,
       }, () => {
         this.getResults(requestUrl);
       });
     } else {
       this.setState({
-        searchTerm: searchTerm
+        searchTerm: searchTerm,
       }, () => {
         this.buildRequest();
       });
@@ -239,11 +239,11 @@ class Main extends React.Component {
   handleSearchTrigger = () => {
     const { searchIsVisible } = this.state;
     this.setState({
-      searchIsVisible: !searchIsVisible
+      searchIsVisible: !searchIsVisible,
     });
   }
 
-  render () {
+  render() {
     const {
       searchTerm,
       filters,
@@ -261,7 +261,7 @@ class Main extends React.Component {
       ratingIsVisible,
       certificationIsVisible,
       releaseDateIsVisible,
-      searchIsVisible
+      searchIsVisible,
     } = this.state;
 
     const dropdowns = [
@@ -271,7 +271,7 @@ class Main extends React.Component {
       ratingIsVisible,
       certificationIsVisible,
       releaseDateIsVisible,
-      searchIsVisible
+      searchIsVisible,
     ];
 
     const dropdownIsOpen = dropdowns.includes(true);
@@ -293,7 +293,7 @@ class Main extends React.Component {
     };
 
     if (this.initialRequest === true && !filters && searchTerm.length === 0) {
-      const sendInitialRequest = new Promise((resolve, reject) => {
+      const sendInitialRequest = new Promise((resolve) => {
         this.getResults(DEFAULT_REQUEST);
         resolve();
       });

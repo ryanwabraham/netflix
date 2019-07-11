@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Nav () {
+function Nav() {
   return (
     <nav>
       <div id="logo">

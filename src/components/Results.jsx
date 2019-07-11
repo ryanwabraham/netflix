@@ -32,7 +32,7 @@ const Results = ({ resultData, dropdownIsOpen }) => {
 
 Results.propTypes = {
   resultData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dropdownIsOpen: PropTypes.bool.isRequired
+  dropdownIsOpen: PropTypes.bool.isRequired,
 };
 
 export default Results;

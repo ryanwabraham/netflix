@@ -43,12 +43,12 @@ class Filters extends React.Component {
     onSearch(searchTerm);
   }
 
-  handleSearchTrigger = (e) => {
+  handleSearchTrigger = () => {
     const { onSearchTrigger } = this.props;
     onSearchTrigger();
   }
 
-  render () {
+  render() {
     const {
       dropdowns,
       typeIsSetByUser,
@@ -57,7 +57,7 @@ class Filters extends React.Component {
       duration,
       rating,
       certification,
-      releaseDate
+      releaseDate,
     } = this.props;
     const { Range } = Slider;
 
@@ -360,7 +360,7 @@ Filters.propTypes = {
   duration: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
   certification: PropTypes.string.isRequired,
-  releaseDate: PropTypes.string.isRequired
+  releaseDate: PropTypes.string.isRequired,
 };
 
 export default Filters;
