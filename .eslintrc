@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb-standard"],
+  "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
     "object-shorthand": [2, "consistent"]
