@@ -5,5 +5,5 @@ import appStyles from 'appStyles';
 
 ReactDOM.render(
   <Main />,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
