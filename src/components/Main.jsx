@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import Hero from 'Hero';
-const Nav = React.lazy(() => import(/* webpackChunkName: "nav" */ 'Nav'));
+import Nav from 'Nav';
+
 const Filters = React.lazy(() => import(/* webpackChunkName: "filters" */ 'Filters'));
 const Results = React.lazy(() => import(/* webpackChunkName: "results" */ 'Results'));
-
 const MOVIE_DB_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = '87dfa1c669eea853da609d4968d294be'; // borrowing this for now
 const ADDITIONAL_CONFIG = '&sort_by=popularity.desc&language=en-US&original_language=en';
@@ -306,9 +306,7 @@ class Main extends React.Component {
 
     return (
       <main>
-        <Suspense fallback={<nav></nav>}>
-          <Nav />
-        </Suspense>
+        <Nav />
         <section id="results">
           <div id="mobile-disclaimer">
             Sorry, this demo is currently only available for desktop devices.
