@@ -287,7 +287,7 @@ class Main extends React.Component {
           </h3>
         );
       } else {
-        response = <Suspense fallback={<h3 id="no-results">Loading...</h3>}><Results resultData={data} dropdownIsOpen={dropdownIsOpen} /></Suspense>;
+        response = <Suspense fallback={<h3 id="no-results"></h3>}><Results resultData={data} dropdownIsOpen={dropdownIsOpen} /></Suspense>;
       }
       return response;
     };
