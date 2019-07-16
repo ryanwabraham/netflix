@@ -1,8 +1,11 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/app.jsx',
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
+    chunkFilename: '[name].[hash:8].bundle.js'
   },
   resolve: {
     modules: [__dirname, 'node_modules'],
@@ -45,7 +48,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'file-loader?name=[name].[ext]&publicPath=./img/&outputPath=public/img/'
+        loader: 'file-loader?name=[name].[ext]&publicPath=./img/&outputPath=./img/'
       }
     ]
   }

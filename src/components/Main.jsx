@@ -1,8 +1,8 @@
-import React from 'react';
-import Nav from 'Nav';
+import React, { lazy, Suspense } from 'react';
 import Hero from 'Hero';
-import Results from 'Results';
-import Filters from 'Filters';
+const Nav = React.lazy(() => import(/* webpackChunkName: "nav" */ 'Nav'));
+const Filters = React.lazy(() => import(/* webpackChunkName: "filters" */ 'Filters'));
+const Results = React.lazy(() => import(/* webpackChunkName: "results" */ 'Results'));
 
 const MOVIE_DB_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = '87dfa1c669eea853da609d4968d294be'; // borrowing this for now
@@ -287,7 +287,7 @@ class Main extends React.Component {
           </h3>
         );
       } else {
-        response = <Results resultData={data} dropdownIsOpen={dropdownIsOpen} />;
+        response = <Suspense fallback={<h3 id="no-results">Loading...</h3>}><Results resultData={data} dropdownIsOpen={dropdownIsOpen} /></Suspense>;
       }
       return response;
     };
@@ -306,26 +306,30 @@ class Main extends React.Component {
 
     return (
       <main>
-        <Nav />
+        <Suspense fallback={<nav></nav>}>
+          <Nav />
+        </Suspense>
         <section id="results">
           <div id="mobile-disclaimer">
             Sorry, this demo is currently only available for desktop devices.
           </div>
           <Hero />
-          <Filters
-            onFilter={this.handleFilter}
-            onSearch={this.handleSearch}
-            onDropdown={this.handleDropdowns}
-            onSearchTrigger={this.handleSearchTrigger}
-            dropdowns={dropdowns}
-            typeIsSetByUser={typeIsSetByUser}
-            type={type}
-            genres={genres}
-            duration={duration}
-            rating={rating}
-            certification={certification}
-            releaseDate={releaseDate}
-          />
+          <Suspense fallback={<aside><div id="filters"></div></aside>}>
+            <Filters
+              onFilter={this.handleFilter}
+              onSearch={this.handleSearch}
+              onDropdown={this.handleDropdowns}
+              onSearchTrigger={this.handleSearchTrigger}
+              dropdowns={dropdowns}
+              typeIsSetByUser={typeIsSetByUser}
+              type={type}
+              genres={genres}
+              duration={duration}
+              rating={rating}
+              certification={certification}
+              releaseDate={releaseDate}
+            />
+          </Suspense>
           {displayResults()}
         </section>
       </main>
