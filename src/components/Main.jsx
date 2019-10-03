@@ -221,7 +221,7 @@ class Main extends React.Component {
   handleSearch = (searchTerm) => {
     if (searchTerm.length > 0) {
       const request = encodeURIComponent(searchTerm);
-      const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}${ADDITIONAL_CONFIG}`;
+      const requestUrl = `${MOVIE_DB_URL}search/multi?query=${request}&api_key=${API_KEY}`;
       this.setState({
         searchTerm: searchTerm,
       }, () => {
