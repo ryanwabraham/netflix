@@ -96,8 +96,7 @@ aside {
         color: $text-gray;
         cursor: pointer;
 
-        &:after {
-            content: '';
+        span {
             position: absolute;
             top: 8px;
             right: -17px;
@@ -115,7 +114,7 @@ aside {
         &.active {
             color: $text;
 
-            &:after {
+            span {
                 opacity: 1;
                 transform: rotate(180deg);
                 transition-duration: .4s;
@@ -125,7 +124,7 @@ aside {
         &.applied {
             color: $text;
 
-            &:after {
+            span {
                 opacity: 1;
                 transform-origin: 50% 50%;
                 transform: rotate(0deg);

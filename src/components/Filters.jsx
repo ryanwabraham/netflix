@@ -27,7 +27,7 @@ class Filters extends React.Component {
     }
   }
 
-  handleDropdown = (filter) => {
+  handleDropdown = (e, filter) => {
     const { onDropdown } = this.props;
     onDropdown(filter);
   }
@@ -66,8 +66,12 @@ class Filters extends React.Component {
         <div id="filters">
           <section>
             <form onChange={e => this.handleFilter(e, 'type')}>
-              <h3 onClick={() => this.handleDropdown('type')} className={`${(dropdowns[0] ? 'active' : '')} ${(typeIsSetByUser ? 'applied' : '')}`}>
+              <h3
+                onClick={e => this.handleDropdown(e, 'type')}
+                className={`${(dropdowns[0] ? 'active' : '')} ${(typeIsSetByUser ? 'applied' : '')}`}
+              >
                 Type
+                <span className={`${(dropdowns[0] ? 'active' : '')} ${(typeIsSetByUser ? 'applied' : '')}`} />
               </h3>
               <div className={dropdowns[0] ? 'filters__dropdown type-wrapper visible' : 'filters__dropdown type-wrapper'}>
                 <label htmlFor="type--movie">
@@ -85,8 +89,12 @@ class Filters extends React.Component {
 
           <section>
             <form>
-              <h3 onClick={() => this.handleDropdown('genre')} className={`${(dropdowns[1] ? 'active' : '')} ${(genres.length > 0 ? 'applied' : '')}`}>
+              <h3
+                onClick={e => this.handleDropdown(e, 'genre')}
+                className={`${(dropdowns[1] ? 'active' : '')} ${(genres.length > 0 ? 'applied' : '')}`}
+              >
                 Genre
+                <span className={`${(dropdowns[1] ? 'active' : '')} ${(genres.length > 0 ? 'applied' : '')}`} />
               </h3>
               <div className={dropdowns[1] ? 'filters__dropdown genre-wrapper visible' : 'filters__dropdown genre-wrapper'}>
                 <label htmlFor="genre--action">
@@ -184,8 +192,12 @@ class Filters extends React.Component {
 
           <section>
             <form>
-              <h3 onClick={() => this.handleDropdown('duration')} className={`${(dropdowns[2] ? 'active' : '')} ${(duration.length > 0 ? 'applied' : '')}`}>
+              <h3
+                onClick={e => this.handleDropdown(e, 'duration')}
+                className={`${(dropdowns[2] ? 'active' : '')} ${(duration.length > 0 ? 'applied' : '')}`}
+              >
                 Duration
+                <span className={`${(dropdowns[2] ? 'active' : '')} ${(duration.length > 0 ? 'applied' : '')}`} />
               </h3>
               <div className={dropdowns[2] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                 <div className={type === 'tv' ? 'distribution duration tv' : 'distribution duration'} />
@@ -221,8 +233,12 @@ class Filters extends React.Component {
 
           <section>
             <form>
-              <h3 onClick={() => this.handleDropdown('rating')} className={`${(dropdowns[3] ? 'active' : '')} ${(rating.length > 0 ? 'applied' : '')}`}>
+              <h3
+                onClick={e => this.handleDropdown(e, 'rating')}
+                className={`${(dropdowns[3] ? 'active' : '')} ${(rating.length > 0 ? 'applied' : '')}`}
+              >
                 Rating
+                <span className={`${(dropdowns[3] ? 'active' : '')} ${(rating.length > 0 ? 'applied' : '')}`} />
               </h3>
               <div className={dropdowns[3] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                 <div className="distribution rating" />
@@ -253,8 +269,12 @@ class Filters extends React.Component {
 
           <section>
             <form onChange={e => this.handleFilter(e, 'certification')}>
-              <h3 onClick={() => this.handleDropdown('certification')} className={`${(dropdowns[4] ? 'active' : '')} ${(certification.length > 0 ? 'applied' : '')}`}>
+              <h3
+                onClick={e => this.handleDropdown(e, 'certification')}
+                className={`${(dropdowns[4] ? 'active' : '')} ${(certification.length > 0 ? 'applied' : '')}`}
+              >
                 Maturity
+                <span className={`${(dropdowns[4] ? 'active' : '')} ${(certification.length > 0 ? 'applied' : '')}`} />
               </h3>
               <div className={dropdowns[4] ? 'filters__dropdown certification-wrapper visible' : 'filters__dropdown certification-wrapper'}>
                 <label htmlFor="certification--any">
@@ -286,8 +306,12 @@ class Filters extends React.Component {
 
           <section>
             <form>
-              <h3 onClick={() => this.handleDropdown('releaseDate')} className={`${(dropdowns[5] ? 'active' : '')} ${(releaseDate.length > 0 ? 'applied' : '')}`}>
+              <h3
+                onClick={e => this.handleDropdown(e, 'releaseDate')}
+                className={`${(dropdowns[5] ? 'active' : '')} ${(releaseDate.length > 0 ? 'applied' : '')}`}
+              >
                 Release Date
+                <span className={`${(dropdowns[5] ? 'active' : '')}${(releaseDate.length > 0 ? 'applied' : '')}`} />
               </h3>
               <div className={dropdowns[5] ? 'filters__dropdown slider-wrapper visible' : 'filters__dropdown slider-wrapper'}>
                 <div className="distribution releaseDate" />

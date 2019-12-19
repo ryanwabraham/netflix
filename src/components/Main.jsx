@@ -139,13 +139,13 @@ class Main extends React.Component {
     let filtersSet = true;
     let {
       type,
+      genres,
       typeIsSetByUser,
       duration,
       rating,
       certification,
       releaseDate,
     } = this.state;
-    const { genres } = this.state;
     const filterList = [type, genres, duration, rating, certification, releaseDate];
 
     switch (filter) {
