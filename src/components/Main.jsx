@@ -190,7 +190,7 @@ class Main extends React.Component {
           } else if (type === 'tv') {
             releaseDate = `&first_air_date.gte=${e[0]}&first_air_date.lte=${e[1]}`;
           } else {
-            releaseDate = `&primary_release_date.gte=${e[0]}&primary_release_date.lte=${e[1]}`;
+            releaseDate = `&primary_release_date.gte=${e[0]}-01-01&primary_release_date.lte=${e[1]}-01-01`;
           }
         }
         break;
