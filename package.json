@@ -11,30 +11,30 @@
   "dependencies": {
     "prop-types": "^15.7.2",
     "rc-slider": "^8.6.13",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-debounce-input": "^3.2.2",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-react": "^7.7.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
     "babel-eslint": "^8.2.6",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "css-loader": "^1.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react": "^7.19.0",
     "file-loader": "^2.0.0",
-    "node-sass": "^4.13.0",
-    "npm": "^6.13.4",
+    "node-sass": "^4.13.1",
+    "npm": "^6.14.4",
     "sass-loader": "^7.3.1",
     "script-loader": "^0.6.1",
     "style-loader": "^0.23.1",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10"
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }
